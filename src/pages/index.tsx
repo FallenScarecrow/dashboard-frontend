@@ -1,26 +1,27 @@
 import Head from 'next/head';
 import { ReactElement } from 'react';
-import styled from 'styled-components';
-import Layout from '../components/Layout';
 
-const Title = styled.h1`
-  color: ${({ theme }) => theme.colors.primary};
-  font-size: 50px;
-`;
+import { NextPageWithLayout } from '~@types/_app';
 
-const Home = () => {
+import SimplePageLayout from '~@layouts/SimplePageLayout';
+
+import Typography from '~@components/Typography';
+
+const Home: NextPageWithLayout = () => {
   return (
     <>
       <Head>
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Title>My page</Title>
+      <Typography component="h2" variant="display" size="large">
+        Hello world!
+      </Typography>
     </>
   );
 };
 
 export default Home;
 Home.getLayout = (page: ReactElement) => {
-  return <Layout>{page}</Layout>;
+  return <SimplePageLayout>{page}</SimplePageLayout>;
 };

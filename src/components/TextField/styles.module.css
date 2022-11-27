@@ -1,0 +1,70 @@
+/* #region Text */
+.textField-primary {
+  /* Light Theme */
+  @apply bg-primary-400 text-white;
+  @apply disabled:bg-primary-400/40 disabled:text-white/40;
+
+  /* Dark Theme */
+  @apply dark:bg-primary-200 dark:text-black;
+  @apply disabled:dark:bg-primary-200/40 disabled:dark:text-black/40;
+}
+
+.textField-secondary {
+  /* Light Theme */
+  @apply bg-secondary-400 text-white;
+  @apply disabled:bg-secondary-400/40 disabled:text-white/40;
+
+  /* Dark Theme */
+  @apply dark:bg-secondary-200 dark:text-black;
+  @apply disabled:dark:bg-secondary-200/40 disabled:dark:text-black/40;
+}
+
+.textField-error {
+  /* Light Theme */
+  @apply bg-error-400 text-white;
+  @apply disabled:bg-error-400/40 disabled:text-white/40;
+
+  /* Dark Theme */
+  @apply dark:bg-error-200 dark:text-black;
+  @apply disabled:dark:bg-error-200/40 disabled:dark:text-black/40;
+}
+
+.textField-warning {
+  /* Light Theme */
+  @apply bg-warning-400 text-white;
+  @apply disabled:bg-warning-400/40 disabled:text-white/40;
+
+  /* Dark Theme */
+  @apply dark:bg-warning-200 dark:text-black;
+  @apply disabled:dark:bg-warning-200/40 disabled:dark:text-black/40;
+}
+
+.textField-info {
+  /* Light Theme */
+  @apply bg-info-400 text-white;
+  @apply disabled:bg-info-400/40 disabled:text-white/40;
+
+  /* Dark Theme */
+  @apply dark:bg-info-200 dark:text-black;
+  @apply disabled:dark:bg-info-200/40 disabled:dark:text-black/40;
+}
+
+.textField-success {
+  /* Light Theme */
+  @apply bg-success-400 text-white;
+  @apply disabled:bg-success-400/40 disabled:text-white/40;
+
+  /* Dark Theme */
+  @apply dark:bg-success-200 dark:text-black;
+  @apply disabled:dark:bg-success-200/40 disabled:dark:text-black/40;
+}
+
+/* #endregion */
+
+/* #region Needed? */
+/* #region Outline */
+/* #endregion */
+
+/* #region Container */
+/* #endregion */
+/* #endregion */

@@ -19,7 +19,16 @@
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "incremental": true
+    "incremental": true,
+
+    "baseUrl": "./src",
+    "paths": {
+      "~@styles/*": ["styles/*"],
+      "~@components/*": ["components/*"],
+      "~@containers/*": ["containers/*"],
+      "~@layouts/*": ["layouts/*"],
+      "~@types/*": ["types/*"]
+    }
   },
   "exclude": ["node_modules"],
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
