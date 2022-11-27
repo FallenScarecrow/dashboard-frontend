@@ -1,0 +1,158 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@tailwind variants;
+
+html,
+body,
+#__next {
+  @apply bg-neutral-50 text-black;
+  @apply dark:bg-neutral-900 dark:text-white;
+}
+
+button {
+  @apply disabled:cursor-not-allowed;
+}
+
+i {
+  font-style: normal;
+}
+
+.border-primary {
+  @apply border-primary-800 dark:border-primary-400;
+}
+
+.border-secondary {
+  @apply border-secondary-800 dark:border-secondary-400;
+}
+
+.border-info {
+  @apply border-info-800 dark:border-info-400;
+}
+
+.border-error {
+  @apply border-error-800 dark:border-error-400;
+}
+
+.border-warning {
+  @apply border-warning-800 dark:border-warning-400;
+}
+
+.border-success {
+  @apply border-success-800 dark:border-success-400;
+}
+
+.scale-enter {
+  @apply scale-0 opacity-0;
+}
+
+.scale-enter-active {
+  @apply scale-100 opacity-100 transition-all;
+}
+
+.scale-enter-done {
+  @apply transition-all;
+}
+
+.scale-exit {
+  @apply scale-100 opacity-100;
+}
+
+.scale-exit-active {
+  @apply scale-0 opacity-0 transition-all;
+}
+
+.slide-enter {
+  @apply -translate-x-full;
+}
+
+.slide-enter-active {
+  @apply translate-x-0 transition-transform;
+}
+
+.slide-enter-done {
+  @apply transition-transform;
+}
+
+.slide-exit {
+  @apply translate-x-0;
+}
+
+.slide-exit-active {
+  @apply -translate-x-full transition-transform;
+}
+
+.fade-enter {
+  @apply opacity-0;
+}
+
+.fade-enter-active {
+  @apply opacity-100 transition-opacity;
+}
+
+.fade-enter-done {
+  @apply transition-opacity;
+}
+
+.fade-exit {
+  @apply opacity-100;
+}
+
+.fade-exit-active {
+  @apply opacity-0 transition-opacity;
+}
+
+.out-in-enter {
+  @apply -translate-x-full;
+}
+
+.out-in-enter-active {
+  @apply translate-x-0 transition-transform;
+}
+
+.out-in-enter-done {
+  @apply transition-transform;
+}
+
+.out-in-exit {
+  @apply translate-x-0;
+}
+
+.out-in-exit-active {
+  @apply translate-x-full transition-transform;
+}
+
+.spin-enter {
+  @apply -rotate-180;
+}
+
+.spin-enter-active {
+  @apply rotate-0 transition-transform;
+}
+
+.spin-enter-done {
+  @apply transition-transform;
+}
+
+.spin-exit {
+  @apply rotate-0;
+}
+
+.spin-exit-active {
+  @apply rotate-180 transition-transform;
+}
+
+/* .toast-enter {
+  left: -999px;
+  @apply absolute;
+}
+.toast-enter-active {
+  @apply absolute left-0 transition-all;
+}
+.toast-exit {
+  @apply absolute left-0;
+}
+.toast-exit-active {
+  left: -999px;
+  @apply absolute transition-all;
+} */
