@@ -1,26 +1,21 @@
-import { NextPage } from 'next';
 import type { AppProps } from 'next/app';
-import { ReactElement, ReactNode } from 'react';
-import { ThemeProvider } from 'styled-components';
-import GlobalStyles from '../styles/global-styles';
-import { theme } from '../themes/theme';
+import { NextPageWithLayout } from '../types/_app';
 
-type NextPageWithLayout = NextPage & {
-  // eslint-disable-next-line no-unused-vars
-  getLayout?: (page: ReactElement) => ReactNode;
-};
+import '~@styles/globals.css';
+import { ToastProvider } from 'lib/ToastProvider';
+import { ThemeProvider } from 'next-themes';
 
 type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
 };
 
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
-  const getLayout = Component.getLayout ?? ((page) => page);
+  const getLayout = Component.getLayout ?? (page => page);
+
   return (
-    <>
-      <GlobalStyles />
-      <ThemeProvider theme={theme}>{getLayout(<Component {...pageProps} />)}</ThemeProvider>
-    </>
+    <ThemeProvider enableSystem={true} attribute="class">
+      <ToastProvider>{getLayout(<Component {...pageProps} />)}</ToastProvider>
+    </ThemeProvider>
   );
 }
 
