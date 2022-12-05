@@ -65,7 +65,7 @@ const Test: NextPageWithLayout = () => {
     addToast({ type: status, title: toastTitle, description: `Teste ${status} toast` });
   };
 
-  const handleToastTitleChange = e => {
+  const handleToastTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setToastTitle(e.currentTarget.value);
   };
 

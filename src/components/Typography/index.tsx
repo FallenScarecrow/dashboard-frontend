@@ -1,12 +1,12 @@
 import clsx from 'clsx';
-import React, { forwardRef, ReactNode } from 'react';
+import React, { ComponentType, forwardRef, ReactNode } from 'react';
 import { ThemeColors } from '~@types/_app';
 
 import styles from './styles.module.css';
 
 interface ITypographyProps extends React.HTMLAttributes<HTMLHeadingElement> {
   children?: ReactNode;
-  component: ReactNode;
+  component: ComponentType | 'span' | 'div' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p';
   variant: 'display' | 'title' | 'heading' | 'body' | 'label';
   size: 'large' | 'medium' | 'small';
   color?: ThemeColors;
@@ -23,6 +23,7 @@ const Typography = forwardRef<HTMLHeadingElement, ITypographyProps>(
       className,
       ...rest
     } = props;
+
     let textSize = '';
 
     switch (variant) {

@@ -16,7 +16,7 @@ const Navbar = ({ isOpen = false, onCloseNav }: { isOpen?: boolean; onCloseNav?:
   const stopResizing = useCallback(() => {
     setIsResizing(false);
     if (isOpen != true && containerRef.current && resizableRef.current) {
-      console.log(isOpen, isOpen !== true, containerRef.current, resizableRef.current);
+      console.log(isOpen, containerRef.current, resizableRef.current);
       console.count('stopResizing');
       // Catch percent from translate3D(/-100/%, 0, 0)
       const { x, width } = resizableRef.current.getBoundingClientRect();
