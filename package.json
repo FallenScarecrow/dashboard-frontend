@@ -1,0 +1,51 @@
+{
+  "private": true,
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "mylint": "eslint --fix src",
+    "format": "prettier --write src",
+    "prepare": "husky install"
+  },
+  "dependencies": {
+    "clsx": "^1.2.1",
+    "next": "^12.3.3",
+    "next-themes": "^0.2.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^4.6.0",
+    "react-is": "^18.2.0",
+    "react-transition-group": "^4.4.5",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "17.0.41",
+    "@types/react": "18.0.12",
+    "@types/react-dom": "18.0.5",
+    "@types/react-transition-group": "^4.4.5",
+    "@types/uuid": "^8.3.4",
+    "@typescript-eslint/eslint-plugin": "^5.43.0",
+    "@typescript-eslint/parser": "^5.43.0",
+    "autoprefixer": "^10.4.13",
+    "eslint": "8.17.0",
+    "eslint-config-next": "12.1.6",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-tailwindcss": "^3.7.0",
+    "husky": "^8.0.2",
+    "lint-staged": "^13.0.3",
+    "next-compose-plugins": "^2.2.1",
+    "next-transpile-modules": "^9.1.0",
+    "postcss": "^8.4.19",
+    "prettier": "^2.7.1",
+    "prettier-plugin-tailwindcss": "^0.1.13",
+    "tailwindcss": "^3.2.4",
+    "typescript": "^4.9.3"
+  },
+  "lint-staged": {
+    "*.js": "eslint --cache --fix",
+    "*.{js,css,md}": "prettier --write"
+  }
+}

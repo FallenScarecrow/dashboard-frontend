@@ -1,0 +1,27 @@
+.toast-info {
+  @apply border-info-900
+        text-info-900
+        dark:border-info-300
+        dark:text-info-300;
+}
+
+.toast-warning {
+  @apply border-warning-700
+        text-warning-700
+        dark:border-warning-300
+        dark:text-warning-300;
+}
+
+.toast-error {
+  @apply border-error-800
+        text-error-800
+        dark:border-error-300
+        dark:text-error-300;
+}
+
+.toast-success {
+  @apply border-success-700
+        text-success-700
+        dark:border-success-300
+        dark:text-success-300;
+}
