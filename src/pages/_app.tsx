@@ -1,21 +1,26 @@
 import type { AppProps } from 'next/app';
-import { NextPageWithLayout } from '../types/_app';
+import { ThemeProvider } from 'next-themes';
+import { SessionProvider } from 'next-auth/react';
+
+import { ToastProvider } from '~@lib/ToastProvider';
+
+import { NextPageWithLayout } from '~@types/_app';
 
 import '~@styles/globals.css';
-import { ToastProvider } from 'lib/ToastProvider';
-import { ThemeProvider } from 'next-themes';
 
 type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
 };
 
-function MyApp({ Component, pageProps }: AppPropsWithLayout) {
+function MyApp({ Component, pageProps: { session, ...pageProps } }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? (page => page);
 
   return (
-    <ThemeProvider enableSystem={true} attribute="class">
-      <ToastProvider>{getLayout(<Component {...pageProps} />)}</ToastProvider>
-    </ThemeProvider>
+    <SessionProvider session={session}>
+      <ThemeProvider enableSystem={true} attribute="class">
+        <ToastProvider>{getLayout(<Component {...pageProps} />)}</ToastProvider>
+      </ThemeProvider>
+    </SessionProvider>
   );
 }
 

@@ -27,7 +27,8 @@
       "~@components/*": ["components/*"],
       "~@containers/*": ["containers/*"],
       "~@layouts/*": ["layouts/*"],
-      "~@types/*": ["types/*"]
+      "~@types/*": ["types/*"],
+      "~@lib/*": ["lib/*"]
     }
   },
   "exclude": ["node_modules"],
