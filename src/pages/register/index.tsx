@@ -1,8 +1,9 @@
 import Head from 'next/head';
-import Link from 'next/link';
 import { ChangeEvent, useEffect, useRef, useState } from 'react';
 
-import { IoKeyOutline, IoPersonOutline } from 'react-icons/io5';
+import Link from 'next/link';
+
+import { IoKeyOutline, IoMailOutline, IoPersonOutline } from 'react-icons/io5';
 
 import { NextPageWithLayout } from '~@types/_app';
 
@@ -13,13 +14,8 @@ import Button from '~@components/Button';
 import TextField from '~@components/TextField';
 import Typography from '~@components/Typography';
 
-const Login: NextPageWithLayout = () => {
+const Register: NextPageWithLayout = () => {
   const inputRef = useRef<HTMLInputElement>(null);
-
-  const [data, setData] = useState({
-    username: '',
-    password: '',
-  });
 
   useEffect(() => {
     const idTimeout = setTimeout(() => {
@@ -31,6 +27,11 @@ const Login: NextPageWithLayout = () => {
     };
   }, []);
 
+  const [data, setData] = useState({
+    email: '',
+    password: '',
+  });
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { target } = e;
 
@@ -40,27 +41,42 @@ const Login: NextPageWithLayout = () => {
   return (
     <>
       <Head>
-        <title>Login</title>
+        <title>Register</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <MountAnimation>
-        <div className="flex h-full w-full flex-col items-center justify-between">
-          <Typography variant="display" size="medium" component="h2">
-            Login
+        <div className="flex h-full w-full flex-col items-center">
+          <Typography variant="display" size="medium" component="h2" className="mb-4">
+            Create Account
           </Typography>
-          <div className="flex w-full flex-col">
+          <div className="flex w-full flex-col items-center">
+            <div className="flex h-64 w-64 items-center justify-center border-2 border-neutral-900 transition-colors duration-500 dark:border-neutral-100 sm:rounded-full">
+              <IoPersonOutline size={128} />
+            </div>
             <TextField
               ref={inputRef}
               id="username"
               name="username"
               type="text"
               icon={IoPersonOutline}
-              value={data.username}
+              value={data.email}
               required
               onChange={handleChange}
               fullWidth
-              placeholder="Username / E-mail"
+              placeholder="Username"
               autoComplete="username"
+            />
+            <TextField
+              id="email"
+              name="email"
+              type="text"
+              icon={IoMailOutline}
+              value={data.email}
+              required
+              onChange={handleChange}
+              fullWidth
+              placeholder="E-mail"
+              autoComplete="email"
             />
             <TextField
               id="password"
@@ -72,17 +88,17 @@ const Login: NextPageWithLayout = () => {
               required
               onChange={handleChange}
               fullWidth
-              placeholder="Senha"
-              autoComplete="current-password"
+              placeholder="Password"
+              autoComplete="new-password"
             />
             <Button type="button" variant="contained" className="self-end">
-              Login
+              Sign-Up
             </Button>
           </div>
-          <Typography variant="body" size="small" component="span">
-            Don&apos;t have an account? &nbsp;
-            <Link href="/register" passHref legacyBehavior>
-              <a className="hover:underline">Sign-Up</a>
+          <Typography variant="body" size="small" component="span" className="mt-auto">
+            Already have an account? &nbsp;
+            <Link href="/login" passHref legacyBehavior>
+              <a className="hover:underline">Sign-In</a>
             </Link>
           </Typography>
         </div>
@@ -91,7 +107,7 @@ const Login: NextPageWithLayout = () => {
   );
 };
 
-export default Login;
-Login.getLayout = page => {
+export default Register;
+Register.getLayout = page => {
   return <LoginLayout>{page}</LoginLayout>;
 };

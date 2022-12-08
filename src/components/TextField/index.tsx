@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 
 interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
   id: string;
-  type: React.HTMLInputTypeAttribute;
+  type: 'email' | 'text' | 'password' | 'search' | 'url' | 'tel';
   placeholder: string;
   fullWidth?: boolean;
   color?: ThemeColors;
@@ -109,7 +109,7 @@ const TextField = forwardRef<HTMLInputElement, IInputProps>((props: IInputProps,
         size="large"
         variant="label"
         className={clsx(
-          'absolute top-1/2 left-4 -translate-y-1/3 px-1 capitalize text-black transition-[top,font-size,left] duration-500 dark:text-white',
+          'absolute top-1/2 left-4 -translate-y-1/3 px-1 capitalize text-black transition-[top,font-size,left,color] duration-500 dark:text-white',
           'peer-focus:-top-2 peer-focus:left-0 peer-focus:text-xs',
           'group-[.valid]:-top-2 group-[.valid]:left-0 group-[.valid]:text-xs',
           'peer-disabled:select-none peer-disabled:text-opacity-40',
