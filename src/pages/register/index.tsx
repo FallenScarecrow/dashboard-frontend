@@ -1,10 +1,12 @@
 import Head from 'next/head';
-import Link from 'next/link';
+import { BuiltInProviderType } from 'next-auth/providers';
 import { ClientSafeProvider, getProviders, LiteralUnion, signIn } from 'next-auth/react';
 
 import { ChangeEvent, useEffect, useRef, useState } from 'react';
 
-import { IoKeyOutline, IoPersonOutline } from 'react-icons/io5';
+import Link from 'next/link';
+
+import { IoKeyOutline, IoMailOutline, IoPersonOutline } from 'react-icons/io5';
 
 import { NextPageWithLayout } from '~@types/_app';
 
@@ -14,11 +16,10 @@ import { ANIMATION_TIMEOUT, MountAnimation } from '~@components/MountAnimation';
 import Button from '~@components/Button';
 import TextField from '~@components/TextField';
 import Typography from '~@components/Typography';
-import { BuiltInProviderType } from 'next-auth/providers';
 import Image from 'next/image';
 import clsx from 'clsx';
 
-interface ILoginProps {
+interface IRegisterProps {
   providers: Record<LiteralUnion<BuiltInProviderType, string>, ClientSafeProvider> | null;
 }
 
@@ -31,14 +32,9 @@ const images = {
     'https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white',
 };
 
-const SignIn: NextPageWithLayout<ILoginProps> = ({ providers }) => {
+const Register: NextPageWithLayout<IRegisterProps> = ({ providers }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const nodeRef = useRef<HTMLDivElement>(null);
-
-  const [data, setData] = useState({
-    username: '',
-    password: '',
-  });
 
   useEffect(() => {
     const idTimeout = setTimeout(() => {
@@ -50,6 +46,11 @@ const SignIn: NextPageWithLayout<ILoginProps> = ({ providers }) => {
     };
   }, []);
 
+  const [data, setData] = useState({
+    email: '',
+    password: '',
+  });
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { target } = e;
 
@@ -59,19 +60,13 @@ const SignIn: NextPageWithLayout<ILoginProps> = ({ providers }) => {
   return (
     <>
       <Head>
-        <title>Log in</title>
+        <title>Register</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <MountAnimation nodeRef={nodeRef}>
         <div ref={nodeRef} className="h-full w-full">
-          <Typography variant="display" size="medium" component="h2">
-            Log in
-          </Typography>
-          <Typography variant="body" size="small" component="span" className="my-4">
-            New to Dashboard? &nbsp;
-            <Link href="/register" passHref legacyBehavior>
-              <a className="text-cyan-600 underline dark:text-cyan-400">Sign Up</a>
-            </Link>
+          <Typography variant="display" size="medium" component="h2" className="mb-4">
+            Create Account
           </Typography>
           <form>
             <TextField
@@ -80,12 +75,24 @@ const SignIn: NextPageWithLayout<ILoginProps> = ({ providers }) => {
               name="username"
               type="text"
               icon={IoPersonOutline}
-              value={data.username}
+              value={data.email}
               required
               onChange={handleChange}
               fullWidth
-              placeholder="Username / Email"
+              placeholder="Username"
               autoComplete="username"
+            />
+            <TextField
+              id="email"
+              name="email"
+              type="text"
+              icon={IoMailOutline}
+              value={data.email}
+              required
+              onChange={handleChange}
+              fullWidth
+              placeholder="E-mail"
+              autoComplete="email"
             />
             <TextField
               id="password"
@@ -97,22 +104,12 @@ const SignIn: NextPageWithLayout<ILoginProps> = ({ providers }) => {
               required
               onChange={handleChange}
               fullWidth
-              placeholder="Senha"
-              autoComplete="current-password"
+              placeholder="Password"
+              autoComplete="new-password"
             />
             <Button type="button" variant="contained" className="self-end" fullWidth>
-              Login
+              Sign-Up
             </Button>
-            <Link href="/register" passHref legacyBehavior>
-              <Typography
-                variant="body"
-                size="small"
-                component="a"
-                className="my-4 text-cyan-600 underline dark:text-cyan-400"
-              >
-                Forgot your password?
-              </Typography>
-            </Link>
           </form>
           {Object.values(providers || []).length > 0 ? (
             <>
@@ -150,6 +147,17 @@ const SignIn: NextPageWithLayout<ILoginProps> = ({ providers }) => {
               </div>
             </>
           ) : null}
+          <Typography
+            variant="body"
+            size="small"
+            component="div"
+            className="mt-8 w-full text-center"
+          >
+            Already have an account? &nbsp;
+            <Link href="/login" passHref legacyBehavior>
+              <a className="text-cyan-600 underline dark:text-cyan-400">Sign-In</a>
+            </Link>
+          </Typography>
         </div>
       </MountAnimation>
     </>
@@ -164,7 +172,7 @@ export async function getServerSideProps() {
   };
 }
 
-export default SignIn;
-SignIn.getLayout = page => {
+export default Register;
+Register.getLayout = page => {
   return <LoginLayout>{page}</LoginLayout>;
 };

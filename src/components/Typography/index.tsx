@@ -1,12 +1,13 @@
 import clsx from 'clsx';
 import React, { ComponentType, forwardRef, ReactNode } from 'react';
+
 import { ThemeColors } from '~@types/_app';
 
 import styles from './styles.module.css';
 
 interface ITypographyProps extends React.HTMLAttributes<HTMLHeadingElement> {
   children?: ReactNode;
-  component: ComponentType | 'span' | 'div' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p';
+  component: ComponentType | 'span' | 'div' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'a';
   variant: 'display' | 'title' | 'heading' | 'body' | 'label';
   size: 'large' | 'medium' | 'small';
   color?: ThemeColors;

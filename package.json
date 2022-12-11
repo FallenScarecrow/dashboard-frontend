@@ -7,18 +7,30 @@
     "lint": "next lint",
     "mylint": "eslint --fix src",
     "format": "prettier --write src",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
+    "@next-auth/prisma-adapter": "1.0.5",
+    "@prisma/client": "^4.5.0",
+    "@tanstack/react-query": "^4.19.1",
+    "@trpc/client": "^10.4.3",
+    "@trpc/next": "^10.4.3",
+    "@trpc/react-query": "^10.4.3",
+    "@trpc/server": "^10.4.3",
     "clsx": "^1.2.1",
     "next": "^12.3.3",
+    "next-auth": "^4.18.1",
     "next-themes": "^0.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.6.0",
     "react-is": "^18.2.0",
+    "react-query": "^3.39.2",
     "react-transition-group": "^4.4.5",
-    "uuid": "^9.0.0"
+    "superjson": "^1.12.0",
+    "uuid": "^9.0.0",
+    "zod": "^3.19.1"
   },
   "devDependencies": {
     "@types/node": "17.0.41",
@@ -41,6 +53,7 @@
     "postcss": "^8.4.19",
     "prettier": "^2.7.1",
     "prettier-plugin-tailwindcss": "^0.1.13",
+    "prisma": "^4.7.1",
     "tailwindcss": "^3.2.4",
     "typescript": "^4.9.3"
   },
