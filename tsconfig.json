@@ -23,12 +23,16 @@
 
     "baseUrl": "./src",
     "paths": {
+      "~@env/*": ["env/*"],
+      "~@pages/*": ["pages/*"],
+      "~@server/*": ["server/*"],
       "~@styles/*": ["styles/*"],
       "~@components/*": ["components/*"],
       "~@containers/*": ["containers/*"],
       "~@layouts/*": ["layouts/*"],
       "~@types/*": ["types/*"],
-      "~@lib/*": ["lib/*"]
+      "~@lib/*": ["lib/*"],
+      "~@utils/*": ["utils/*"]
     }
   },
   "exclude": ["node_modules"],

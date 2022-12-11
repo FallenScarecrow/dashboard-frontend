@@ -7,9 +7,14 @@ import { ToastProvider } from '~@lib/ToastProvider';
 import { NextPageWithLayout } from '~@types/_app';
 
 import '~@styles/globals.css';
+import { Session } from 'next-auth';
+import { trpc } from '~@utils/trpc';
 
 type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
+  pageProps: {
+    session: Session | null;
+  };
 };
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppPropsWithLayout) {
@@ -24,4 +29,4 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppPropsWith
   );
 }
 
-export default MyApp;
+export default trpc.withTRPC(MyApp);

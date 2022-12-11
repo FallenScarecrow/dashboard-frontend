@@ -8,6 +8,7 @@ interface IMountAnimationProps {
   timeout?: number;
   unmountOnExit?: boolean;
   classNames?: string;
+  nodeRef: any;
 }
 
 export const MountAnimation = ({
@@ -15,6 +16,7 @@ export const MountAnimation = ({
   timeout = ANIMATION_TIMEOUT, // MATCH YOUR DEFAULT ANIMATION DURATION
   unmountOnExit = true,
   classNames = 'slide', // ADD YOUR DEFAULT ANIMATION
+  nodeRef,
   ...restProps
 }: IMountAnimationProps) => {
   const [isMounted, setIsMounted] = useState(false);
@@ -32,6 +34,7 @@ export const MountAnimation = ({
       timeout={timeout}
       classNames={classNames}
       unmountOnExit={unmountOnExit}
+      nodeRef={nodeRef}
       {...restProps}
     >
       <>{children}</>
