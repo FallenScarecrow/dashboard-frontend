@@ -22,7 +22,7 @@ interface ILoginProps {
   providers: Record<LiteralUnion<BuiltInProviderType, string>, ClientSafeProvider> | null;
 }
 
-const images = {
+const images: { [x in LiteralUnion<BuiltInProviderType, string>]?: string } = {
   discord:
     'https://img.shields.io/badge/Discord-7289DA?style=for-the-badge&logo=discord&logoColor=white',
   facebook:
@@ -131,22 +131,24 @@ const SignIn: NextPageWithLayout<ILoginProps> = ({ providers }) => {
                 </Typography>
               </div>
               <div className="flex w-full flex-wrap justify-center gap-4">
-                {Object.values(providers || []).map(provider => (
-                  <div key={provider.name}>
-                    <button
-                      onClick={() => signIn(provider.id)}
-                      className="relative h-10 w-40 overflow-hidden rounded-md shadow-md"
-                    >
-                      <Image
-                        alt="Log in Discord"
-                        src={images[provider.id]}
-                        width={104.75}
-                        height={28}
-                        layout="fill"
-                      />
-                    </button>
-                  </div>
-                ))}
+                {Object.values(providers || []).map(provider =>
+                  (images[provider.id] || '')?.length > 0 ? (
+                    <div key={provider.name}>
+                      <button
+                        onClick={() => signIn(provider.id)}
+                        className="relative h-10 w-40 overflow-hidden rounded-md shadow-md"
+                      >
+                        <Image
+                          alt="Log in Discord"
+                          src={images[provider.id] || ''}
+                          width={104.75}
+                          height={28}
+                          layout="fill"
+                        />
+                      </button>
+                    </div>
+                  ) : null,
+                )}
               </div>
             </>
           ) : null}

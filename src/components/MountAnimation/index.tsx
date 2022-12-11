@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useState } from 'react';
+import { ReactNode, Ref, useEffect, useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
 
 export const ANIMATION_TIMEOUT = 150;
@@ -8,7 +8,7 @@ interface IMountAnimationProps {
   timeout?: number;
   unmountOnExit?: boolean;
   classNames?: string;
-  nodeRef: unknown;
+  nodeRef: Ref<HTMLElement | undefined> | undefined;
 }
 
 export const MountAnimation = ({
