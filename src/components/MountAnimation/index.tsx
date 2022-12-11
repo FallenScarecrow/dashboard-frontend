@@ -8,7 +8,7 @@ interface IMountAnimationProps {
   timeout?: number;
   unmountOnExit?: boolean;
   classNames?: string;
-  nodeRef: any;
+  nodeRef: unknown;
 }
 
 export const MountAnimation = ({
