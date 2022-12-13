@@ -7,6 +7,7 @@ import { env } from '~@env/server.mjs';
 import { prisma } from '~@server/db/client';
 
 export const authOptions: NextAuthOptions = {
+  secret: env.NEXTAUTH_SECRET,
   pages: {
     signIn: '/login',
   },
