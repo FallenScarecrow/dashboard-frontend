@@ -8,6 +8,13 @@ const withTM = require('next-transpile-modules');
 const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
+  env: {
+    DATABASE_URL: process.env.DATABASE_URL,
+    NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
+    NEXTAUTH_URL: process.env.NEXTAUTH_URL,
+    GITHUB_ID: process.env.GITHUB_ID,
+    GITHUB_SECRET: process.env.GITHUB_SECRET,
+  },
   images: {
     remotePatterns: [
       {
