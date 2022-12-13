@@ -37,7 +37,6 @@ const SignIn: NextPageWithLayout<ILoginProps> = ({ providers }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const nodeRef = useRef<HTMLDivElement>(null);
 
-  debugger;
   console.log(env.DATABASE_URL);
   alert('DATABASE_URL: ' + env.DATABASE_URL);
   console.log(env.NEXTAUTH_SECRET);
