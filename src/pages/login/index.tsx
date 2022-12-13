@@ -1,10 +1,15 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import Image from 'next/image';
+import { BuiltInProviderType } from 'next-auth/providers';
 import { ClientSafeProvider, getProviders, LiteralUnion, signIn } from 'next-auth/react';
 
 import { ChangeEvent, useEffect, useRef, useState } from 'react';
+import clsx from 'clsx';
 
 import { IoKeyOutline, IoPersonOutline } from 'react-icons/io5';
+
+import { env } from '~@env/server.mjs';
 
 import { NextPageWithLayout } from '~@types/_app';
 
@@ -14,9 +19,6 @@ import { ANIMATION_TIMEOUT, MountAnimation } from '~@components/MountAnimation';
 import Button from '~@components/Button';
 import TextField from '~@components/TextField';
 import Typography from '~@components/Typography';
-import { BuiltInProviderType } from 'next-auth/providers';
-import Image from 'next/image';
-import clsx from 'clsx';
 
 interface ILoginProps {
   providers: Record<LiteralUnion<BuiltInProviderType, string>, ClientSafeProvider> | null;
@@ -34,6 +36,12 @@ const images: { [x in LiteralUnion<BuiltInProviderType, string>]?: string } = {
 const SignIn: NextPageWithLayout<ILoginProps> = ({ providers }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const nodeRef = useRef<HTMLDivElement>(null);
+
+  console.log(env.DATABASE_URL);
+  console.log(env.NEXTAUTH_SECRET);
+  console.log(env.NEXTAUTH_URL);
+  console.log(env.GITHUB_ID);
+  console.log(env.GITHUB_SECRET);
 
   const [data, setData] = useState({
     username: '',
