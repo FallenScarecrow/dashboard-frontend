@@ -37,11 +37,17 @@ const SignIn: NextPageWithLayout<ILoginProps> = ({ providers }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const nodeRef = useRef<HTMLDivElement>(null);
 
+  debugger;
   console.log(env.DATABASE_URL);
+  alert('DATABASE_URL: ' + env.DATABASE_URL);
   console.log(env.NEXTAUTH_SECRET);
+  alert('NEXTAUTH_SECRET: ' + env.NEXTAUTH_SECRET);
   console.log(env.NEXTAUTH_URL);
+  alert('NEXTAUTH_URL: ' + env.NEXTAUTH_URL);
   console.log(env.GITHUB_ID);
+  alert('GITHUB_ID: ' + env.GITHUB_ID);
   console.log(env.GITHUB_SECRET);
+  alert('GITHUB_SECRET: ' + env.GITHUB_SECRET);
 
   const [data, setData] = useState({
     username: '',
