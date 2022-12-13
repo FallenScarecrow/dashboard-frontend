@@ -9,8 +9,6 @@ import clsx from 'clsx';
 
 import { IoKeyOutline, IoPersonOutline } from 'react-icons/io5';
 
-import { env } from '~@env/server.mjs';
-
 import { NextPageWithLayout } from '~@types/_app';
 
 import LoginLayout from '~@layouts/LoginLayout';
