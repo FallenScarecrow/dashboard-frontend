@@ -13,6 +13,12 @@ export const authOptions: NextAuthOptions = {
   },
   // Include user.id on session
   callbacks: {
+    signIn(params) {
+      if (params.user.id) {
+        return false;
+      }
+      return true;
+    },
     session({ session, user }) {
       if (session.user) {
         session.user.id = user.id;

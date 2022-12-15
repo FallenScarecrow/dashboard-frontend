@@ -135,9 +135,7 @@ const SignIn: NextPageWithLayout<ILoginProps> = ({ providers }) => {
                   (images[provider.id] || '')?.length > 0 ? (
                     <div key={provider.name}>
                       <button
-                        onClick={() =>
-                          signIn(provider.id, { redirect: false, callbackUrl: '/dashboard' })
-                        }
+                        onClick={() => signIn(provider.id)}
                         className="relative h-10 w-40 overflow-hidden rounded-md shadow-md"
                       >
                         <Image
