@@ -6,23 +6,9 @@ import { z } from 'zod';
  * This way you can ensure the app isn't built with invalid env vars.
  */
 export const serverSchema = z.object({
-  DATABASE_URL: z.string().url(),
-  NODE_ENV: z.enum(['development', 'test', 'production']),
-  NEXTAUTH_SECRET:
-    process.env.NODE_ENV === 'production' ? z.string().min(1) : z.string().min(1).optional(),
-  NEXTAUTH_URL: z.preprocess(
-    // This makes Vercel deployments not fail if you don't set NEXTAUTH_URL
-    // Since NextAuth.js automatically uses the VERCEL_URL if present.
-    str => process.env.VERCEL_URL ?? str,
-    // VERCEL_URL doesn't include `https` so it cant be validated as a URL
-    process.env.VERCEL ? z.string() : z.string().url(),
-  ),
-  DISCORD_CLIENT_ID: z.string().optional(),
-  DISCORD_CLIENT_SECRET: z.string().optional(),
-  FACEBOOK_CLIENT_ID: z.string().optional(),
-  FACEBOOK_CLIENT_SECRET: z.string().optional(),
+  NODE_ENV: z.enum(['development', 'test', 'production']).optional(),
   GITHUB_ID: z.string(),
-  GITHUB_SECRET: z.string(),
+  GITHUB_SCOPE: z.string(),
 });
 
 /**
@@ -32,6 +18,8 @@ export const serverSchema = z.object({
  */
 export const clientSchema = z.object({
   // NEXT_PUBLIC_CLIENTVAR: z.string(),
+  NEXT_PUBLIC_URL: z.string().url(),
+  NEXT_PUBLIC_API_URL: z.string().url(),
 });
 
 /**
@@ -42,4 +30,6 @@ export const clientSchema = z.object({
  */
 export const clientEnv = {
   // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
+  NEXT_PUBLIC_URL: process.env.NEXT_PUBLIC_URL,
+  NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
 };

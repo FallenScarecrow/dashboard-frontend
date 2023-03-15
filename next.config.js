@@ -2,8 +2,8 @@
 /**
  * @type {import('next').NextConfig}
  **/
-const withPlugins = require('next-compose-plugins');
-const withTM = require('next-transpile-modules');
+// const withPlugins = require('next-compose-plugins');
+// const withTM = require('next-transpile-modules');
 
 const nextConfig = {
   reactStrictMode: true,
@@ -12,18 +12,16 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'img.shields.io',
-        port: '',
-      },
-      {
-        protocol: 'https',
         hostname: 'external-preview.redd.it',
-        port: '',
       },
       {
         protocol: 'https',
-        hostname: 'www.fillmurray.com',
-        port: '',
+        hostname: 'image.tmdb.org',
+      },
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '3001',
       },
     ],
   },
@@ -81,4 +79,4 @@ const nextConfig = {
   },
 };
 
-module.exports = withPlugins([[withTM], nextConfig]);
+module.exports = nextConfig;
