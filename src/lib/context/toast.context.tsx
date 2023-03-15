@@ -1,4 +1,11 @@
-import React, { createContext, useContext, useCallback, useState, useEffect } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useCallback,
+  useState,
+  useEffect,
+  createRef,
+} from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { v4 as uuid } from 'uuid';
 
@@ -10,7 +17,6 @@ interface IToastContextData {
    * Adds a toast to the list
    * @returns Return de id of the toast created, in case to remove early
    */
-  // eslint-disable-next-line no-unused-vars
   addToast(data: IToastProps): string;
 
   /**
@@ -18,13 +24,13 @@ interface IToastContextData {
    * Remove a toast from the list early
    * @param number Id of the toast to be removed
    */
-  // eslint-disable-next-line no-unused-vars
   removeToast(id: string): void;
 }
 
 interface IToast extends IToastProps {
   id: string;
-  timedout?: NodeJS.Timeout;
+  ref: React.MutableRefObject<null>;
+  timedOut?: NodeJS.Timeout;
 }
 
 const ToastContext = createContext({} as IToastContextData);
@@ -41,51 +47,33 @@ const ToastProvider = ({ children }: { children: React.ReactNode }) => {
     // setTimeout(() => removeToast(id), 5000);
     const { type, title, description } = data;
 
-    setToastList(prevList => [...prevList, { id, type, title, description }]);
+    setToastList(prevList => [...prevList, { id, type, title, description, ref: createRef() }]);
 
     return id;
   }, []);
 
   useEffect(() => {
-    let timeout = 5000;
-    toastList.forEach(toast => {
-      if (toast.timedout) return;
-
-      toast.timedout = setTimeout(() => {
-        removeToast(toast.id);
-      }, timeout);
-
-      timeout += 250;
-    });
-
     return () => {
-      toastList.forEach(toast => clearTimeout(toast.timedout));
+      toastList.forEach(toast => clearTimeout(toast.timedOut));
     };
-  }, [removeToast, toastList]);
+  }, []);
 
   useEffect(() => {
     let timeout = 5000;
-    toastList.forEach(toast => {
-      if (toast.timedout) return;
 
-      toast.timedout = setTimeout(() => {
+    toastList.forEach(toast => {
+      if (toast.timedOut) return;
+
+      toast.timedOut = setTimeout(() => {
         removeToast(toast.id);
       }, timeout);
 
       timeout += 250;
     });
-
-    return () => {
-      toastList.forEach(toast => {
-        if (toast.timedout) return;
-
-        clearTimeout(toast.timedout);
-      });
-    };
   }, [removeToast, toastList]);
 
   return (
-    <ToastContext.Provider value={{ addToast: addToast, removeToast: removeToast }}>
+    <ToastContext.Provider value={{ addToast, removeToast }}>
       {children}
       <TransitionGroup
         id="toast-container"
@@ -93,8 +81,13 @@ const ToastProvider = ({ children }: { children: React.ReactNode }) => {
       >
         {toastList.length != 0
           ? toastList.map(toast => (
-              <CSSTransition key={toast.id} timeout={500} classNames="scale">
-                <Toast type={toast.type} title={toast.title} description={toast.description} />
+              <CSSTransition key={toast.id} nodeRef={toast.ref} timeout={500} classNames="slide">
+                <Toast
+                  ref={toast.ref}
+                  type={toast.type}
+                  title={toast.title}
+                  description={toast.description}
+                />
               </CSSTransition>
             ))
           : null}

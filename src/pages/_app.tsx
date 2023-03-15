@@ -1,32 +1,31 @@
-import type { AppProps } from 'next/app';
-import { ThemeProvider } from 'next-themes';
-import { SessionProvider } from 'next-auth/react';
+import App, { AppContext, AppInitialProps, AppProps } from 'next/app';
 
-import { ToastProvider } from '~@lib/ToastProvider';
+import { NextPageWithLayout } from '~@types/pages/_app';
 
-import { NextPageWithLayout } from '~@types/_app';
+import ContextProvider from '~@lib/context/index.context';
 
 import '~@styles/globals.css';
-import { Session } from 'next-auth';
-import { trpc } from '~@utils/trpc';
 
 type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
-  pageProps: {
-    session: Session | null;
-  };
+  cookies?: string | undefined;
 };
 
-function MyApp({ Component, pageProps: { session, ...pageProps } }: AppPropsWithLayout) {
+export default function MyApp({ Component, pageProps, cookies }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? (page => page);
 
   return (
-    <SessionProvider session={session}>
-      <ThemeProvider enableSystem={true} attribute="class">
-        <ToastProvider>{getLayout(<Component {...pageProps} />)}</ToastProvider>
-      </ThemeProvider>
-    </SessionProvider>
+    <ContextProvider cookies={cookies}>{getLayout(<Component {...pageProps} />)}</ContextProvider>
   );
 }
 
-export default trpc.withTRPC(MyApp);
+MyApp.getInitialProps = async (appContext: AppContext) => {
+  const data: AppInitialProps = await App.getInitialProps(appContext);
+
+  const pageProps = {
+    ...data,
+    cookies: appContext.ctx.req?.headers.cookie,
+  };
+
+  return pageProps;
+};
