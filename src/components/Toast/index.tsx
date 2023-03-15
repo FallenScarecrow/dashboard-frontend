@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import { forwardRef, ReactNode } from 'react';
 import clsx from 'clsx';
 import {
   IoAlertCircleOutline,
@@ -7,12 +7,12 @@ import {
   IoWarningOutline,
 } from 'react-icons/io5';
 
-import { ThemeStatus } from '~@types/_app';
+import { ThemeStatus } from '~@types/pages/_app';
+
 import Typography from '~@components/Typography';
 
 import styles from './style.module.css';
 
-// eslint-disable-next-line no-unused-vars
 const icons: { [x in ThemeStatus]: ReactNode } = {
   info: <IoInformationCircleOutline />,
   warning: <IoWarningOutline />,
@@ -22,15 +22,16 @@ const icons: { [x in ThemeStatus]: ReactNode } = {
 
 export interface IToastProps {
   type: ThemeStatus;
-  title?: string | React.ReactNode;
-  description: string | React.ReactNode;
+  title?: string | ReactNode;
+  description: string | ReactNode;
 }
 
-const Toast = ({ type, title, description }: IToastProps) => {
+const Toast = ({ type, title, description }: IToastProps, ref: React.LegacyRef<HTMLDivElement>) => {
   return (
     <div
+      ref={ref}
       className={clsx(
-        'peer z-50 mt-4 mr-4 flex w-full items-center border-l-4 border-solid bg-white p-2 shadow-md shadow-black/20 transition-all dark:bg-zinc-800 dark:shadow-white/0',
+        'peer z-50 mt-4 mr-4 flex w-full items-center border-l-4 border-solid bg-white p-2 shadow-md shadow-black/20 transition-all',
         'sm:m-0 sm:ml-4 sm:mb-4 sm:min-w-[350px] sm:p-4 sm:peer-[]:mb-2',
         styles[`toast-${type}`],
       )}
@@ -52,4 +53,4 @@ const Toast = ({ type, title, description }: IToastProps) => {
   );
 };
 
-export default Toast;
+export default forwardRef<HTMLDivElement, IToastProps>(Toast);

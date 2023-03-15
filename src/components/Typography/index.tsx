@@ -1,17 +1,32 @@
 import clsx from 'clsx';
 import React, { ComponentType, forwardRef, ReactNode } from 'react';
 
-import { ThemeColors } from '~@types/_app';
+import { ThemeColors } from '~@types/pages/_app';
 
 import styles from './styles.module.css';
 
 interface ITypographyProps extends React.HTMLAttributes<HTMLElement> {
   children?: ReactNode;
-  component: ComponentType | 'span' | 'div' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'a';
-  variant: 'display' | 'title' | 'heading' | 'body' | 'label';
-  size: 'large' | 'medium' | 'small';
+  component:
+    | ComponentType
+    | 'li'
+    | 'span'
+    | 'div'
+    | 'h1'
+    | 'h2'
+    | 'h3'
+    | 'h4'
+    | 'h5'
+    | 'h6'
+    | 'p'
+    | 'a';
+  variant: TTextVariant;
+  size: TTextSize;
   color?: ThemeColors;
 }
+
+type TTextVariant = 'display' | 'heading' | 'title' | 'body' | 'label';
+type TTextSize = 'large' | 'medium' | 'small';
 
 const defaultClassesMapping: Record<string, Record<string, string>> = {
   display: {
@@ -50,7 +65,7 @@ const Typography = forwardRef((props: ITypographyProps, ref) => {
     <Component
       ref={ref}
       className={clsx(
-        'block align-middle font-sans text-black antialiased dark:text-white',
+        'block align-middle font-sans text-brutal-black antialiased',
         defaultClassesMapping[variant][size],
         color && styles[`heading-${color}`],
         className,

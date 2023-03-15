@@ -1,6 +1,5 @@
-import { signIn, signOut, useSession } from 'next-auth/react';
-
 import React, { ReactNode } from 'react';
+import Link from 'next/link';
 import clsx from 'clsx';
 import {
   IoDesktopSharp,
@@ -10,14 +9,18 @@ import {
   IoPersonCircleSharp,
 } from 'react-icons/io5';
 
+import { ISession, useSession } from '~@lib/context/session.context';
+
 import Typography from '~@components/Typography';
-import { trpc } from '~@utils/trpc';
+import ButtonTheme from '~@components/ButtonTheme';
 
 type SimplePageLayoutProps = {
   children: ReactNode;
 };
 
 const SimplePageLayout = ({ children }: SimplePageLayoutProps) => {
+  const { session: sessionData } = useSession();
+
   return (
     <div className="h-screen">
       <div className="flex h-12 items-center px-4 text-4xl">
@@ -25,7 +28,7 @@ const SimplePageLayout = ({ children }: SimplePageLayoutProps) => {
           Scarecrow
         </Typography>
         <div className="ml-auto flex items-center gap-4">
-          <AuthShowcase />
+          <AuthShowcase authData={sessionData} />
         </div>
       </div>
       <div className="flex max-h-[calc(100vh-3rem)]">
@@ -39,9 +42,7 @@ const SimplePageLayout = ({ children }: SimplePageLayoutProps) => {
               <div
                 key={menu.title}
                 className={clsx(
-                  menu.title == 'Home'
-                    ? 'bg-neutral-300 dark:bg-neutral-700'
-                    : 'hover:bg-neutral-300/50 dark:hover:bg-neutral-700/50',
+                  menu.title == 'Home' ? 'bg-neutral-300' : 'hover:bg-neutral-300/50',
                   'peer flex cursor-pointer items-center gap-4 rounded-md p-2 px-4 peer-[]:mt-2',
                 )}
               >
@@ -69,17 +70,10 @@ const SimplePageLayout = ({ children }: SimplePageLayoutProps) => {
 
 export default SimplePageLayout;
 
-const AuthShowcase: React.FC = () => {
-  const { data: sessionData } = useSession();
-
-  const { data: secretMessage } = trpc.auth.getSecretMessage.useQuery(
-    undefined, // no input
-    { enabled: sessionData?.user !== undefined },
-  );
-
+const AuthShowcase = ({ authData }: { authData: ISession }) => {
   return (
     <div className="flex items-center justify-center gap-4">
-      {sessionData ? (
+      {authData ? (
         <>
           <div className="relative">
             <IoMailSharp className="col-span-2" size={30} />
@@ -98,26 +92,33 @@ const AuthShowcase: React.FC = () => {
           </div>
           <div>
             <p className="text-center text-base text-white">
-              <span>Logged in as {sessionData.user?.name}</span>
-              {secretMessage ? <span> - {secretMessage}</span> : null}
+              <span>{authData.displayName}</span>
             </p>
           </div>
           <div>
             <button
               className="rounded-full bg-white/10 px-4 py-2 text-base font-semibold text-white no-underline transition hover:bg-white/20"
-              onClick={() => signOut()}
+              // onClick={() => signOut()}
             >
               Sign out
             </button>
           </div>
         </>
       ) : (
-        <button
-          className="rounded-full bg-white/10 px-4 py-2 text-base font-semibold text-white no-underline transition hover:bg-white/20"
-          onClick={() => signIn()}
-        >
-          Sign in
-        </button>
+        <>
+          <ButtonTheme />
+          <Link href="/login" passHref legacyBehavior>
+            <button
+              className={clsx(
+                'rounded-full px-4 py-2 text-base font-semibold no-underline transition',
+                'bg-neutral-700/10 text-neutral-700',
+                'hover:bg-neutral-500/50',
+              )}
+            >
+              Sign in
+            </button>
+          </Link>
+        </>
       )}
     </div>
   );

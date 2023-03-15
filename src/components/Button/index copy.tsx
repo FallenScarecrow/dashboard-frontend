@@ -49,8 +49,8 @@ const Button = forwardRef<HTMLButtonElement, TButtonProps>((props, ref) => {
   return (
     <button
       className={clsx(
-        'relative inline-flex min-w-[calc(100%-1rem)] cursor-pointer items-center justify-center overflow-hidden text-center transition-colors',
-        !children ? `h-9 w-9 px-0 sm:min-w-0` : 'h-10 px-6 sm:min-w-[9.25rem]',
+        'relative m-1 my-2 inline-flex min-w-[calc(100%-1rem)] cursor-pointer items-center justify-center overflow-hidden rounded-full text-center transition-colors',
+        !children ? `h-8 w-8 rounded-full px-0 sm:min-w-0` : 'h-10 px-6 sm:min-w-[9.25rem]',
         styles[`btn-${variant}-${color}`],
         fullWidth && 'w-[calc(100%-1rem)]',
         className,
@@ -69,9 +69,9 @@ const Button = forwardRef<HTMLButtonElement, TButtonProps>((props, ref) => {
           variant="heading"
           size="large"
           component="div"
-          className={clsx(children ? 'mr-2' : className)}
+          className={clsx(children && 'mr-2')}
         >
-          <Icon />
+          <Icon className="text-white" />
         </Typography>
       ) : null}
 

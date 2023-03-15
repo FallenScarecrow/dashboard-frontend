@@ -40,7 +40,7 @@ const Ripple = forwardRef<HTMLSpanElement, IRippleProps>(({ disabled = false }, 
   return (
     <span
       className={clsx(
-        'absolute block h-full w-full rounded-full bg-black/25 opacity-0 dark:bg-white/50',
+        'absolute block h-full w-full rounded-full bg-black/25 opacity-0',
         isRippling && 'animate-ripple',
       )}
       onClick={handleClick}

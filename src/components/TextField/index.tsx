@@ -1,21 +1,27 @@
-import { ChangeEvent, FocusEvent, forwardRef, InputHTMLAttributes } from 'react';
+import {
+  ChangeEvent,
+  FocusEvent,
+  forwardRef,
+  HTMLInputTypeAttribute,
+  InputHTMLAttributes,
+} from 'react';
 import clsx from 'clsx';
 import { IconType } from 'react-icons/lib';
 
-import { ThemeColors } from '~@types/_app';
+import { ThemeColors } from '~@types/pages/_app';
 
 import Typography from '~@components/Typography';
 
 import styles from './styles.module.css';
 
-interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
+export interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
   id: string;
-  type: 'email' | 'text' | 'password' | 'search' | 'url' | 'tel';
+  type: 'email' | 'text' | 'password' | 'search' | 'url' | 'tel' | HTMLInputTypeAttribute;
   placeholder: string;
   fullWidth?: boolean;
   color?: ThemeColors;
   icon?: IconType;
-  iconActionButton?: string;
+  iconActionButton?: IconType;
   onActionClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
@@ -26,11 +32,12 @@ const TextField = forwardRef<HTMLInputElement, IInputProps>((props: IInputProps,
     placeholder,
     value,
     onChange: customHandleChange,
-    iconActionButton,
+    iconActionButton: IconActionButton,
     id,
     disabled,
     icon: Icon,
     onActionClick: handleActionClick,
+    type,
     ...rest
   } = props;
 
@@ -58,24 +65,22 @@ const TextField = forwardRef<HTMLInputElement, IInputProps>((props: IInputProps,
     if (!container) {
       return;
     }
-
-    // container.classList.toggle('');
   };
 
   return (
     <label
       htmlFor={id}
-      // eslint-disable-next-line tailwindcss/no-custom-classname
       className={clsx(
-        'group relative m-1 my-4 inline-block h-12 w-full max-w-xs cursor-text',
-        fullWidth && 'max-w-[calc(100%-0.5rem)]',
-        disabled && 'cursor-not-allowed select-none',
+        'group relative m-1 my-4 inline-block h-12 w-full',
+        fullWidth ? 'max-w-[calc(100%-0.5rem)]' : 'max-w-xs',
+        disabled ? 'cursor-not-allowed select-none' : 'cursor-text',
         value && 'valid',
       )}
     >
       <input
         id={id}
         ref={ref}
+        type={type}
         defaultValue={value}
         onBlur={handleFocus}
         onFocus={handleFocus}
@@ -87,7 +92,7 @@ const TextField = forwardRef<HTMLInputElement, IInputProps>((props: IInputProps,
           'disabled:cursor-not-allowed disabled:select-none',
           styles[`textField-${color}`],
           Icon ? 'pl-10' : 'focus:pl-4 group-[.valid]:pl-4',
-          iconActionButton ? 'pr-10' : 'focus:pr-4 group-[.valid]:pr-4',
+          IconActionButton ? 'pr-10' : 'focus:pr-4 group-[.valid]:pr-4',
         )}
         disabled={disabled}
         {...rest}
@@ -95,9 +100,9 @@ const TextField = forwardRef<HTMLInputElement, IInputProps>((props: IInputProps,
       {Icon ? (
         <div
           className={clsx(
-            'absolute top-1/2 -translate-y-1/3 px-2 text-base transition-colors duration-500',
-            'peer-focus:text-white peer-focus:dark:text-black',
-            'group-[.valid]:text-white group-[.valid]:dark:text-black',
+            'absolute top-1/2 -translate-y-1/3 px-2 text-2xl transition-colors duration-500',
+            'peer-focus:text-neutral-900',
+            'group-[.valid]:text-neutral-900',
             'peer-disabled:select-none peer-disabled:text-opacity-40',
           )}
         >
@@ -109,7 +114,7 @@ const TextField = forwardRef<HTMLInputElement, IInputProps>((props: IInputProps,
         size="large"
         variant="label"
         className={clsx(
-          'absolute top-1/2 left-4 -translate-y-1/3 px-1 capitalize text-black transition-[top,font-size,left,color] duration-500 dark:text-white',
+          'absolute top-1/2 left-4 -translate-y-1/3 px-1 capitalize text-neutral-900 transition-[top,font-size,left,color] duration-500',
           'peer-focus:-top-2 peer-focus:left-0 peer-focus:text-xs',
           'group-[.valid]:-top-2 group-[.valid]:left-0 group-[.valid]:text-xs',
           'peer-disabled:select-none peer-disabled:text-opacity-40',
@@ -118,17 +123,19 @@ const TextField = forwardRef<HTMLInputElement, IInputProps>((props: IInputProps,
       >
         {placeholder}
       </Typography>
-      {iconActionButton ? (
+      {IconActionButton ? (
         <button
           type="button"
           className={clsx(
-            'absolute top-1/2 right-1 z-10 -translate-y-1/3 rounded-full p-1 text-black outline-none',
+            'absolute top-1/2 right-1 z-10 -translate-y-1/3 rounded-full p-1 text-2xl outline-none',
+            'peer-focus:text-neutral-900',
+            'group-[.valid]:text-neutral-900',
             'peer-disabled:select-none peer-disabled:text-opacity-40',
           )}
           onClick={handleActionClick}
           disabled={disabled}
         >
-          {iconActionButton}
+          <IconActionButton />
         </button>
       ) : null}
     </label>

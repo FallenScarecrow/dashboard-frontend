@@ -13,7 +13,7 @@ interface IMountAnimationProps {
 
 export const MountAnimation = ({
   children,
-  timeout = ANIMATION_TIMEOUT, // MATCH YOUR DEFAULT ANIMATION DURATION
+  timeout = 50000, // MATCH YOUR DEFAULT ANIMATION DURATION
   unmountOnExit = true,
   classNames = 'slide', // ADD YOUR DEFAULT ANIMATION
   nodeRef,

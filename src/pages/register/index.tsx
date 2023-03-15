@@ -1,6 +1,4 @@
 import Head from 'next/head';
-import { BuiltInProviderType } from 'next-auth/providers';
-import { ClientSafeProvider, getProviders, LiteralUnion, signIn } from 'next-auth/react';
 
 import { ChangeEvent, useEffect, useRef, useState } from 'react';
 
@@ -8,7 +6,7 @@ import Link from 'next/link';
 
 import { IoKeyOutline, IoMailOutline, IoPersonOutline } from 'react-icons/io5';
 
-import { NextPageWithLayout } from '~@types/_app';
+import { NextPageWithLayout } from '~@types/pages/_app';
 
 import LoginLayout from '~@layouts/LoginLayout';
 
@@ -19,20 +17,15 @@ import Typography from '~@components/Typography';
 import Image from 'next/image';
 import clsx from 'clsx';
 
-interface IRegisterProps {
-  providers: Record<LiteralUnion<BuiltInProviderType, string>, ClientSafeProvider> | null;
-}
+type providers = 'google' | 'github' | 'discord';
 
-const images: { [x in LiteralUnion<BuiltInProviderType, string>]?: string } = {
-  discord:
-    'https://img.shields.io/badge/Discord-7289DA?style=for-the-badge&logo=discord&logoColor=white',
-  facebook:
-    'https://img.shields.io/badge/Facebook-1877F2?style=for-the-badge&logo=facebook&logoColor=white',
-  github:
-    'https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white',
-};
+const images: { id: providers; src: string }[] = [
+  { id: 'google', src: '/providers/btn_google_light_normal_ios.svg' },
+  { id: 'github', src: '/providers/github-mark-white.svg' },
+  { id: 'discord', src: '/providers/discord-mark-white.png' },
+];
 
-const Register: NextPageWithLayout<IRegisterProps> = ({ providers }) => {
+const Register: NextPageWithLayout = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const nodeRef = useRef<HTMLDivElement>(null);
 
@@ -48,6 +41,7 @@ const Register: NextPageWithLayout<IRegisterProps> = ({ providers }) => {
 
   const [data, setData] = useState({
     email: '',
+    confirmEmail: '',
     password: '',
   });
 
@@ -95,6 +89,18 @@ const Register: NextPageWithLayout<IRegisterProps> = ({ providers }) => {
               autoComplete="email"
             />
             <TextField
+              id="confirm-email"
+              name="confirm-email"
+              type="text"
+              icon={IoMailOutline}
+              value={data.confirmEmail}
+              required
+              onChange={handleChange}
+              fullWidth
+              placeholder="Confirm Email"
+              autoComplete="email"
+            />
+            <TextField
               id="password"
               name="password"
               type="password"
@@ -107,48 +113,39 @@ const Register: NextPageWithLayout<IRegisterProps> = ({ providers }) => {
               placeholder="Password"
               autoComplete="new-password"
             />
+            <TextField
+              id="confirm-password"
+              name="confirm-password"
+              type="password"
+              icon={IoKeyOutline}
+              color="primary"
+              value={data.password}
+              required
+              onChange={handleChange}
+              fullWidth
+              placeholder="Confirm Password"
+              autoComplete="new-password"
+            />
             <Button type="button" variant="contained" className="self-end" fullWidth>
               Sign-Up
             </Button>
           </form>
-          {Object.values(providers || []).length > 0 ? (
-            <>
-              <div className="relative my-4 flex justify-center overflow-hidden">
-                <Typography
-                  component="span"
-                  size="large"
-                  variant="body"
-                  className={clsx(
-                    'inline-block px-5 align-baseline',
-                    'before:absolute before:top-3 before:right-0 before:left-2/3 before:block before:border-t-2 before:border-neutral-900/20 dark:before:border-neutral-100/20',
-                    'after:absolute after:left-0 after:right-2/3 after:top-3 after:block after:border-t-2 after:border-neutral-900/20 dark:after:border-neutral-100/20',
-                  )}
-                >
-                  or
-                </Typography>
-              </div>
-              <div className="flex w-full flex-wrap justify-center gap-4">
-                {Object.values(providers || []).map(provider =>
-                  (images[provider.id] || '').length > 0 ? (
-                    <div key={provider.name}>
-                      <button
-                        onClick={() => signIn(provider.id)}
-                        className="relative h-10 w-40 overflow-hidden rounded-md shadow-md"
-                      >
-                        <Image
-                          alt="Log in Discord"
-                          src={images[provider.id] || ''}
-                          width={104.75}
-                          height={28}
-                          layout="fill"
-                        />
-                      </button>
-                    </div>
-                  ) : null,
-                )}
-              </div>
-            </>
-          ) : null}
+          <div className="relative my-4 flex justify-center overflow-hidden">
+            <Typography
+              component="span"
+              size="large"
+              variant="body"
+              className={clsx(
+                'inline-block px-5 align-baseline',
+                'before:absolute before:top-3 before:right-0 before:left-2/3 before:block before:border-t-2 before:border-neutral-900/20',
+                'after:absolute after:left-0 after:right-2/3 after:top-3 after:block after:border-t-2 after:border-neutral-900/20',
+              )}
+            >
+              or
+            </Typography>
+          </div>
+
+          <Providers />
           <Typography
             variant="body"
             size="small"
@@ -157,7 +154,7 @@ const Register: NextPageWithLayout<IRegisterProps> = ({ providers }) => {
           >
             Already have an account? &nbsp;
             <Link href="/login" passHref legacyBehavior>
-              <a className="text-cyan-600 underline dark:text-cyan-400">Sign-In</a>
+              <a className="text-cyan-600 underline">Sign-In</a>
             </Link>
           </Typography>
         </div>
@@ -166,15 +163,31 @@ const Register: NextPageWithLayout<IRegisterProps> = ({ providers }) => {
   );
 };
 
-export async function getServerSideProps() {
-  const providers = await getProviders();
-
-  return {
-    props: { providers },
-  };
-}
-
 export default Register;
 Register.getLayout = page => {
   return <LoginLayout>{page}</LoginLayout>;
+};
+
+const Providers = () => {
+  return (
+    <div className="flex w-full flex-wrap justify-around gap-4">
+      {images.map(image => (
+        <button
+          // onClick={() => signIn(provider.id)}
+          // Redirect to Github Login page
+          // Then github comes back and send data to backend
+          key={image.id}
+          className={clsx(
+            'relative aspect-square overflow-hidden rounded-md p-4 backdrop-blur-sm transition-colors duration-500 sm:rounded-xl',
+            'bg-neutral-900/10',
+            'shadow-md shadow-neutral-100/10',
+          )}
+        >
+          <div className="relative h-12 w-12">
+            <Image alt={'Log with ' + image.id} src={image.src} layout="fill" objectFit="contain" />
+          </div>
+        </button>
+      ))}
+    </div>
+  );
 };

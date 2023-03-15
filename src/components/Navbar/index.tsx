@@ -78,7 +78,6 @@ const Navbar = ({ isOpen = false, onCloseNav }: { isOpen?: boolean; onCloseNav?:
   return (
     <div
       ref={containerRef}
-      // eslint-disable-next-line tailwindcss/no-custom-classname
       className="group/side invisible absolute inset-0 z-50 bg-transparent open:visible"
     >
       <div

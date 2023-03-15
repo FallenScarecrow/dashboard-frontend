@@ -1,8 +1,14 @@
 import Head from 'next/head';
-import { ReactElement, useState } from 'react';
+import { ReactNode, useState } from 'react';
 import clsx from 'clsx';
 
-import { NextPageWithLayout, ThemeColors, TextVariants, Sizes, ThemeStatus } from '~@types/_app';
+import {
+  NextPageWithLayout,
+  ThemeColors,
+  TextVariants,
+  Sizes,
+  ThemeStatus,
+} from '~@types/pages/_app';
 
 import DefaultLayout from '~@layouts/CleanLayout';
 
@@ -14,9 +20,10 @@ import {
   IoCheckmarkDoneCircleOutline,
   IoInformationCircleOutline,
   IoRocket,
+  IoSearch,
   IoWarningOutline,
 } from 'react-icons/io5';
-import { useToast } from 'lib/ToastProvider';
+import { useToast } from '~@lib/context/toast.context';
 
 const colors: ThemeColors[] = ['primary', 'secondary'];
 // const statuses: ThemeStatus[] = ['success', 'info', 'warning', 'error'];
@@ -89,7 +96,7 @@ const Test: NextPageWithLayout = () => {
             <Button
               type="button"
               variant="contained"
-              icon={<IoInformationCircleOutline />}
+              icon={IoInformationCircleOutline}
               onClick={() => handleToastClick('success')}
             >
               Success
@@ -97,7 +104,7 @@ const Test: NextPageWithLayout = () => {
             <Button
               type="button"
               variant="contained"
-              icon={<IoWarningOutline />}
+              icon={IoWarningOutline}
               onClick={() => handleToastClick('info')}
             >
               Info
@@ -105,7 +112,7 @@ const Test: NextPageWithLayout = () => {
             <Button
               type="button"
               variant="contained"
-              icon={<IoAlertCircleOutline />}
+              icon={IoAlertCircleOutline}
               onClick={() => handleToastClick('warning')}
             >
               Warning
@@ -113,7 +120,7 @@ const Test: NextPageWithLayout = () => {
             <Button
               type="button"
               variant="contained"
-              icon={<IoCheckmarkDoneCircleOutline />}
+              icon={IoCheckmarkDoneCircleOutline}
               onClick={() => handleToastClick('error')}
             >
               Error
@@ -221,7 +228,7 @@ const Test: NextPageWithLayout = () => {
                   placeholder={color}
                   type="text"
                   color={color}
-                  iconActionButton="🔎"
+                  iconActionButton={IoSearch}
                 />
                 <TextField
                   id={`${color}-val-actionButton`}
@@ -229,7 +236,7 @@ const Test: NextPageWithLayout = () => {
                   placeholder={color}
                   type="text"
                   color={color}
-                  iconActionButton="🔎"
+                  iconActionButton={IoSearch}
                 />
                 <TextField
                   id={`${color}-actionButton-disabled`}
@@ -237,7 +244,7 @@ const Test: NextPageWithLayout = () => {
                   placeholder={color}
                   type="text"
                   color={color}
-                  iconActionButton="🔎"
+                  iconActionButton={IoSearch}
                   disabled
                 />
                 <TextField
@@ -246,7 +253,7 @@ const Test: NextPageWithLayout = () => {
                   placeholder={color}
                   type="text"
                   color={color}
-                  iconActionButton="🔎"
+                  iconActionButton={IoSearch}
                   disabled
                 />
                 <TextField
@@ -256,7 +263,7 @@ const Test: NextPageWithLayout = () => {
                   type="text"
                   color={color}
                   icon={IoRocket}
-                  iconActionButton="🔎"
+                  iconActionButton={IoSearch}
                 />
                 <TextField
                   id={`${color}-val-icon-actionButton`}
@@ -265,7 +272,7 @@ const Test: NextPageWithLayout = () => {
                   type="text"
                   color={color}
                   icon={IoRocket}
-                  iconActionButton="🔎"
+                  iconActionButton={IoSearch}
                 />
                 <TextField
                   id={`${color}-icon-actionButton-disabled`}
@@ -274,7 +281,7 @@ const Test: NextPageWithLayout = () => {
                   type="text"
                   color={color}
                   icon={IoRocket}
-                  iconActionButton="🔎"
+                  iconActionButton={IoSearch}
                   disabled
                 />
                 <TextField
@@ -284,7 +291,7 @@ const Test: NextPageWithLayout = () => {
                   type="text"
                   color={color}
                   icon={IoRocket}
-                  iconActionButton="🔎"
+                  iconActionButton={IoSearch}
                   disabled
                 />
               </div>
@@ -381,7 +388,7 @@ const Test: NextPageWithLayout = () => {
                   type="text"
                   color={color}
                   fullWidth
-                  iconActionButton="🔎"
+                  iconActionButton={IoSearch}
                 />
                 <TextField
                   id={`${color}-val-fullWidth-actionButton`}
@@ -390,7 +397,7 @@ const Test: NextPageWithLayout = () => {
                   color={color}
                   fullWidth
                   value={color}
-                  iconActionButton="🔎"
+                  iconActionButton={IoSearch}
                 />
                 <TextField
                   id={`${color}-val-fullWidth-actionButton`}
@@ -400,7 +407,7 @@ const Test: NextPageWithLayout = () => {
                   color={color}
                   fullWidth
                   icon={IoRocket}
-                  iconActionButton="🔎"
+                  iconActionButton={IoSearch}
                 />
                 <TextField
                   id={`${color}-val-fullWidth-actionButton`}
@@ -410,7 +417,7 @@ const Test: NextPageWithLayout = () => {
                   fullWidth
                   icon={IoRocket}
                   value={color}
-                  iconActionButton="🔎"
+                  iconActionButton={IoSearch}
                 />
                 <TextField
                   id={`${color}-icon-fullWidth-disabled`}
@@ -420,7 +427,7 @@ const Test: NextPageWithLayout = () => {
                   color={color}
                   fullWidth
                   disabled
-                  iconActionButton="🔎"
+                  iconActionButton={IoSearch}
                 />
                 <TextField
                   id={`${color}-val-icon-fullWidth-disabled`}
@@ -430,7 +437,7 @@ const Test: NextPageWithLayout = () => {
                   fullWidth
                   value={color}
                   disabled
-                  iconActionButton="🔎"
+                  iconActionButton={IoSearch}
                 />
                 <TextField
                   id={`${color}-icon-fullWidth-disabled`}
@@ -441,7 +448,7 @@ const Test: NextPageWithLayout = () => {
                   fullWidth
                   icon={IoRocket}
                   disabled
-                  iconActionButton="🔎"
+                  iconActionButton={IoSearch}
                 />
                 <TextField
                   id={`${color}-val-icon-fullWidth-disabled`}
@@ -452,7 +459,7 @@ const Test: NextPageWithLayout = () => {
                   value={color}
                   icon={IoRocket}
                   disabled
-                  iconActionButton="🔎"
+                  iconActionButton={IoSearch}
                 />
               </div>
             </CardContent>
@@ -468,9 +475,9 @@ const Test: NextPageWithLayout = () => {
                 <Typography variant="title" component="h4" size="small">
                   Icon
                 </Typography>
-                <Button type="button" color={color} variant="text" icon={<IoRocket />} />
-                <Button type="button" color={color} variant="outlined" icon={<IoRocket />} />
-                <Button type="button" color={color} variant="contained" icon={<IoRocket />} />
+                <Button type="button" color={color} variant="text" icon={IoRocket} />
+                <Button type="button" color={color} variant="outlined" icon={IoRocket} />
+                <Button type="button" color={color} variant="contained" icon={IoRocket} />
               </div>
               <div>
                 <Typography variant="title" component="h4" size="small">
@@ -485,13 +492,13 @@ const Test: NextPageWithLayout = () => {
                 <Button type="button" color={color} variant="contained">
                   Login
                 </Button>
-                <Button type="button" color={color} variant="text" icon={<IoRocket />}>
+                <Button type="button" color={color} variant="text" icon={IoRocket}>
                   Login
                 </Button>
-                <Button type="button" color={color} variant="outlined" icon={<IoRocket />}>
+                <Button type="button" color={color} variant="outlined" icon={IoRocket}>
                   Login
                 </Button>
-                <Button type="button" color={color} variant="contained" icon={<IoRocket />}>
+                <Button type="button" color={color} variant="contained" icon={IoRocket}>
                   Login
                 </Button>
               </div>
@@ -499,21 +506,9 @@ const Test: NextPageWithLayout = () => {
                 <Typography variant="title" component="h4" size="small">
                   Disabled
                 </Typography>
-                <Button type="button" color={color} variant="text" icon={<IoRocket />} disabled />
-                <Button
-                  type="button"
-                  color={color}
-                  variant="outlined"
-                  icon={<IoRocket />}
-                  disabled
-                />
-                <Button
-                  type="button"
-                  color={color}
-                  variant="contained"
-                  icon={<IoRocket />}
-                  disabled
-                />
+                <Button type="button" color={color} variant="text" icon={IoRocket} disabled />
+                <Button type="button" color={color} variant="outlined" icon={IoRocket} disabled />
+                <Button type="button" color={color} variant="contained" icon={IoRocket} disabled />
                 <Button type="button" color={color} variant="text" disabled>
                   Login
                 </Button>
@@ -523,19 +518,13 @@ const Test: NextPageWithLayout = () => {
                 <Button type="button" color={color} variant="contained" disabled>
                   Login
                 </Button>
-                <Button type="button" color={color} variant="text" icon={<IoRocket />} disabled>
+                <Button type="button" color={color} variant="text" icon={IoRocket} disabled>
                   Login
                 </Button>
-                <Button type="button" color={color} variant="outlined" icon={<IoRocket />} disabled>
+                <Button type="button" color={color} variant="outlined" icon={IoRocket} disabled>
                   Login
                 </Button>
-                <Button
-                  type="button"
-                  color={color}
-                  variant="contained"
-                  icon={<IoRocket />}
-                  disabled
-                >
+                <Button type="button" color={color} variant="contained" icon={IoRocket} disabled>
                   Login
                 </Button>
               </div>
@@ -569,25 +558,13 @@ const Test: NextPageWithLayout = () => {
                 <Typography variant="title" component="h4" size="small">
                   FullWidth Icon
                 </Typography>
-                <Button type="button" color={color} variant="text" fullWidth icon={<IoRocket />}>
+                <Button type="button" color={color} variant="text" fullWidth icon={IoRocket}>
                   Login
                 </Button>
-                <Button
-                  type="button"
-                  color={color}
-                  variant="outlined"
-                  fullWidth
-                  icon={<IoRocket />}
-                >
+                <Button type="button" color={color} variant="outlined" fullWidth icon={IoRocket}>
                   Login
                 </Button>
-                <Button
-                  type="button"
-                  color={color}
-                  variant="contained"
-                  fullWidth
-                  icon={<IoRocket />}
-                >
+                <Button type="button" color={color} variant="contained" fullWidth icon={IoRocket}>
                   Login
                 </Button>
                 <Typography variant="title" component="h4" size="small">
@@ -598,7 +575,7 @@ const Test: NextPageWithLayout = () => {
                   color={color}
                   variant="text"
                   fullWidth
-                  icon={<IoRocket />}
+                  icon={IoRocket}
                   disabled
                 >
                   Login
@@ -608,7 +585,7 @@ const Test: NextPageWithLayout = () => {
                   color={color}
                   variant="outlined"
                   fullWidth
-                  icon={<IoRocket />}
+                  icon={IoRocket}
                   disabled
                 >
                   Login
@@ -618,7 +595,7 @@ const Test: NextPageWithLayout = () => {
                   color={color}
                   variant="contained"
                   fullWidth
-                  icon={<IoRocket />}
+                  icon={IoRocket}
                   disabled
                 >
                   Login
@@ -633,6 +610,6 @@ const Test: NextPageWithLayout = () => {
 };
 
 export default Test;
-Test.getLayout = (page: ReactElement) => {
+Test.getLayout = (page: ReactNode) => {
   return <DefaultLayout>{page}</DefaultLayout>;
 };

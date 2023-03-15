@@ -25,7 +25,7 @@ const ButtonTheme = () => {
   }, []);
 
   return (
-    <div className="overflow-hidden px-2">
+    <div className="h-10 w-10 overflow-hidden border-2 border-brutal-black shadow-neubrutalism shadow-brutal-black">
       <SwitchTransition mode="out-in">
         <CSSTransition
           key={currentTheme == 'dark' ? 'DarkTheme' : 'LightTheme'}
@@ -39,7 +39,7 @@ const ButtonTheme = () => {
               ref={nodeRef}
               type="button"
               variant="text"
-              icon={currentTheme == 'dark' ? <IoSunnySharp /> : <IoMoonSharp />}
+              icon={currentTheme == 'dark' ? IoSunnySharp : IoMoonSharp}
               onClick={handleDarkModeToggleClick}
             />
           ) : (

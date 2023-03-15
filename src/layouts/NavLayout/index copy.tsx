@@ -3,17 +3,12 @@ import clsx from 'clsx';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 import {
-  IoDesktopOutline,
   IoDesktopSharp,
-  IoGridOutline,
   IoHomeSharp,
-  IoLogOutOutline,
   IoMailSharp,
   IoMenu,
-  IoPeopleOutline,
   IoPeopleSharp,
   IoPersonCircleSharp,
-  IoSettingsOutline,
 } from 'react-icons/io5';
 
 import Typography from '~@components/Typography';
@@ -117,12 +112,7 @@ const NavLayout = ({ children }: LayoutProps) => {
 
       <div className={clsx('h-screen w-full', menuOpen ? 'overflow-hidden' : 'overflow-y-auto')}>
         <div className="flex min-h-screen flex-col">
-          <div
-            className={clsx(
-              'grid-cols-12 items-center border-b-2 border-black text-4xl',
-              menuOpen ? 'grid' : 'hidden',
-            )}
-          >
+          <div className="grid grid-cols-12 items-center border-b-2 border-black text-4xl">
             <div className="col-span-2 justify-self-stretch bg-brutal-black p-2 text-center sm:col-span-1 md:justify-self-start">
               <Button icon={IoMenu} onClick={handleClick} className="text-white" />
             </div>
@@ -156,72 +146,8 @@ const NavLayout = ({ children }: LayoutProps) => {
               </div>
             </div>
           </div>
-          <div className="grid flex-1 grid-cols-12">
-            <div className="col-span-3 flex flex-col border-r-2 border-black p-4 xl:col-span-2">
-              <Typography
-                component="div"
-                variant="heading"
-                size="large"
-                className={clsx(
-                  'relative self-center p-2 text-center tracking-widest',
-                  'before:absolute before:-inset-1 before:block before:-skew-y-3 before:bg-brutal-seafoam',
-                  // 'col-span-7 sm:col-span-9 md:col-span-4 md:col-start-5 xl:col-span-2 xl:col-start-6',
-                )}
-              >
-                <span className="relative text-brutal-black">Scarecrow</span>
-              </Typography>
-              <nav className="mx-auto mt-12 w-10/12">
-                <ul>
-                  {[
-                    { icon: IoGridOutline, title: 'Overview' },
-                    { icon: IoPeopleOutline, title: 'User' },
-                    { icon: IoDesktopOutline, title: 'Conferences' },
-                    { icon: IoSettingsOutline, title: 'Settings' },
-                  ].map(({ icon: Icon, title }, i) => (
-                    <Typography
-                      component="li"
-                      variant="heading"
-                      size="small"
-                      key={title}
-                      className={clsx(
-                        i == 0 && 'border-brutal-black bg-brutal-seafoam shadow-brutal-black',
-                        i != 0 &&
-                          'border-white shadow-white hover:border-brutal-black hover:bg-brutal-seafoam hover:shadow-brutal-black',
-                        'mt-4 cursor-pointer rounded-full border-2 py-2 px-6 text-brutal-black shadow-neubrutalism',
-                      )}
-                    >
-                      <div className="flex w-full items-center gap-4">
-                        <Icon />
-                        {title}
-                      </div>
-                    </Typography>
-                  ))}
-                </ul>
-              </nav>
-              <hr className="mx-auto mt-auto w-10/12" />
-              <div className="mx-auto w-10/12">
-                <ul>
-                  <Typography
-                    component="li"
-                    variant="heading"
-                    size="small"
-                    className={clsx(
-                      'border-white shadow-white hover:border-brutal-black hover:bg-brutal-seafoam hover:shadow-brutal-black',
-                      'mt-4 cursor-pointer rounded-full border-2 py-2 px-8 text-red-600 shadow-neubrutalism',
-                    )}
-                  >
-                    <div className="flex w-2/3 items-center gap-4">
-                      <IoLogOutOutline /> Logout
-                    </div>
-                  </Typography>
-                </ul>
-              </div>
-            </div>
-            <main className="col-span-9 bg-brutal-seafoam/10 bg-dotted bg-repeat pl-6 xl:col-span-10">
-              {children}
-            </main>
-          </div>
-          {/* <footer className="h-20 bg-brutal-black">Footer</footer> */}
+          <main className="flex-1">{children}</main>
+          {/* <footer className="h-20 bg-neutral-800">Footer</footer> */}
         </div>
       </div>
     </>
