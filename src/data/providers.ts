@@ -1,6 +1,6 @@
-import { IProvider } from '~@types/_api';
+import { TProviders } from '~@types/_app';
 
-const providers: IProvider[] = [
+const providers: TProviders = [
   { id: 'google', src: '/providers/btn_google_light_normal_ios.svg' },
   {
     id: 'github',
