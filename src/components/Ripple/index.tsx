@@ -1,11 +1,9 @@
 import clsx from 'clsx';
 import React, { forwardRef, MouseEvent, useEffect, useState } from 'react';
 
-interface IRippleProps {
-  disabled?: boolean;
-}
+import { TRippleProps } from '~@types/components/Ripple';
 
-const Ripple = forwardRef<HTMLSpanElement, IRippleProps>(({ disabled = false }, ref) => {
+const Ripple = forwardRef<HTMLSpanElement, TRippleProps>(({ disabled = false }, ref) => {
   const [isRippling, setIsRippling] = useState(false);
   const [data, setData] = useState({ left: -1, top: -1, width: '100%', height: '100%' });
 

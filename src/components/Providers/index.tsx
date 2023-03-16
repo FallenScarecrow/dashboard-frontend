@@ -1,17 +1,10 @@
 import clsx from 'clsx';
 import Image from 'next/image';
 
-import { env } from '~@env/client.mjs';
+import { TProvidersProps } from '~@types/components/Providers';
 
-type TProviderId = 'google' | 'github' | 'discord';
-interface IProvider {
-  id: TProviderId;
-  src: string;
-  callback?: string;
-}
-
-const Providers = ({ providers }) => {
-  if (!providers?.length) return <span>Loading...</span>;
+const Providers = ({ providers }: TProvidersProps) => {
+  if (!providers.length) return <span>Loading...</span>;
 
   const handleClick = (callback?: string) => {
     if (!callback) return;

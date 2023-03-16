@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from 'react';
+import React, { useState } from 'react';
 import clsx from 'clsx';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
@@ -15,16 +15,14 @@ import {
   IoPersonCircleSharp,
   IoSettingsOutline,
 } from 'react-icons/io5';
+import { ImMinus } from 'react-icons/im';
+
+import { TDefaultLayoutProps } from '~@types/layouts';
 
 import Typography from '~@components/Typography';
 import Button from '~@components/Button';
-import { ImMinus } from 'react-icons/im';
 
-type LayoutProps = {
-  children: ReactNode;
-};
-
-const NavLayout = ({ children }: LayoutProps) => {
+const NavLayout = ({ children }: TDefaultLayoutProps) => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const handleClick = () => {

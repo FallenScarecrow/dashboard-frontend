@@ -1,41 +1,22 @@
 import React, { createContext, useContext, useCallback, useState, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 
-interface ISessionContextData {
-  session: ISession;
+import {
+  TSession,
+  TSessionContextData,
+  TSessionProviderProps,
+} from '~@types/lib/context/session.context';
 
-  /**
-   * @function saveSession
-   * Save Session in Local Storage
-   * @param session Session in JSON format
-   */
-  saveSession(session: ISession): void;
+const SessionContext = createContext({} as TSessionContextData);
 
-  /**
-   * @function clearSession
-   * Remove Session from Local Storage
-   */
-  clearSession(): void;
-}
-
-export interface ISession {
-  authToken: string;
-  displayName: string;
-  id: string;
-  login: string;
-  roles: string[];
-}
-
-const SessionContext = createContext({} as ISessionContextData);
-
-const SessionProvider = ({ children }: { children: React.ReactNode }) => {
+const SessionProvider = ({ children }: TSessionProviderProps) => {
   const [cookies, setCookie, removeCookie] = useCookies(['session']);
   const [session, setSession] = useState(cookies.session);
 
   useEffect(() => setSession(cookies.session), [cookies.session]);
 
   const saveSession = useCallback(
-    (session: ISession) => {
+    (session: TSession) => {
       setCookie('session', session, {
         domain: process.env.COOKIE_DOMAIN,
         secure: process.env.NODE_ENV !== 'development',

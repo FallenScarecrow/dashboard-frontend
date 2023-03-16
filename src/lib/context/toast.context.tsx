@@ -9,29 +9,10 @@ import React, {
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { v4 as uuid } from 'uuid';
 
-import Toast, { IToastProps } from '~@components/Toast';
+import { IToast, IToastContextData } from '~@types/lib/context/toast.context';
+import { TToastProps } from '~@types/components/Toast';
 
-interface IToastContextData {
-  /**
-   * @function addToast
-   * Adds a toast to the list
-   * @returns Return de id of the toast created, in case to remove early
-   */
-  addToast(data: IToastProps): string;
-
-  /**
-   * @function removeToast
-   * Remove a toast from the list early
-   * @param number Id of the toast to be removed
-   */
-  removeToast(id: string): void;
-}
-
-interface IToast extends IToastProps {
-  id: string;
-  ref: React.MutableRefObject<null>;
-  timedOut?: NodeJS.Timeout;
-}
+import Toast from '~@components/Toast';
 
 const ToastContext = createContext({} as IToastContextData);
 
@@ -42,7 +23,7 @@ const ToastProvider = ({ children }: { children: React.ReactNode }) => {
     setToastList(prevList => prevList.filter(toast => toast.id != id));
   }, []);
 
-  const addToast = useCallback((data: IToastProps) => {
+  const addToast = useCallback((data: TToastProps) => {
     const id = uuid();
     // setTimeout(() => removeToast(id), 5000);
     const { type, title, description } = data;
@@ -50,12 +31,6 @@ const ToastProvider = ({ children }: { children: React.ReactNode }) => {
     setToastList(prevList => [...prevList, { id, type, title, description, ref: createRef() }]);
 
     return id;
-  }, []);
-
-  useEffect(() => {
-    return () => {
-      toastList.forEach(toast => clearTimeout(toast.timedOut));
-    };
   }, []);
 
   useEffect(() => {

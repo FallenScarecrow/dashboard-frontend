@@ -1,9 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
+import { TNavbarProps } from '~@types/components/Navbar';
+
 const defineTranslate = (val: number) => 'translate3D(' + val + '%, 0, 0)';
 
-const Navbar = ({ isOpen = false, onCloseNav }: { isOpen?: boolean; onCloseNav?: () => void }) => {
+const Navbar = ({ isOpen = false, onCloseNav }: TNavbarProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const resizableRef = useRef<HTMLDivElement>(null);
   const [isResizing, setIsResizing] = useState(false);

@@ -1,13 +1,11 @@
+import React from 'react';
 import clsx from 'clsx';
-import { ReactNode } from 'react';
+
+import { TDefaultLayoutProps } from '~@types/layouts';
 
 import ButtonTheme from '~@components/ButtonTheme';
 
-type LoginLayoutProps = {
-  children: ReactNode;
-};
-
-const LoginLayout = ({ children }: LoginLayoutProps) => {
+const LoginLayout = ({ children }: TDefaultLayoutProps) => {
   return (
     <div className="flex min-h-full w-full flex-col justify-between">
       <div className="absolute top-5 right-5 z-50">

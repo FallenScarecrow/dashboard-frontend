@@ -3,19 +3,6 @@ import { ReactNode, useState } from 'react';
 import clsx from 'clsx';
 
 import {
-  NextPageWithLayout,
-  ThemeColors,
-  TextVariants,
-  Sizes,
-  ThemeStatus,
-} from '~@types/pages/_app';
-
-import DefaultLayout from '~@layouts/CleanLayout';
-
-import Typography from '~@components/Typography';
-import TextField from '~@components/TextField';
-import Button from '~@components/Button';
-import {
   IoAlertCircleOutline,
   IoCheckmarkDoneCircleOutline,
   IoInformationCircleOutline,
@@ -23,12 +10,21 @@ import {
   IoSearch,
   IoWarningOutline,
 } from 'react-icons/io5';
+
+import { TNextPageWithLayout, TThemeColors, TTextVariants, TSizes, TStatus } from '~@types/_app';
+
 import { useToast } from '~@lib/context/toast.context';
 
-const colors: ThemeColors[] = ['primary', 'secondary'];
+import DefaultLayout from '~@layouts/CleanLayout';
+
+import Typography from '~@components/Typography';
+import TextField from '~@components/TextField';
+import Button from '~@components/Button';
+
+const colors: TThemeColors[] = ['primary', 'secondary'];
 // const statuses: ThemeStatus[] = ['success', 'info', 'warning', 'error'];
-const variants: TextVariants[] = ['display', 'heading', 'title', 'body', 'label'];
-const sizes: Sizes[] = ['large', 'medium', 'small'];
+const variants: TTextVariants[] = ['display', 'heading', 'title', 'body', 'label'];
+const sizes: TSizes[] = ['large', 'medium', 'small'];
 
 const Card = ({
   children,
@@ -55,7 +51,7 @@ const CardContent = ({
   className = '',
 }: {
   children: React.ReactNode;
-  color?: ThemeColors;
+  color?: TThemeColors;
   className?: string;
 }) => {
   const bColor = `border-${color}`;
@@ -64,11 +60,11 @@ const CardContent = ({
   );
 };
 
-const Test: NextPageWithLayout = () => {
+const Test: TNextPageWithLayout = () => {
   const { addToast } = useToast();
   const [toastTitle, setToastTitle] = useState('');
 
-  const handleToastClick = (status: ThemeStatus) => {
+  const handleToastClick = (status: TStatus) => {
     addToast({ type: status, title: toastTitle, description: `Teste ${status} toast` });
   };
 
@@ -129,8 +125,8 @@ const Test: NextPageWithLayout = () => {
         </Card>
         <Card title="Typography">
           <CardContent className="col-start-4">
-            {variants.map((variant: TextVariants) =>
-              sizes.map((size: Sizes) => (
+            {variants.map((variant: TTextVariants) =>
+              sizes.map((size: TSizes) => (
                 <Typography
                   key={`${variant}-${size}`}
                   variant={variant}

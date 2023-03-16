@@ -1,17 +1,12 @@
-import App, { AppContext, AppInitialProps, AppProps } from 'next/app';
+import App, { AppContext, AppInitialProps } from 'next/app';
 
-import { NextPageWithLayout } from '~@types/pages/_app';
+import { TAppPropsWithLayout } from '~@types/_app';
 
 import ContextProvider from '~@lib/context/index.context';
 
 import '~@styles/globals.css';
 
-type AppPropsWithLayout = AppProps & {
-  Component: NextPageWithLayout;
-  cookies?: string | undefined;
-};
-
-export default function MyApp({ Component, pageProps, cookies }: AppPropsWithLayout) {
+export default function MyApp({ Component, pageProps, cookies }: TAppPropsWithLayout) {
   const getLayout = Component.getLayout ?? (page => page);
 
   return (

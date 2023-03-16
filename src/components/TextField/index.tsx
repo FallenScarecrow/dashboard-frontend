@@ -1,31 +1,13 @@
-import {
-  ChangeEvent,
-  FocusEvent,
-  forwardRef,
-  HTMLInputTypeAttribute,
-  InputHTMLAttributes,
-} from 'react';
+import { ChangeEvent, FocusEvent, forwardRef } from 'react';
 import clsx from 'clsx';
-import { IconType } from 'react-icons/lib';
 
-import { ThemeColors } from '~@types/pages/_app';
+import { TInputProps } from '~@types/components/TextField';
 
 import Typography from '~@components/Typography';
 
 import styles from './styles.module.css';
 
-export interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
-  id: string;
-  type: 'email' | 'text' | 'password' | 'search' | 'url' | 'tel' | HTMLInputTypeAttribute;
-  placeholder: string;
-  fullWidth?: boolean;
-  color?: ThemeColors;
-  icon?: IconType;
-  iconActionButton?: IconType;
-  onActionClick?: React.MouseEventHandler<HTMLButtonElement>;
-}
-
-const TextField = forwardRef<HTMLInputElement, IInputProps>((props: IInputProps, ref) => {
+const TextField = forwardRef<HTMLInputElement, TInputProps>((props, ref) => {
   const {
     fullWidth = false,
     color = 'primary',

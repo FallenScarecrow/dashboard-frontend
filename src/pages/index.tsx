@@ -1,13 +1,13 @@
 import Head from 'next/head';
 
-import { NextPageWithLayout } from '~@types/pages/_app';
+import { TNextPageWithLayout } from '~@types/_app';
 
 import NavLayout from '~@layouts/NavLayout';
 
 import Typography from '~@components/Typography';
 import Row from '~@components/Row';
 
-const Home: NextPageWithLayout = () => {
+const Home: TNextPageWithLayout = () => {
   return (
     <>
       <Head>

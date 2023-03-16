@@ -6,9 +6,10 @@ import clsx from 'clsx';
 
 import { IoKeyOutline, IoPersonOutline } from 'react-icons/io5';
 
-import env from '~@env/client';
+import { TNextPageWithLayout } from '~@types/_app';
+import { ILoginProps } from '~@types/pages/login';
 
-import { NextPageWithLayout } from '~@types/pages/_app';
+import { providers } from '~@data/providers';
 
 import LoginLayout from '~@layouts/LoginLayout';
 
@@ -19,7 +20,7 @@ import Typography from '~@components/Typography';
 import PasswordField from '~@components/PasswordField';
 import Providers from '~@components/Providers';
 
-const SignIn: NextPageWithLayout = ({ providers }) => {
+const SignIn: TNextPageWithLayout<ILoginProps> = ({ providers }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const nodeRef = useRef<HTMLDivElement>(null);
 
@@ -138,52 +139,15 @@ const SignIn: NextPageWithLayout = ({ providers }) => {
   );
 };
 
-export async function getServerSideProps() {
-  return {
-    props: {
-      providers: [
-        { id: 'google', src: '/providers/btn_google_light_normal_ios.svg' },
-        {
-          id: 'github',
-          src: '/providers/github-mark-white.svg',
-          callback: `https://github.com/login/oauth/authorize?client_id=${
-            process.env.GITHUB_ID
-          }&scope=${encodeURIComponent(
-            process.env.GITHUB_SCOPE || '',
-          )}&redirect_uri=${encodeURIComponent(
-            process.env.NEXT_PUBLIC_URL + '/auth/callback/github',
-          )}`,
-          // 'https://github.com/login/oauth/authorize?response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fauth%2Fcallback%2Fgithub&scope=user%2C%20user%3Aemail%2C%20repo%2C%20repo%3Astatus&client_id=d0af904c9bf70c386c95',
-        },
-        { id: 'discord', src: '/providers/discord-mark-white.png' },
-      ],
-    },
-  };
-}
-
 export default SignIn;
 SignIn.getLayout = page => {
   return <LoginLayout>{page}</LoginLayout>;
 };
 
-// export async function getServerSideProps({ req }: GetServerSidePropsContext) {
-//   const userAgent = req ? req.headers['user-agent'] : navigator.userAgent;
-
-//   const providers = [
-//     { id: 'google', src: '/providers/btn_google_light_normal_ios.svg' },
-//     {
-//       id: 'github',
-//       src: '/providers/github-mark-white.svg',
-//       callback: `https://github.com/login/oauth/authorize?client_id=${env.GITHUB_ID}&scope=user%2C%20user%3Aemail%2C%20repo%2C%20repo%3Astatus&redirect_uri=${env.NEXT_PUBLIC_URL}/auth/callback/github`,
-//       // 'https://github.com/login/oauth/authorize?response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fauth%2Fcallback%2Fgithub&scope=user%2C%20user%3Aemail%2C%20repo%2C%20repo%3Astatus&client_id=d0af904c9bf70c386c95',
-//     },
-//     { id: 'discord', src: '/providers/discord-mark-white.png' },
-//   ];
-
-//   return {
-//     props: {
-//       providers,
-//       userAgent,
-//     },
-//   };
-// }
+export async function getServerSideProps() {
+  return {
+    props: {
+      providers,
+    },
+  };
+}

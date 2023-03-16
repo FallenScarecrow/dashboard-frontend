@@ -1,12 +1,15 @@
-import Head from 'next/head';
-
 import { ChangeEvent, useEffect, useRef, useState } from 'react';
+import clsx from 'clsx';
 
+import Head from 'next/head';
 import Link from 'next/link';
 
 import { IoKeyOutline, IoMailOutline, IoPersonOutline } from 'react-icons/io5';
 
-import { NextPageWithLayout } from '~@types/pages/_app';
+import { TNextPageWithLayout } from '~@types/_app';
+import { IRegisterProps } from '~@types/pages/register';
+
+import { providers } from '~@data/providers';
 
 import LoginLayout from '~@layouts/LoginLayout';
 
@@ -14,18 +17,9 @@ import { ANIMATION_TIMEOUT, MountAnimation } from '~@components/MountAnimation';
 import Button from '~@components/Button';
 import TextField from '~@components/TextField';
 import Typography from '~@components/Typography';
-import Image from 'next/image';
-import clsx from 'clsx';
+import Providers from '~@components/Providers';
 
-type providers = 'google' | 'github' | 'discord';
-
-const images: { id: providers; src: string }[] = [
-  { id: 'google', src: '/providers/btn_google_light_normal_ios.svg' },
-  { id: 'github', src: '/providers/github-mark-white.svg' },
-  { id: 'discord', src: '/providers/discord-mark-white.png' },
-];
-
-const Register: NextPageWithLayout = () => {
+const Register: TNextPageWithLayout<IRegisterProps> = ({ providers }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const nodeRef = useRef<HTMLDivElement>(null);
 
@@ -145,7 +139,7 @@ const Register: NextPageWithLayout = () => {
             </Typography>
           </div>
 
-          <Providers />
+          <Providers providers={providers} />
           <Typography
             variant="body"
             size="small"
@@ -168,26 +162,34 @@ Register.getLayout = page => {
   return <LoginLayout>{page}</LoginLayout>;
 };
 
-const Providers = () => {
-  return (
-    <div className="flex w-full flex-wrap justify-around gap-4">
-      {images.map(image => (
-        <button
-          // onClick={() => signIn(provider.id)}
-          // Redirect to Github Login page
-          // Then github comes back and send data to backend
-          key={image.id}
-          className={clsx(
-            'relative aspect-square overflow-hidden rounded-md p-4 backdrop-blur-sm transition-colors duration-500 sm:rounded-xl',
-            'bg-neutral-900/10',
-            'shadow-md shadow-neutral-100/10',
-          )}
-        >
-          <div className="relative h-12 w-12">
-            <Image alt={'Log with ' + image.id} src={image.src} layout="fill" objectFit="contain" />
-          </div>
-        </button>
-      ))}
-    </div>
-  );
-};
+export async function getServerSideProps() {
+  return {
+    props: {
+      providers,
+    },
+  };
+}
+
+// const Providers = () => {
+//   return (
+//     <div className="flex w-full flex-wrap justify-around gap-4">
+//       {images.map(image => (
+//         <button
+//           // onClick={() => signIn(provider.id)}
+//           // Redirect to Github Login page
+//           // Then github comes back and send data to backend
+//           key={image.id}
+//           className={clsx(
+//             'relative aspect-square overflow-hidden rounded-md p-4 backdrop-blur-sm transition-colors duration-500 sm:rounded-xl',
+//             'bg-neutral-900/10',
+//             'shadow-md shadow-neutral-100/10',
+//           )}
+//         >
+//           <div className="relative h-12 w-12">
+//             <Image alt={'Log with ' + image.id} src={image.src} layout="fill" objectFit="contain" />
+//           </div>
+//         </button>
+//       ))}
+//     </div>
+//   );
+// };

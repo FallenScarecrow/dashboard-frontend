@@ -1,32 +1,17 @@
-import { forwardRef, ReactNode } from 'react';
+import { forwardRef } from 'react';
 import clsx from 'clsx';
-import {
-  IoAlertCircleOutline,
-  IoCheckmarkDoneCircleOutline,
-  IoInformationCircleOutline,
-  IoWarningOutline,
-} from 'react-icons/io5';
 
-import { ThemeStatus } from '~@types/pages/_app';
+import { TToastProps } from '~@types/components/Toast';
+
+import { statusIcons } from '~@data/statusIcons';
 
 import Typography from '~@components/Typography';
 
 import styles from './style.module.css';
 
-const icons: { [x in ThemeStatus]: ReactNode } = {
-  info: <IoInformationCircleOutline />,
-  warning: <IoWarningOutline />,
-  error: <IoAlertCircleOutline />,
-  success: <IoCheckmarkDoneCircleOutline />,
-};
+const Toast = forwardRef<HTMLDivElement, TToastProps>(({ type, title, description }, ref) => {
+  const Icon = statusIcons[type];
 
-export interface IToastProps {
-  type: ThemeStatus;
-  title?: string | ReactNode;
-  description: string | ReactNode;
-}
-
-const Toast = ({ type, title, description }: IToastProps, ref: React.LegacyRef<HTMLDivElement>) => {
   return (
     <div
       ref={ref}
@@ -37,7 +22,7 @@ const Toast = ({ type, title, description }: IToastProps, ref: React.LegacyRef<H
       )}
     >
       <Typography variant="heading" component="div" size="large">
-        {icons[type]}
+        <Icon />
       </Typography>
       <div className="ml-4 inline-flex flex-col">
         {title ? (
@@ -51,6 +36,8 @@ const Toast = ({ type, title, description }: IToastProps, ref: React.LegacyRef<H
       </div>
     </div>
   );
-};
+});
 
-export default forwardRef<HTMLDivElement, IToastProps>(Toast);
+Toast.displayName = 'Toast';
+
+export default Toast;

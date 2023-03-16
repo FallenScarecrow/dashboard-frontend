@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import Document, { Html, Main, NextScript, Head } from 'next/document';
 import React from 'react';
 

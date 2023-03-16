@@ -23,6 +23,7 @@
 
     "baseUrl": "./src",
     "paths": {
+      "~@data/*": ["data/*"],
       "~@env/*": ["env/*"],
       "~@pages/*": ["pages/*"],
       "~@server/*": ["server/*"],

@@ -3,25 +3,26 @@ import Image from 'next/image';
 import React from 'react';
 import clsx from 'clsx';
 
-import { NextPageWithLayout } from '~@types/pages/_app';
-import { IDashboardProps } from '~@types/pages/dashboard';
-
-import NavLayout from '~@layouts/NavLayout';
-
-import Row from '~@components/Row';
-import Typography from '~@components/Typography';
-import { ImArrowLeft, ImArrowRight } from 'react-icons/im';
 import {
   IoCalendarClearOutline,
   IoCameraOutline,
   IoDesktopOutline,
   IoMailOutline,
-  IoPersonCircleOutline,
   IoPersonOutline,
   IoStar,
 } from 'react-icons/io5';
+
+import { TNextPageWithLayout } from '~@types/_app';
+import { IDashboardProps } from '~@types/pages/dashboard';
+
 import { env } from '~@env/client';
+
 import { useSession } from '~@lib/context/session.context';
+
+import NavLayout from '~@layouts/NavLayout';
+
+import Row from '~@components/Row';
+import Typography from '~@components/Typography';
 
 const cards = [
   {
@@ -54,27 +55,7 @@ const cards = [
   },
 ];
 
-const positions = {
-  'top-left':
-    '-top-2 right-0 scale-0 border-t-8 border-l-8 border-transparent origin-bottom-left border-l-brutal-seafoam',
-  left: 'border-r-8 scale-x-0 inset-y-0 right-0 origin-right border-brutal-seafoam',
-  bottom: 'border-b-8 scale-y-0 -left-px right-px bottom-0 origin-bottom border-brutal-seafoam',
-  'bottom-right':
-    'border-b-8 border-r-8 bottom-0 scale-0 -left-2 origin-bottom-right border-transparent border-t-brutal-seafoam border-r-brutal-seafoam',
-};
-
-const Bars = ({ position }: { position: 'top-left' | 'left' | 'bottom' | 'bottom-right' }) => {
-  return (
-    <div
-      className={clsx(
-        'absolute transition-transform group-hover/post-image:scale-100',
-        positions[position],
-      )}
-    />
-  );
-};
-
-const Dashboard: NextPageWithLayout = ({ movies }: IDashboardProps) => {
+const Dashboard: TNextPageWithLayout<IDashboardProps> = ({ movies }) => {
   const { session } = useSession();
 
   return (

@@ -1,31 +1,12 @@
-import React, { ButtonHTMLAttributes, FocusEvent, forwardRef } from 'react';
+import React, { FocusEvent, forwardRef } from 'react';
 import clsx from 'clsx';
 
-import { ThemeColors } from '~@types/pages/_app';
-import { ButtonVariants } from '~@types/Button';
+import { TButtonProps } from '~@types/components/Button';
 
 import Ripple from '~@components/Ripple';
+import Typography from '~@components/Typography';
 
 import styles from './style.module.css';
-import Typography from '~@components/Typography';
-import { IconType } from 'react-icons/lib';
-
-interface IButtonIconProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  fullWidth?: boolean;
-  color?: ThemeColors;
-  icon: IconType;
-  variant?: ButtonVariants;
-}
-
-interface IButtonTextProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  fullWidth?: boolean;
-  color?: ThemeColors;
-  icon?: IconType;
-  children: React.ReactNode;
-  variant?: ButtonVariants;
-}
-
-export type TButtonProps = IButtonIconProps | IButtonTextProps;
 
 const Button = forwardRef<HTMLButtonElement, TButtonProps>((props, ref) => {
   const {

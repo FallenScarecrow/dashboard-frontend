@@ -1,6 +1,7 @@
-import React, { ReactNode } from 'react';
-import Link from 'next/link';
+import React from 'react';
 import clsx from 'clsx';
+import Link from 'next/link';
+
 import {
   IoDesktopSharp,
   IoHomeSharp,
@@ -9,16 +10,14 @@ import {
   IoPersonCircleSharp,
 } from 'react-icons/io5';
 
+import { TDefaultLayoutProps } from '~@types/layouts';
+
 import { ISession, useSession } from '~@lib/context/session.context';
 
 import Typography from '~@components/Typography';
 import ButtonTheme from '~@components/ButtonTheme';
 
-type SimplePageLayoutProps = {
-  children: ReactNode;
-};
-
-const SimplePageLayout = ({ children }: SimplePageLayoutProps) => {
+const SimplePageLayout = ({ children }: TDefaultLayoutProps) => {
   const { session: sessionData } = useSession();
 
   return (
