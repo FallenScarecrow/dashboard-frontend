@@ -30,4 +30,4 @@ type TProvider = {
   callback?: string;
 };
 
-export { IMovie, IMovie, TProviderId, TProvider };
+export { TMovie, TMovies, TProviderId, TProvider };
