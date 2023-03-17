@@ -1,5 +1,5 @@
-import { IMovies } from '~@types/_api';
+import { TMovies } from '~@types/_api';
 
 export interface IDashboardProps {
-  movies: IMovies;
+  movies: TMovies;
 }

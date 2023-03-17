@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-server-import-in-page */
 import { NextResponse, NextRequest } from 'next/server';
 
-import getAuthSession from '~@lib/utils/session';
+import { getAuthSession } from '~@lib/utils/session';
 
 import publicPaths from 'data/publicPaths';
 

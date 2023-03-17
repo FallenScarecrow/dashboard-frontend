@@ -20,24 +20,18 @@ const GithubCallback = () => {
     const code = router.query.code as string;
 
     (async () => {
-      await getGithubSession(
-        code,
-        async res => {
+      getGithubSession(code)
+        .then(() => {
           setLoading(false);
-          if (res.status >= 400) {
-            setHasError(true);
-            return;
-          }
 
           setTimeout(() => {
-            router.push('/dashboard');
-          }, 3000);
-        },
-        () => {
+            window.location.assign('/dashboard');
+          }, 1500);
+        })
+        .catch(() => {
           setLoading(false);
           setHasError(true);
-        },
-      );
+        });
     })();
 
     return () => {

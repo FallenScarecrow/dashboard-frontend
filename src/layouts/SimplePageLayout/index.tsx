@@ -10,9 +10,10 @@ import {
   IoPersonCircleSharp,
 } from 'react-icons/io5';
 
+import { TSession } from '~@types/lib/context/session.context';
 import { TDefaultLayoutProps } from '~@types/layouts';
 
-import { ISession, useSession } from '~@lib/context/session.context';
+import { useSession } from '~@lib/context/session.context';
 
 import Typography from '~@components/Typography';
 import ButtonTheme from '~@components/ButtonTheme';
@@ -69,7 +70,7 @@ const SimplePageLayout = ({ children }: TDefaultLayoutProps) => {
 
 export default SimplePageLayout;
 
-const AuthShowcase = ({ authData }: { authData: ISession }) => {
+const AuthShowcase = ({ authData }: { authData: TSession }) => {
   return (
     <div className="flex items-center justify-center gap-4">
       {authData ? (

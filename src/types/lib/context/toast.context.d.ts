@@ -1,6 +1,6 @@
-import { IToastProps } from '~@components/Toast';
+import { TToastProps } from '~@types/components/Toast';
 
-interface IToastContextData {
+type TToastContextData = {
   /**
    * @function addToast
    * Adds a toast to the list
@@ -14,12 +14,12 @@ interface IToastContextData {
    * @param number Id of the toast to be removed
    */
   removeToast(id: string): void;
-}
+};
 
-interface IToast extends IToastProps {
+type TToast = TToastProps & {
   id: string;
   ref: React.MutableRefObject<null>;
   timedOut?: NodeJS.Timeout;
-}
+};
 
-export { IToast, IToastContextData };
+export { TToast, TToastContextData };

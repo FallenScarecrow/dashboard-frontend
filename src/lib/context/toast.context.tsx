@@ -9,15 +9,15 @@ import React, {
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { v4 as uuid } from 'uuid';
 
-import { IToast, IToastContextData } from '~@types/lib/context/toast.context';
+import { TToast, TToastContextData } from '~@types/lib/context/toast.context';
 import { TToastProps } from '~@types/components/Toast';
 
 import Toast from '~@components/Toast';
 
-const ToastContext = createContext({} as IToastContextData);
+const ToastContext = createContext({} as TToastContextData);
 
 const ToastProvider = ({ children }: { children: React.ReactNode }) => {
-  const [toastList, setToastList] = useState<IToast[]>([]);
+  const [toastList, setToastList] = useState<TToast[]>([]);
 
   const removeToast = useCallback((id: string) => {
     setToastList(prevList => prevList.filter(toast => toast.id != id));

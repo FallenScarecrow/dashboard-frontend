@@ -15,7 +15,7 @@ import {
 import { TNextPageWithLayout } from '~@types/_app';
 import { IDashboardProps } from '~@types/pages/dashboard';
 
-import { env } from '~@env/client';
+import { env } from '~@env/client.mjs';
 
 import { useSession } from '~@lib/context/session.context';
 

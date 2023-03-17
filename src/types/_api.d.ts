@@ -1,7 +1,7 @@
 type TMovie = {
   adult: boolean;
   backdrop_path: string;
-  genre_ids: Array<number>;
+  genre_ids: number[];
   id: number;
   original_language: string;
   original_title: string;
@@ -18,7 +18,7 @@ type TMovie = {
 type TMovies = {
   dates: { maximum: string; minimum: string };
   page: number;
-  results: IMovie[];
+  results: TMovie[];
   total_pages: number;
   total_results: number;
 };
