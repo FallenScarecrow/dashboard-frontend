@@ -7,8 +7,8 @@ import { z } from 'zod';
  */
 export const serverSchema = z.object({
   NODE_ENV: z.enum(['development', 'test', 'production']).optional(),
-  GITHUB_ID: z.string(),
-  GITHUB_SCOPE: z.string(),
+  SITE_GITHUB_ID: z.string(),
+  SITE_GITHUB_SCOPE: z.string(),
 });
 
 /**
