@@ -1,20 +1,19 @@
-type TSession = {
+import { Api } from '~@types/_api';
+
+type TData = {
   authToken: string;
-  displayName: string;
-  id: string;
-  login: string;
-  roles: string[];
+  session: Api.TSession;
 };
 
 type TSessionContextData = {
-  session: TSession;
+  data: TData;
 
   /**
    * @function saveSession
    * Save Session in Local Storage
    * @param session Session in JSON format
    */
-  saveSession(session: TSession): void;
+  saveSession(session: Api.TSessionApi): void;
 
   /**
    * @function clearSession
@@ -25,4 +24,4 @@ type TSessionContextData = {
 
 type TSessionProviderProps = { children: React.ReactNode };
 
-export { TSession, TSessionContextData, TSessionProviderProps };
+export { TData, TSessionContextData, TSessionProviderProps };

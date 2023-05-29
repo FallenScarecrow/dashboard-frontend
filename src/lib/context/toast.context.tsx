@@ -34,7 +34,7 @@ const ToastProvider = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   useEffect(() => {
-    let timeout = 5000;
+    let timeout = 4000;
 
     toastList.forEach(toast => {
       if (toast.timedOut) return;
@@ -43,7 +43,7 @@ const ToastProvider = ({ children }: { children: React.ReactNode }) => {
         removeToast(toast.id);
       }, timeout);
 
-      timeout += 250;
+      timeout += 500;
     });
   }, [removeToast, toastList]);
 
@@ -52,7 +52,7 @@ const ToastProvider = ({ children }: { children: React.ReactNode }) => {
       {children}
       <TransitionGroup
         id="toast-container"
-        className="fixed bottom-0 right-1/2 z-50 mx-auto flex h-0 w-full translate-x-1/2 flex-col-reverse sm:left-0 sm:right-full sm:w-fit sm:translate-x-0"
+        className="fixed inset-x-5 bottom-36 z-50 mx-auto flex h-0 flex-col-reverse sm:bottom-0 sm:left-0 sm:right-full sm:w-fit sm:translate-x-0"
       >
         {toastList.length != 0
           ? toastList.map(toast => (

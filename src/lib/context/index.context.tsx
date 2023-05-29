@@ -3,6 +3,7 @@ import { ReactNode } from 'react';
 import { SessionProvider } from './session.context';
 import { ToastProvider } from './toast.context';
 import { Cookies, CookiesProvider } from 'react-cookie';
+import { NavbarProvider } from './navbar.context';
 
 export default function ContextProvider({
   children,
@@ -17,7 +18,9 @@ export default function ContextProvider({
     // <ThemeProvider enableSystem={true} attribute="class">
     <CookiesProvider cookies={isBrowser ? undefined : new Cookies(cookies)}>
       <SessionProvider>
-        <ToastProvider>{children}</ToastProvider>
+        <NavbarProvider>
+          <ToastProvider>{children}</ToastProvider>
+        </NavbarProvider>
       </SessionProvider>
     </CookiesProvider>
     // </ThemeProvider>
