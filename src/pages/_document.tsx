@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import Document, { Html, Main, NextScript, Head } from 'next/document';
+import Document, { Html, Head, Main, NextScript } from 'next/document';
 import React from 'react';
 
 export default class MyDocument extends Document {
   render() {
     return (
-      <Html lang="pt-BR">
+      <Html lang="pt-BR" className="group/layout">
         <Head>
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
