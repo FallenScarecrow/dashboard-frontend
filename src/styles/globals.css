@@ -72,21 +72,45 @@
   }
 
   .drop-shadow-neubrutalism {
-    --tw-drop-shadow: drop-shadow(-1px -1px rgba(0, 0, 0, 1)) drop-shadow(-1px 0px rgba(0, 0, 0, 1))
-      drop-shadow(0px -1px rgba(0, 0, 0, 1)) drop-shadow(0px 0px rgba(0, 0, 0, 1))
-      drop-shadow(1px 0px rgba(0, 0, 0, 1)) drop-shadow(0px 1px rgba(0, 0, 0, 1))
-      drop-shadow(1px 1px rgba(0, 0, 0, 1)) drop-shadow(2px 1px rgba(0, 0, 0, 1))
-      drop-shadow(1px 2px rgba(0, 0, 0, 1));
+    --tw-drop-shadow-color: rgba(0, 0, 0, 1);
+    --tw-drop-shadow: drop-shadow(-1px -1px var(--tw-drop-shadow-color))
+      drop-shadow(-1px 0px var(--tw-drop-shadow-color))
+      drop-shadow(0px -1px var(--tw-drop-shadow-color))
+      drop-shadow(0px 0px var(--tw-drop-shadow-color))
+      drop-shadow(1px 0px var(--tw-drop-shadow-color))
+      drop-shadow(0px 1px var(--tw-drop-shadow-color))
+      drop-shadow(1px 1px var(--tw-drop-shadow-color))
+      drop-shadow(2px 1px var(--tw-drop-shadow-color))
+      drop-shadow(1px 2px var(--tw-drop-shadow-color));
     filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale)
       var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
   }
 
   .drop-shadow-neubrutalism-border {
-    --tw-drop-shadow: drop-shadow(-1px 0px rgba(0, 0, 0, 1)) drop-shadow(0px -1px rgba(0, 0, 0, 1))
-      drop-shadow(0px 0px rgba(0, 0, 0, 1)) drop-shadow(1px 0px rgba(0, 0, 0, 1))
-      drop-shadow(0px 1px rgba(0, 0, 0, 1));
+    --tw-drop-shadow-color: rgba(0, 0, 0, 1);
+    --tw-drop-shadow: drop-shadow(-1px 0px var(--tw-drop-shadow-color))
+      drop-shadow(0px -1px var(--tw-drop-shadow-color))
+      drop-shadow(0px 0px var(--tw-drop-shadow-color))
+      drop-shadow(1px 0px var(--tw-drop-shadow-color))
+      drop-shadow(0px 1px var(--tw-drop-shadow-color));
     filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale)
       var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+  }
+
+  .drop-shadow-white {
+    --tw-drop-shadow-color: rgba(255, 255, 255, 1);
+  }
+
+  .drop-shadow-primary {
+    --tw-drop-shadow-color: rgba(63, 238, 154, 1);
+  }
+
+  .drop-shadow-secondary {
+    --tw-drop-shadow-color: rgba(255, 87, 167, 1);
+  }
+
+  .drop-shadow-lime-green {
+    --tw-drop-shadow-color: rgba(50, 205, 50, 1);
   }
 
   .text-shadow-none {
@@ -157,7 +181,8 @@
 html,
 body,
 #__next {
-  @apply overflow-hidden bg-white text-brutal-black;
+  @apply text-xs sm:text-base;
+  @apply overflow-hidden bg-brutal-white text-brutal-white;
   /* @apply dark:bg-brutal-black dark:text-white; */
 }
 
@@ -167,6 +192,34 @@ button {
 
 i {
   font-style: normal;
+}
+
+hr {
+  @apply border-brutal-black/10;
+}
+
+.bolt {
+  transform: rotateZ(-160deg);
+  padding: 2px;
+  margin: 0;
+  overflow: visible;
+  transform-origin: 50% 50% 0;
+}
+
+.bolt:after {
+  content: '';
+  top: -9px;
+  left: -8px;
+  transform: rotateZ(4deg);
+  width: 100%;
+  height: 50%;
+  background: inherit;
+  position: absolute;
+  margin: 0;
+  overflow: visible;
+  border-top: 0 solid;
+  border-radius: 0;
+  transform-origin: 50% 50% 0;
 }
 
 /* #region Border Colors */
@@ -215,6 +268,56 @@ i {
 .scale-exit-active {
   @apply scale-0 opacity-0 transition-all;
 }
+/* #endregion */
+
+/* #region Hero-Slide Transition */
+/* .hero-slide-enter {
+  @apply translate-x-full;
+}
+
+.hero-slide-enter-active {
+  @apply translate-x-0 transition-all;
+}
+
+.hero-slide-enter-done {
+  @apply transition-all;
+}
+
+.hero-slide-exit {
+  @apply translate-x-0;
+}
+
+.hero-slide-exit-active {
+  @apply -translate-x-full transition-all;
+}
+
+.hero-slide-animation {
+  animation: 10s ease-in-out hero-slide;
+}
+
+@keyframes hero-slide {
+  from {
+    @apply translate-x-full scale-0;
+  }
+  25% {
+    @apply translate-x-0 scale-125;
+  }
+  40% {
+    @apply translate-x-0 scale-125;
+  }
+  50% {
+    @apply translate-x-0 scale-100;
+  }
+  75% {
+    @apply translate-x-0 scale-100;
+  }
+  60% {
+    @apply translate-x-0 scale-125;
+  }
+  to {
+    @apply -translate-x-full scale-0;
+  }
+} */
 /* #endregion */
 
 /* #region Slide Transition */

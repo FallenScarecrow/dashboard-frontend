@@ -6,10 +6,15 @@
 // const withTM = require('next-transpile-modules');
 
 const nextConfig = {
+  strictMode: false,
   reactStrictMode: true,
   poweredByHeader: false,
   images: {
     remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'picsum.photos',
+      },
       {
         protocol: 'https',
         hostname: 'external-preview.redd.it',
@@ -21,6 +26,11 @@ const nextConfig = {
       {
         protocol: 'http',
         hostname: 'localhost',
+        port: '3001',
+      },
+      {
+        protocol: 'http',
+        hostname: '192.168.1.66',
         port: '3001',
       },
     ],

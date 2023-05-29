@@ -1,16 +1,21 @@
-import React from 'react';
+import React, { InputHTMLAttributes } from 'react';
 import { IconType } from 'react-icons/lib';
-import { TThemeColors } from '~@types/_app';
+import { App } from '~@types/_app';
+
+type TInputTypes = 'email' | 'text' | 'password' | 'search' | 'url' | 'tel';
 
 type TInputProps = InputHTMLAttributes<HTMLInputElement> & {
   id: string;
-  type: 'email' | 'text' | 'password' | 'search' | 'url' | 'tel';
-  placeholder: string;
-  fullWidth?: boolean;
-  color?: TThemeColors;
+  type: TInputTypes;
+  name: string;
   icon?: IconType;
-  iconActionButton?: IconType;
+  color?: App.TThemeColors;
+  focusIn?: number | boolean | undefined;
+  variant?: App.TThemeVariants;
+  fullWidth?: boolean;
+  placeholder: string;
   onActionClick?: React.MouseEventHandler<HTMLButtonElement>;
+  iconActionButton?: IconType;
 };
 
-export { TInputProps };
+export { TInputTypes, TInputProps };

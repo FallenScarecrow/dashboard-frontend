@@ -7,6 +7,8 @@ import { z } from 'zod';
  */
 export const serverSchema = z.object({
   NODE_ENV: z.enum(['development', 'test', 'production']).optional(),
+  TMDB_V3_KEY: z.string(),
+  TMDB_V4_KEY: z.string(),
   SITE_GITHUB_ID: z.string(),
   SITE_GITHUB_SCOPE: z.string(),
 });
@@ -20,6 +22,7 @@ export const clientSchema = z.object({
   // NEXT_PUBLIC_CLIENTVAR: z.string(),
   NEXT_PUBLIC_URL: z.string().url(),
   NEXT_PUBLIC_API_URL: z.string().url(),
+  NEXT_PUBLIC_TMDB_URL: z.string().url(),
 });
 
 /**
@@ -32,4 +35,5 @@ export const clientEnv = {
   // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
   NEXT_PUBLIC_URL: process.env.NEXT_PUBLIC_URL,
   NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
+  NEXT_PUBLIC_TMDB_URL: process.env.NEXT_PUBLIC_TMDB_URL,
 };

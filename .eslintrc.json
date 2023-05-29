@@ -16,28 +16,28 @@
   "parser": "@typescript-eslint/parser",
 
   "rules": {
-    "camelcase": "error",
+    // "camelcase": "error",
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": "error",
-    "@typescript-eslint/naming-convention": [
-      "error",
-      {
-        "selector": "interface",
-        "format": ["PascalCase"],
-        "custom": {
-          "regex": "^I[A-Z]",
-          "match": true
-        }
-      },
-      {
-        "selector": "typeLike",
-        "format": ["PascalCase"],
-        "custom": {
-          "regex": "^T[A-Z]",
-          "match": true
-        }
-      }
-    ],
+    // "@typescript-eslint/naming-convention": [
+    //   "error",
+    //   {
+    //     "selector": "interface",
+    //     "format": ["PascalCase"],
+    //     "custom": {
+    //       "regex": "^I[A-Z]",
+    //       "match": true
+    //     }
+    //   },
+    //   {
+    //     "selector": "typeLike",
+    //     "format": ["PascalCase"],
+    //     "custom": {
+    //       "regex": "^T[A-Z]",
+    //       "match": true
+    //     }
+    //   }
+    // ],
     "tailwindcss/no-custom-classname": [
       "warn",
       {

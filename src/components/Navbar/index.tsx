@@ -18,8 +18,6 @@ const Navbar = ({ isOpen = false, onCloseNav }: TNavbarProps) => {
   const stopResizing = useCallback(() => {
     setIsResizing(false);
     if (isOpen != true && containerRef.current && resizableRef.current) {
-      console.log(isOpen, containerRef.current, resizableRef.current);
-      console.count('stopResizing');
       // Catch percent from translate3D(/-100/%, 0, 0)
       const { x, width } = resizableRef.current.getBoundingClientRect();
       // let x = /-?\d*(?:\.\d*)?(?=%)/.exec(resizableRef.current.style.getPropertyValue('transform'));
@@ -37,7 +35,6 @@ const Navbar = ({ isOpen = false, onCloseNav }: TNavbarProps) => {
 
   const closeSideBar = useCallback(() => {
     if (containerRef.current && resizableRef.current) {
-      console.count('closeSideBar');
       resizableRef.current.style.transform = defineTranslate(-100);
       setTimeout(() => containerRef.current?.removeAttribute('open'), 150);
     }
@@ -88,7 +85,7 @@ const Navbar = ({ isOpen = false, onCloseNav }: TNavbarProps) => {
         onClick={closeSideBar}
       />
       <div
-        className="absolute inset-y-0 left-0 w-60 bg-white p-0 transition-transform ease-linear after:visible after:absolute after:inset-y-0 after:left-full after:w-5 group-open/side:translate-x-0"
+        className="absolute inset-y-0 left-0 w-60 bg-brutal-white p-0 transition-transform ease-linear after:visible after:absolute after:inset-y-0 after:left-full after:w-5 group-open/side:translate-x-0"
         onMouseDown={startResizing}
         style={{
           transform: isOpen ? defineTranslate(0) : defineTranslate(-100),
