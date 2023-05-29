@@ -1,48 +1,51 @@
-import { ChangeEvent, useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
 import clsx from 'clsx';
 
 import Head from 'next/head';
 import Link from 'next/link';
 
-import { IoKeyOutline, IoMailOutline, IoPersonOutline } from 'react-icons/io5';
-
-import { TNextPageWithLayout } from '~@types/_app';
+import { App } from '~@types/_app';
 import { IRegisterProps } from '~@types/pages/register';
 
 import { providers } from '~@data/providers';
 
-import LoginLayout from '~@layouts/LoginLayout';
+import { Login } from '~@layouts';
 
-import { ANIMATION_TIMEOUT, MountAnimation } from '~@components/MountAnimation';
-import Button from '~@components/Button';
-import TextField from '~@components/TextField';
+import { MountAnimation } from '~@components/MountAnimation';
+import Form from '~@components/Form';
 import Typography from '~@components/Typography';
 import Providers from '~@components/Providers';
+import registerFields, { RegisterFieldsData } from '~@data/fields/registerFields';
+import { MainApi } from '~@lib/utils/api/api';
+import { StateData } from '~@types/components/Form';
+import { useSession } from '~@lib/context/session.context';
 
-const Register: TNextPageWithLayout<IRegisterProps> = ({ providers }) => {
-  const inputRef = useRef<HTMLInputElement>(null);
+const Register: App.TNextPageWithLayout<IRegisterProps> = ({ providers }) => {
   const nodeRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const idTimeout = setTimeout(() => {
-      inputRef.current?.focus();
-    }, ANIMATION_TIMEOUT);
+  const { saveSession } = useSession();
 
-    return () => {
-      clearTimeout(idTimeout);
-    };
-  }, []);
+  const handleValidate = (data: StateData<RegisterFieldsData>) => {
+    // Matching emails
+    if (data.email !== data['confirm-email']) return false;
 
-  const [data, setData] = useState({
-    email: '',
-    confirmEmail: '',
-    password: '',
-  });
+    // Checking password size
+    if (data.password.length < 8 || data.password.length > 20) return false;
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { target } = e;
+    // Matching passwords
+    if (data.password !== data['confirm-password']) return false;
 
-    setData(prev => ({ ...prev, [target.id]: target.value }));
+    return true;
+  };
+
+  const handleSubmit = (data: StateData<RegisterFieldsData>) => {
+    MainApi.getV1()
+      .users.register({
+        email: data.email,
+        password: data.password,
+        name: data.username,
+      })
+      .then(data => saveSession(data.data));
   };
 
   return (
@@ -52,11 +55,27 @@ const Register: TNextPageWithLayout<IRegisterProps> = ({ providers }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <MountAnimation nodeRef={nodeRef}>
-        <div ref={nodeRef} className="h-full w-full">
-          <Typography variant="display" size="medium" component="h2" className="mb-4">
-            Create Account
+        <div ref={nodeRef} className="w-full bg-inherit pb-8">
+          <Typography
+            variant="display"
+            size="medium"
+            component="h2"
+            className="mb-4 w-min sm:w-max"
+            emphasis="normal"
+          >
+            Register
           </Typography>
-          <form>
+
+          <Form
+            fields={registerFields}
+            submitProps={{
+              fullWidth: true,
+              children: 'Sign-Up',
+            }}
+            onSubmit={handleSubmit}
+            onValidate={handleValidate}
+          />
+          {/* <form>
             <TextField
               ref={inputRef}
               id="username"
@@ -123,7 +142,7 @@ const Register: TNextPageWithLayout<IRegisterProps> = ({ providers }) => {
             <Button type="button" variant="contained" className="self-end" fullWidth>
               Sign-Up
             </Button>
-          </form>
+          </form> */}
           <div className="relative my-4 flex justify-center overflow-hidden">
             <Typography
               component="span"
@@ -140,17 +159,22 @@ const Register: TNextPageWithLayout<IRegisterProps> = ({ providers }) => {
           </div>
 
           <Providers providers={providers} />
-          <Typography
-            variant="body"
-            size="small"
-            component="div"
-            className="mt-8 w-full text-center"
-          >
-            Already have an account? &nbsp;
+          <div className="mt-8 flex items-center justify-center gap-2">
+            <Typography variant="body" size="small" component="div">
+              Already have an account?
+            </Typography>
             <Link href="/login" passHref legacyBehavior>
-              <a className="text-cyan-600 underline">Sign-In</a>
+              <Typography
+                variant="body"
+                size="small"
+                component="a"
+                className="my-4 underline"
+                emphasis="full"
+              >
+                Sign-In
+              </Typography>
             </Link>
-          </Typography>
+          </div>
         </div>
       </MountAnimation>
     </>
@@ -159,7 +183,7 @@ const Register: TNextPageWithLayout<IRegisterProps> = ({ providers }) => {
 
 export default Register;
 Register.getLayout = page => {
-  return <LoginLayout>{page}</LoginLayout>;
+  return <Login>{page}</Login>;
 };
 
 export async function getServerSideProps() {

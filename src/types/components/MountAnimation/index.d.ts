@@ -1,5 +1,5 @@
 type TMountAnimationProps = {
-  children: ReactNode;
+  children: ReactElement;
   timeout?: number;
   unmountOnExit?: boolean;
   classNames?: string;

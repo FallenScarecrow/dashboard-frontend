@@ -1,7 +1,7 @@
-import { TProviders } from '~@types/_app';
+import { Api } from '~@types/_api';
 
 type TProvidersProps = {
-  providers: TProviders;
+  providers: Api.TProviders;
 };
 
 export { TProvidersProps };

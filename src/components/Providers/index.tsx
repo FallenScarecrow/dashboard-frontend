@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import Image from 'next/image';
 
 import { TProvidersProps } from '~@types/components/Providers';
@@ -18,11 +17,7 @@ const Providers = ({ providers }: TProvidersProps) => {
         <button
           key={provider.id}
           onClick={() => handleClick(provider.callback)}
-          className={clsx(
-            'relative aspect-square overflow-hidden rounded-md p-4 backdrop-blur-sm transition-all duration-500 sm:rounded-xl',
-            'border-2 border-transparent bg-brutal-black shadow-none shadow-transparent',
-            'hover:-translate-x-1 hover:-translate-y-1 hover:border-brutal-black hover:bg-brutal-seafoam hover:shadow-neubrutalism hover:shadow-brutal-black',
-          )}
+          className="relative aspect-square overflow-hidden border-4 border-brutal-black bg-brutal-primary p-4 shadow-none shadow-transparent backdrop-blur-sm transition-all duration-500 hover:bg-brutal-secondary hover:shadow-neubrutalism hover:shadow-brutal-black"
         >
           <div className="relative h-12 w-12">
             <Image

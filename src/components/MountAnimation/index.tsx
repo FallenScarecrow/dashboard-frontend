@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import { TMountAnimationProps } from '~@types/components/MountAnimation';
 
@@ -30,7 +30,7 @@ export const MountAnimation = ({
       nodeRef={nodeRef}
       {...restProps}
     >
-      <>{children}</>
+      {children}
     </CSSTransition>
   );
 };
