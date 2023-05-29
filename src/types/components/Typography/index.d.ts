@@ -1,26 +1,33 @@
-import { TThemeColors } from '~@types/_app';
+import { LinkProps } from 'next/link';
+import { App, TThemeColors } from '~@types/_app';
 
-type TTypographyProps = React.HTMLAttributes<HTMLElement> & {
-  children?: React.ReactNode;
-  component:
-    | React.ComponentType
-    | 'li'
-    | 'span'
-    | 'div'
-    | 'h1'
-    | 'h2'
-    | 'h3'
-    | 'h4'
-    | 'h5'
-    | 'h6'
-    | 'p'
-    | 'a';
-  variant: TTextVariant;
-  size: TTextSize;
-  color?: TThemeColors;
+type TTypographyLinkProps = LinkProps & {
+  component: React.ForwardRefExoticComponent<
+    Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, keyof LinkProps> &
+      LinkProps & {
+        children?: React.ReactNode;
+      } & React.RefAttributes<HTMLAnchorElement>
+  >;
 };
 
+type TTypographyHTMLProps = {
+  component: 'li' | 'span' | 'div' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'a';
+};
+
+type TTypographyProps = TTypographyLinkProps | TTypographyHTMLProps;
+
+type TTypography = React.HTMLAttributes<HTMLElement> &
+  TTypographyProps & {
+    children?: React.ReactNode;
+    variant: TTextVariant;
+    size: TTextSize;
+    emphasis?: TTextEmphasis;
+    emphasisColor?: App.TThemeColors;
+    color?: TThemeColors;
+  };
+
+type TTextEmphasis = 'normal' | 'full';
 type TTextVariant = 'display' | 'heading' | 'title' | 'body' | 'label';
 type TTextSize = 'large' | 'medium' | 'small';
 
-export { TTextSize, TTextVariant, TTypographyProps };
+export { TTextSize, TTextVariant, TTextEmphasis, TTypographyProps, TTypography };

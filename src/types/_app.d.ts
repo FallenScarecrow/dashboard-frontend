@@ -1,35 +1,40 @@
 import { NextPage } from 'next';
-import { AppProps } from 'next/app';
-import { ReactElement, ReactNode } from 'react';
+import { AppContext, AppProps } from 'next/app';
 import { IconType } from 'react-icons/lib';
 
-import { TProvider } from '~@types/_api';
+declare namespace App {
+  export type TNextPageWithLayout<TP = object, TIP = TP> = NextPage<TP, TIP> & {
+    getLayout?: ((page: React.ReactElement) => React.ReactNode) | undefined;
+  };
 
-type TNextPageWithLayout<TP = object, TIP = TP> = NextPage<TP, TIP> & {
-  getLayout: (page: ReactElement) => ReactNode;
-};
+  export type TAppPropsWithLayout = Omit<AppProps, 'Component' | 'cookies'> & {
+    Component: TNextPageWithLayout;
+    cookies?: string | undefined;
+    getLayout?: ((page: React.ReactElement) => React.ReactNode) | undefined;
+  };
 
-type TAppPropsWithLayout = AppProps & {
-  Component: TNextPageWithLayout;
-  cookies?: string | undefined;
-};
+  export type TAppContextWithLayout = Omit<AppContext, 'Component'> & {
+    Component: TNextPageWithLayout;
+  };
 
-type TThemeColors = 'primary' | 'secondary';
-type TStatus = 'error' | 'warning' | 'info' | 'success';
-type TTextVariants = 'display' | 'heading' | 'title' | 'body' | 'label';
-type TSizes = 'large' | 'medium' | 'small';
+  export type TColors =
+    | TThemeColors
+    | 'blue'
+    | 'orange'
+    | 'red'
+    | 'yellow'
+    | 'green'
+    | 'lime-green'
+    | 'seafoam'
+    | 'purple'
+    | 'pink-flamingo'
+    | 'black';
 
-type TIcons = { [x in TStatus]: IconType };
+  export type TThemeColors = 'primary' | 'primary-variant' | 'secondary' | 'secondary-variant';
+  export type TStatus = 'error' | 'warning' | 'info' | 'success';
+  export type TTextVariants = 'display' | 'heading' | 'title' | 'body' | 'label';
+  export type TThemeVariants = 'contained' | 'outlined' | 'text' | 'variant';
+  export type TSizes = 'large' | 'medium' | 'small';
 
-type TProviders = TProvider[];
-
-export {
-  TNextPageWithLayout,
-  TAppPropsWithLayout,
-  TThemeColors,
-  TStatus,
-  TTextVariants,
-  TSizes,
-  TIcons,
-  TProviders,
-};
+  export type TIcons = { [x in TStatus]: IconType };
+}

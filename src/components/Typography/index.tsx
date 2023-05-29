@@ -1,14 +1,26 @@
+/* eslint-disable tailwindcss/no-custom-classname */
 import clsx from 'clsx';
 import { forwardRef } from 'react';
 
-import { TTypographyProps } from '~@types/components/Typography';
+import { TTypography } from '~@types/components/Typography';
 
-import { typographyClasses } from '~@data/typographyClasses';
+import {
+  typographyClasses,
+  typographyEmphasisClasses,
+  typographyEmphasisColorClasses,
+} from '~@data/typographyClasses';
 
-import styles from './styles.module.css';
-
-const Typography = forwardRef<HTMLElement, TTypographyProps>((props, ref) => {
-  const { children, variant, component, size, color, className, ...rest } = props;
+const Typography = forwardRef<HTMLElement, TTypography>((props, ref) => {
+  const {
+    children,
+    variant,
+    component,
+    size,
+    className,
+    emphasis,
+    emphasisColor = 'primary',
+    ...rest
+  } = props;
 
   const Component = component as React.ElementType;
 
@@ -16,14 +28,17 @@ const Typography = forwardRef<HTMLElement, TTypographyProps>((props, ref) => {
     <Component
       ref={ref}
       className={clsx(
-        'block align-middle font-sans text-brutal-black antialiased',
+        'block align-middle font-sans antialiased',
         typographyClasses[variant][size],
-        color && styles[`heading-${color}`],
+        // color && styles[`heading-${color}`],
+        emphasis && typographyEmphasisClasses[emphasis],
+        emphasis && typographyEmphasisColorClasses[emphasisColor],
+        !className?.includes('text-') && 'text-inherit',
         className,
       )}
       {...rest}
     >
-      {children}
+      {emphasis ? <div className="relative text-inherit">{children}</div> : children}
     </Component>
   );
 });
