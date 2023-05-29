@@ -15,7 +15,7 @@ import { TNextPageWithLayout, TThemeColors, TTextVariants, TSizes, TStatus } fro
 
 import { useToast } from '~@lib/context/toast.context';
 
-import DefaultLayout from '~@layouts/CleanLayout';
+import { Clear } from '~@layouts';
 
 import Typography from '~@components/Typography';
 import TextField from '~@components/TextField';
@@ -607,5 +607,5 @@ const Test: TNextPageWithLayout = () => {
 
 export default Test;
 Test.getLayout = (page: ReactNode) => {
-  return <DefaultLayout>{page}</DefaultLayout>;
+  return <Clear>{page}</Clear>;
 };
