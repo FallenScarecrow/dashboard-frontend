@@ -1,5 +1,12 @@
 import React from 'react';
 
-type TRowProps = { children: React.ReactNode; className?: string };
+type TRowCustomProps = {
+  children: React.ReactNode;
+  className?: string;
+  flex?: boolean;
+  style?: React.CSSProperties | undefined;
+};
+
+type TRowProps = Optional<Omit<HTMLDivElement, keyof TRowCustomProps>> & TRowCustomProps;
 
 export { TRowProps };
