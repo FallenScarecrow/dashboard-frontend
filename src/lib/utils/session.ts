@@ -2,7 +2,7 @@
 import { NextRequest } from 'next/server';
 
 async function getAuthSession(ctx: NextRequest) {
-  return ctx.cookies.get('user');
+  return ctx.cookies.get('authToken');
 }
 
 export { getAuthSession };
