@@ -1,8 +1,8 @@
 import { ReactNode } from 'react';
-import { TStatus } from '~@types/_app';
+import { App } from '~@types/_app';
 
 type TToastProps = {
-  type: TStatus;
+  type: App.TStatus;
   title?: string | ReactNode;
   description: string | ReactNode;
 };

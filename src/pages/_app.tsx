@@ -5,16 +5,12 @@ import ContextProvider from '~@lib/context/index.context';
 import '~@styles/globals.css';
 
 import { Navigation } from '~@layouts';
-import withHOCDefault from '~@lib/hoc';
 
 export default function MyApp({ Component, pageProps, cookies }: _App.TAppPropsWithLayout) {
-  const HOCComponent = withHOCDefault(Component);
   const getLayout = Component.getLayout || (page => <Navigation>{page}</Navigation>);
 
   return (
-    <ContextProvider cookies={cookies}>
-      {getLayout(<HOCComponent {...pageProps} />)}
-    </ContextProvider>
+    <ContextProvider cookies={cookies}>{getLayout(<Component {...pageProps} />)}</ContextProvider>
   );
 }
 

@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { Clear } from '~@layouts';
 import { getGithubSession, abortApiController } from '~@lib/api/githubSession';
 import { useSession } from '~@lib/context/session.context';
-import { TNextPageWithLayout } from '~@types/_app';
+import { App } from '~@types/_app';
 
 const useCallApi = ({ router }: { router: NextRouter }) => {
   const [prerenderCompleted, setPrerenderCompleted] = useState(false);
@@ -33,7 +33,7 @@ const useCallApi = ({ router }: { router: NextRouter }) => {
             window.location.assign('/dashboard');
           }, 1500);
         })
-        .catch(res => {
+        .catch(() => {
           setLoading(false);
           setHasError(true);
         });
@@ -51,7 +51,7 @@ const useCallApi = ({ router }: { router: NextRouter }) => {
   return [loading, hasError];
 };
 
-const GithubCallback: TNextPageWithLayout = () => {
+const GithubCallback: App.TNextPageWithLayout = () => {
   const router = useRouter();
 
   const [loading, hasError] = useCallApi({ router });

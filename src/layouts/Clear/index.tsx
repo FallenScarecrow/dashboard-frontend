@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import { IoMailOutline, IoMenuOutline } from 'react-icons/io5';
+import { IoMailOutline } from 'react-icons/io5';
 import Row from '~@components/Row';
 import Typography from '~@components/Typography';
 import { env } from '~@env/client.mjs';

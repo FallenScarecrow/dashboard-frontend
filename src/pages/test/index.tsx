@@ -11,7 +11,7 @@ import {
   IoWarningOutline,
 } from 'react-icons/io5';
 
-import { TNextPageWithLayout, TThemeColors, TTextVariants, TSizes, TStatus } from '~@types/_app';
+import { App } from '~@types/_app';
 
 import { useToast } from '~@lib/context/toast.context';
 
@@ -21,10 +21,10 @@ import Typography from '~@components/Typography';
 import TextField from '~@components/TextField';
 import Button from '~@components/Button';
 
-const colors: TThemeColors[] = ['primary', 'secondary'];
+const colors: App.TThemeColors[] = ['primary', 'secondary'];
 // const statuses: ThemeStatus[] = ['success', 'info', 'warning', 'error'];
-const variants: TTextVariants[] = ['display', 'heading', 'title', 'body', 'label'];
-const sizes: TSizes[] = ['large', 'medium', 'small'];
+const variants: App.TTextVariants[] = ['display', 'heading', 'title', 'body', 'label'];
+const sizes: App.TSizes[] = ['large', 'medium', 'small'];
 
 const Card = ({
   children,
@@ -51,7 +51,7 @@ const CardContent = ({
   className = '',
 }: {
   children: React.ReactNode;
-  color?: TThemeColors;
+  color?: App.TThemeColors;
   className?: string;
 }) => {
   const bColor = `border-${color}`;
@@ -60,11 +60,11 @@ const CardContent = ({
   );
 };
 
-const Test: TNextPageWithLayout = () => {
+const Test: App.TNextPageWithLayout = () => {
   const { addToast } = useToast();
   const [toastTitle, setToastTitle] = useState('');
 
-  const handleToastClick = (status: TStatus) => {
+  const handleToastClick = (status: App.TStatus) => {
     addToast({ type: status, title: toastTitle, description: `Teste ${status} toast` });
   };
 
@@ -84,6 +84,7 @@ const Test: TNextPageWithLayout = () => {
             <TextField
               id="toastTitle"
               type="text"
+              name="toastTitle"
               value={toastTitle}
               placeholder="Toast Title"
               onChange={handleToastTitleChange}
@@ -125,8 +126,8 @@ const Test: TNextPageWithLayout = () => {
         </Card>
         <Card title="Typography">
           <CardContent className="col-start-4">
-            {variants.map((variant: TTextVariants) =>
-              sizes.map((size: TSizes) => (
+            {variants.map(variant =>
+              sizes.map(size => (
                 <Typography
                   key={`${variant}-${size}`}
                   variant={variant}
@@ -150,9 +151,17 @@ const Test: TNextPageWithLayout = () => {
                 <Typography variant="title" component="h4" size="small">
                   Normal
                 </Typography>
-                <TextField id={color} value="" placeholder={color} type="text" color={color} />
+                <TextField
+                  id={color}
+                  name={color}
+                  value=""
+                  placeholder={color}
+                  type="text"
+                  color={color}
+                />
                 <TextField
                   id={`${color}-val`}
+                  name={`${color}-val`}
                   value={color}
                   placeholder={color}
                   type="text"
@@ -160,6 +169,7 @@ const Test: TNextPageWithLayout = () => {
                 />
                 <TextField
                   id={`${color}-disabled`}
+                  name={`${color}-disabled`}
                   value=""
                   placeholder={color}
                   type="text"
@@ -168,6 +178,7 @@ const Test: TNextPageWithLayout = () => {
                 />
                 <TextField
                   id={`${color}-val-disabled`}
+                  name={`${color}-val-disabled`}
                   value={color}
                   placeholder={color}
                   type="text"
@@ -181,6 +192,7 @@ const Test: TNextPageWithLayout = () => {
                 </Typography>
                 <TextField
                   id={`${color}-icon`}
+                  name={`${color}-icon`}
                   value=""
                   placeholder={color}
                   type="text"
@@ -189,6 +201,7 @@ const Test: TNextPageWithLayout = () => {
                 />
                 <TextField
                   id={`${color}-val-icon`}
+                  name={`${color}-val-icon`}
                   value={color}
                   placeholder={color}
                   type="text"
@@ -197,6 +210,7 @@ const Test: TNextPageWithLayout = () => {
                 />
                 <TextField
                   id={`${color}-icon-disabled`}
+                  name={`${color}-icon-disabled`}
                   value=""
                   placeholder={color}
                   type="text"
@@ -206,6 +220,7 @@ const Test: TNextPageWithLayout = () => {
                 />
                 <TextField
                   id={`${color}-val-icon-disabled`}
+                  name={`${color}-val-icon-disabled`}
                   value={color}
                   placeholder={color}
                   type="text"
@@ -220,6 +235,7 @@ const Test: TNextPageWithLayout = () => {
                 </Typography>
                 <TextField
                   id={`${color}-actionButton`}
+                  name={`${color}-actionButton`}
                   value=""
                   placeholder={color}
                   type="text"
@@ -228,6 +244,7 @@ const Test: TNextPageWithLayout = () => {
                 />
                 <TextField
                   id={`${color}-val-actionButton`}
+                  name={`${color}-val-actionButton`}
                   value={color}
                   placeholder={color}
                   type="text"
@@ -236,6 +253,7 @@ const Test: TNextPageWithLayout = () => {
                 />
                 <TextField
                   id={`${color}-actionButton-disabled`}
+                  name={`${color}-actionButton-disabled`}
                   value=""
                   placeholder={color}
                   type="text"
@@ -245,6 +263,7 @@ const Test: TNextPageWithLayout = () => {
                 />
                 <TextField
                   id={`${color}-val-actionButton-disabled`}
+                  name={`${color}-val-actionButton-disabled`}
                   value={color}
                   placeholder={color}
                   type="text"
@@ -254,6 +273,7 @@ const Test: TNextPageWithLayout = () => {
                 />
                 <TextField
                   id={`${color}-icon-actionButton`}
+                  name={`${color}-icon-actionButton`}
                   value=""
                   placeholder={color}
                   type="text"
@@ -263,6 +283,7 @@ const Test: TNextPageWithLayout = () => {
                 />
                 <TextField
                   id={`${color}-val-icon-actionButton`}
+                  name={`${color}-val-icon-actionButton`}
                   value={color}
                   placeholder={color}
                   type="text"
@@ -272,6 +293,7 @@ const Test: TNextPageWithLayout = () => {
                 />
                 <TextField
                   id={`${color}-icon-actionButton-disabled`}
+                  name={`${color}-icon-actionButton-disabled`}
                   value=""
                   placeholder={color}
                   type="text"
@@ -282,6 +304,7 @@ const Test: TNextPageWithLayout = () => {
                 />
                 <TextField
                   id={`${color}-val-icon-actionButton-disabled`}
+                  name={`${color}-val-icon-actionButton-disabled`}
                   value={color}
                   placeholder={color}
                   type="text"
@@ -297,6 +320,7 @@ const Test: TNextPageWithLayout = () => {
                 </Typography>
                 <TextField
                   id={`${color}-fullWidth`}
+                  name={`${color}-fullWidth`}
                   value=""
                   placeholder={color}
                   type="text"
@@ -305,6 +329,7 @@ const Test: TNextPageWithLayout = () => {
                 />
                 <TextField
                   id={`${color}-fullWidth`}
+                  name={`${color}-fullWidth`}
                   value={color}
                   placeholder={color}
                   type="text"
@@ -313,6 +338,7 @@ const Test: TNextPageWithLayout = () => {
                 />
                 <TextField
                   id={`${color}-icon-fullWidth`}
+                  name={`${color}-icon-fullWidth`}
                   value=""
                   placeholder={color}
                   type="text"
@@ -322,6 +348,7 @@ const Test: TNextPageWithLayout = () => {
                 />
                 <TextField
                   id={`${color}-val-icon-fullWidth`}
+                  name={`${color}-val-icon-fullWidth`}
                   placeholder={color}
                   type="text"
                   color={color}
@@ -336,6 +363,7 @@ const Test: TNextPageWithLayout = () => {
                 </Typography>
                 <TextField
                   id={`${color}-val-fullWidth-disabled`}
+                  name={`${color}-val-fullWidth-disabled`}
                   value=""
                   placeholder={color}
                   type="text"
@@ -345,6 +373,7 @@ const Test: TNextPageWithLayout = () => {
                 />
                 <TextField
                   id={`${color}-val-fullWidth-disabled`}
+                  name={`${color}-val-fullWidth-disabled`}
                   placeholder={color}
                   type="text"
                   color={color}
@@ -354,6 +383,7 @@ const Test: TNextPageWithLayout = () => {
                 />
                 <TextField
                   id={`${color}-icon-fullWidth-disabled`}
+                  name={`${color}-icon-fullWidth-disabled`}
                   value=""
                   placeholder={color}
                   type="text"
@@ -364,6 +394,7 @@ const Test: TNextPageWithLayout = () => {
                 />
                 <TextField
                   id={`${color}-val-icon-fullWidth-disabled`}
+                  name={`${color}-val-icon-fullWidth-disabled`}
                   placeholder={color}
                   type="text"
                   color={color}
@@ -379,6 +410,7 @@ const Test: TNextPageWithLayout = () => {
                 </Typography>
                 <TextField
                   id={`${color}-val-fullWidth-actionButton`}
+                  name={`${color}-val-fullWidth-actionButton`}
                   value=""
                   placeholder={color}
                   type="text"
@@ -388,6 +420,7 @@ const Test: TNextPageWithLayout = () => {
                 />
                 <TextField
                   id={`${color}-val-fullWidth-actionButton`}
+                  name={`${color}-val-fullWidth-actionButton`}
                   placeholder={color}
                   type="text"
                   color={color}
@@ -397,6 +430,7 @@ const Test: TNextPageWithLayout = () => {
                 />
                 <TextField
                   id={`${color}-val-fullWidth-actionButton`}
+                  name={`${color}-val-fullWidth-actionButton`}
                   value=""
                   placeholder={color}
                   type="text"
@@ -407,6 +441,7 @@ const Test: TNextPageWithLayout = () => {
                 />
                 <TextField
                   id={`${color}-val-fullWidth-actionButton`}
+                  name={`${color}-val-fullWidth-actionButton`}
                   placeholder={color}
                   type="text"
                   color={color}
@@ -417,6 +452,7 @@ const Test: TNextPageWithLayout = () => {
                 />
                 <TextField
                   id={`${color}-icon-fullWidth-disabled`}
+                  name={`${color}-icon-fullWidth-disabled`}
                   value=""
                   placeholder={color}
                   type="text"
@@ -427,6 +463,7 @@ const Test: TNextPageWithLayout = () => {
                 />
                 <TextField
                   id={`${color}-val-icon-fullWidth-disabled`}
+                  name={`${color}-val-icon-fullWidth-disabled`}
                   placeholder={color}
                   type="text"
                   color={color}
@@ -437,6 +474,7 @@ const Test: TNextPageWithLayout = () => {
                 />
                 <TextField
                   id={`${color}-icon-fullWidth-disabled`}
+                  name={`${color}-icon-fullWidth-disabled`}
                   value=""
                   placeholder={color}
                   type="text"
@@ -448,6 +486,7 @@ const Test: TNextPageWithLayout = () => {
                 />
                 <TextField
                   id={`${color}-val-icon-fullWidth-disabled`}
+                  name={`${color}-val-icon-fullWidth-disabled`}
                   placeholder={color}
                   type="text"
                   color={color}

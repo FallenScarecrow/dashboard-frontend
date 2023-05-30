@@ -5,9 +5,9 @@ import {
   IoWarningOutline,
 } from 'react-icons/io5';
 
-import { TIcons } from '~@types/_app';
+import { App } from '~@types/_app';
 
-const statusIcons: TIcons = {
+const statusIcons: App.TIcons = {
   info: IoInformationCircleOutline,
   warning: IoWarningOutline,
   error: IoAlertCircleOutline,

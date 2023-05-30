@@ -40,7 +40,7 @@ const TextField = (props: TInputProps) => {
     return () => {
       clearTimeout(idTimeout);
     };
-  }, []);
+  }, [focusIn]);
 
   useEffect(() => {
     if (!isFocus) return;

@@ -1,4 +1,6 @@
-import { VERSIONS as moviesVersions, movies } from './movies';
+import { TReturnVersions as TMoviesVersions, VERSIONS as moviesVersions, movies } from './movies';
+
+type TApiVersionsMovies = keyof TMoviesVersions;
 
 export interface APIList {
   [index: string]: { [index: string]: unknown };
@@ -8,17 +10,17 @@ export const APIS: APIList = {
   movies: moviesVersions,
 };
 
-class GeneratedAPIs {
-  movies;
+class GeneratedAPIs<V extends TApiVersionsMovies> {
+  movies: TMoviesVersions[V];
 
-  constructor(version: 'v3' | 'v4') {
-    this.movies = movies(version).movies;
+  constructor(version: V) {
+    this.movies = movies(version);
   }
 }
 
 class TMDbApi {
-  private static v3: GeneratedAPIs | null;
-  private static v4: GeneratedAPIs | null;
+  private static v3: GeneratedAPIs<'v3'> | null;
+  private static v4: GeneratedAPIs<'v4'> | null;
 
   static getV3() {
     if (!this.v3) {
