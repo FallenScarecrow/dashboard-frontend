@@ -1,39 +1,20 @@
-/* eslint-disable tailwindcss/no-custom-classname */
-import React, { ButtonHTMLAttributes, FocusEvent, forwardRef } from 'react';
+import React, { FocusEvent, forwardRef } from 'react';
 import clsx from 'clsx';
 
-import { ThemeColors } from '~@types/_app';
-import { ButtonVariants } from '~@types/Button';
+import { TButtonProps } from '~@types/components/Button';
 
 import Ripple from '~@components/Ripple';
-
-import styles from './style.module.css';
 import Typography from '~@components/Typography';
 
-interface IButtonIconProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  fullWidth?: boolean;
-  color?: ThemeColors;
-  icon: React.ReactNode;
-  variant?: ButtonVariants;
-}
-
-interface IButtonTextProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  fullWidth?: boolean;
-  color?: ThemeColors;
-  icon?: React.ReactNode;
-  children: React.ReactNode;
-  variant?: ButtonVariants;
-}
-
-export type TButtonProps = IButtonIconProps | IButtonTextProps;
+// import styles from './style.module.css';
 
 const Button = forwardRef<HTMLButtonElement, TButtonProps>((props, ref) => {
   const {
     fullWidth = false,
-    color = 'primary',
-    variant = 'text',
+    // color = 'primary',
+    // variant = 'text',
     children,
-    icon,
+    icon: Icon,
     onClick: customHandleClick,
     disabled,
     className,
@@ -49,10 +30,15 @@ const Button = forwardRef<HTMLButtonElement, TButtonProps>((props, ref) => {
   return (
     <button
       className={clsx(
-        'relative m-1 my-2 inline-flex h-10 min-w-[calc(100%-1rem)] cursor-pointer items-center justify-center overflow-hidden rounded-full px-6 text-center transition-colors sm:min-w-[9.25rem]',
-        styles[`btn-${variant}-${color}`],
-        !children && `h-8 w-8 rounded-full px-0 sm:min-w-0`,
-        fullWidth && 'w-[calc(100%-1rem)]',
+        'relative inline-flex min-w-[calc(100%-1rem)] cursor-pointer items-center justify-center overflow-hidden text-center', // transition-colors',
+        'rounded-full border-2 bg-brutal-black shadow-none shadow-transparent transition-all duration-500',
+        // TODO: Dont do hover on disabled
+        'hover:-translate-x-1 hover:-translate-y-1 hover:border-brutal-black hover:bg-brutal-seafoam hover:text-brutal-black hover:shadow-neubrutalism hover:shadow-brutal-black',
+        !children ? `h-9 w-9 px-0 sm:min-w-0` : 'h-10 px-6 sm:min-w-[9.25rem]',
+        // styles[`btn-${variant}-${color}`],
+        fullWidth && 'w-full',
+        !className?.includes('text-') && 'text-white',
+        !className?.includes('border-') && 'border-transparent',
         className,
       )}
       onClick={customHandleClick}
@@ -64,14 +50,14 @@ const Button = forwardRef<HTMLButtonElement, TButtonProps>((props, ref) => {
     >
       <Ripple disabled={disabled} />
 
-      {icon ? (
+      {Icon ? (
         <Typography
           variant="heading"
           size="large"
           component="div"
-          className={clsx(children && 'mr-2')}
+          className={clsx(children ? 'mr-2' : className)}
         >
-          {icon}
+          <Icon />
         </Typography>
       ) : null}
 

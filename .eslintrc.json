@@ -16,8 +16,9 @@
   "parser": "@typescript-eslint/parser",
 
   "rules": {
-    "camelcase": "off",
-    "no-unused-vars": "warn"
+    // "camelcase": "error",
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": "error",
     // "@typescript-eslint/naming-convention": [
     //   "error",
     //   {
@@ -27,8 +28,22 @@
     //       "regex": "^I[A-Z]",
     //       "match": true
     //     }
+    //   },
+    //   {
+    //     "selector": "typeLike",
+    //     "format": ["PascalCase"],
+    //     "custom": {
+    //       "regex": "^T[A-Z]",
+    //       "match": true
+    //     }
     //   }
-    // ]
+    // ],
+    "tailwindcss/no-custom-classname": [
+      "warn",
+      {
+        "whitelist": ["valid", "group/.+"]
+      }
+    ]
   },
   "plugins": ["tailwindcss"]
 }

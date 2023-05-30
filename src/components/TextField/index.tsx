@@ -1,38 +1,52 @@
-import { ChangeEvent, FocusEvent, forwardRef, InputHTMLAttributes } from 'react';
+import { ChangeEvent, FocusEvent, useEffect, useRef, useState } from 'react';
 import clsx from 'clsx';
-import { IconType } from 'react-icons/lib';
 
-import { ThemeColors } from '~@types/_app';
+import { TInputProps } from '~@types/components/TextField';
 
 import Typography from '~@components/Typography';
 
 import styles from './styles.module.css';
 
-interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
-  id: string;
-  type: 'email' | 'text' | 'password' | 'search' | 'url' | 'tel';
-  placeholder: string;
-  fullWidth?: boolean;
-  color?: ThemeColors;
-  icon?: IconType;
-  iconActionButton?: string;
-  onActionClick?: React.MouseEventHandler<HTMLButtonElement>;
-}
-
-const TextField = forwardRef<HTMLInputElement, IInputProps>((props: IInputProps, ref) => {
+const TextField = (props: TInputProps) => {
   const {
     fullWidth = false,
+    focusIn = false,
     color = 'primary',
     placeholder,
     value,
     onChange: customHandleChange,
-    iconActionButton,
+    iconActionButton: IconActionButton,
     id,
     disabled,
     icon: Icon,
     onActionClick: handleActionClick,
+    type,
+    variant = 'variant',
     ...rest
   } = props;
+
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [isFocus, setIsFocus] = useState(false);
+
+  useEffect(() => {
+    if (!focusIn || focusIn === 0) return;
+
+    const TIME_TIMEOUT = typeof focusIn === 'boolean' ? 1 : focusIn;
+
+    const idTimeout = setTimeout(() => {
+      setIsFocus(true);
+    }, TIME_TIMEOUT);
+
+    return () => {
+      clearTimeout(idTimeout);
+    };
+  }, [focusIn]);
+
+  useEffect(() => {
+    if (!isFocus) return;
+
+    inputRef.current?.focus();
+  }, [isFocus]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const {
@@ -43,10 +57,10 @@ const TextField = forwardRef<HTMLInputElement, IInputProps>((props: IInputProps,
       return;
     }
 
-    container.classList.remove('valid');
+    container.classList.remove(styles['valid']);
 
     if (!container.classList.contains('') && value !== '') {
-      container.classList.add('valid');
+      container.classList.add(styles['valid']);
     }
 
     customHandleChange && customHandleChange(e);
@@ -58,82 +72,75 @@ const TextField = forwardRef<HTMLInputElement, IInputProps>((props: IInputProps,
     if (!container) {
       return;
     }
-
-    // container.classList.toggle('');
   };
 
   return (
     <label
       htmlFor={id}
-      // eslint-disable-next-line tailwindcss/no-custom-classname
       className={clsx(
-        'group relative m-1 my-4 inline-block h-12 w-full max-w-xs cursor-text',
-        fullWidth && 'max-w-[calc(100%-0.5rem)]',
-        disabled && 'cursor-not-allowed select-none',
-        value && 'valid',
+        'group relative inline-block h-12 w-full',
+        fullWidth ? 'max-w-[calc(100%-0.5rem)]' : 'max-w-xs',
+        disabled ? 'cursor-not-allowed select-none' : 'cursor-text',
+        value && value !== '' && styles['valid'],
+        // variant === 'outlined' ? 'bg-inherit' : '',
+        styles[`textField-${variant}`],
       )}
     >
       <input
         id={id}
-        ref={ref}
-        defaultValue={value}
+        ref={inputRef}
+        type={type}
+        value={value}
         onBlur={handleFocus}
         onFocus={handleFocus}
         onChange={handleChange}
         className={clsx(
-          'peer absolute left-0 bottom-0 m-0 h-px w-full rounded-t-xl border-0 text-base outline-none transition-[height,padding] duration-500',
-          'focus:h-5/6',
-          'group-[.valid]:h-5/6',
+          'peer absolute left-0 bottom-0 m-0 w-full rounded-t-xl border-0 text-base transition-[height,padding] duration-500',
           'disabled:cursor-not-allowed disabled:select-none',
-          styles[`textField-${color}`],
-          Icon ? 'pl-10' : 'focus:pl-4 group-[.valid]:pl-4',
-          iconActionButton ? 'pr-10' : 'focus:pr-4 group-[.valid]:pr-4',
+          styles[`textField-input-${color}`],
+          Icon ? 'pl-10' : 'pl-4',
+          IconActionButton ? 'pr-12' : 'pr-4',
         )}
         disabled={disabled}
         {...rest}
       />
-      {Icon ? (
+      {Icon && (
         <div
           className={clsx(
-            'absolute top-1/2 -translate-y-1/3 px-2 text-base transition-colors duration-500',
-            'peer-focus:text-white peer-focus:dark:text-black',
-            'group-[.valid]:text-white group-[.valid]:dark:text-black',
+            'absolute top-1/2 -translate-y-1/3 px-2 text-2xl text-brutal-black transition-colors duration-500',
             'peer-disabled:select-none peer-disabled:text-opacity-40',
           )}
         >
           <Icon />
         </div>
-      ) : null}
+      )}
       <Typography
         component="span"
-        size="large"
         variant="label"
+        size="large"
         className={clsx(
-          'absolute top-1/2 left-4 -translate-y-1/3 px-1 capitalize text-black transition-[top,font-size,left,color] duration-500 dark:text-white',
-          'peer-focus:-top-2 peer-focus:left-0 peer-focus:text-xs',
-          'group-[.valid]:-top-2 group-[.valid]:left-0 group-[.valid]:text-xs',
-          'peer-disabled:select-none peer-disabled:text-opacity-40',
+          'absolute top-1/2 -translate-y-1/2 px-1 text-xl capitalize text-brutal-black transition-[top,font-size,left,color] duration-500',
           Icon ? 'left-9' : 'left-4',
         )}
       >
         {placeholder}
       </Typography>
-      {iconActionButton ? (
+      {IconActionButton && (
         <button
           type="button"
           className={clsx(
-            'absolute top-1/2 right-1 z-10 -translate-y-1/3 rounded-full p-1 text-black outline-none',
+            'absolute top-1/2 right-1 z-10 -translate-y-1/2 rounded-full p-1 text-2xl text-brutal-black',
             'peer-disabled:select-none peer-disabled:text-opacity-40',
           )}
           onClick={handleActionClick}
           disabled={disabled}
         >
-          {iconActionButton}
+          <IconActionButton />
         </button>
-      ) : null}
+      )}
     </label>
   );
-});
+};
 
 TextField.displayName = 'TextField';
 

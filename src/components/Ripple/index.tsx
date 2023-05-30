@@ -1,11 +1,9 @@
 import clsx from 'clsx';
 import React, { forwardRef, MouseEvent, useEffect, useState } from 'react';
 
-interface IRippleProps {
-  disabled?: boolean;
-}
+import { TRippleProps } from '~@types/components/Ripple';
 
-const Ripple = forwardRef<HTMLSpanElement, IRippleProps>(({ disabled = false }, ref) => {
+const Ripple = forwardRef<HTMLSpanElement, TRippleProps>(({ disabled = false }, ref) => {
   const [isRippling, setIsRippling] = useState(false);
   const [data, setData] = useState({ left: -1, top: -1, width: '100%', height: '100%' });
 
@@ -40,7 +38,7 @@ const Ripple = forwardRef<HTMLSpanElement, IRippleProps>(({ disabled = false }, 
   return (
     <span
       className={clsx(
-        'absolute block h-full w-full rounded-full bg-black/25 opacity-0 dark:bg-white/50',
+        'absolute block h-full w-full rounded-full bg-black/25 opacity-0',
         isRippling && 'animate-ripple',
       )}
       onClick={handleClick}

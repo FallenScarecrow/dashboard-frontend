@@ -8,9 +8,9 @@
   @apply disabled:bg-primary-700/40 disabled:text-white/40;
 
   /* Dark Theme */
-  @apply dark:text-primary-200;
+  /* @apply dark:text-primary-200;
   @apply dark:hover:bg-white/10 dark:hover:text-primary-400;
-  @apply disabled:dark:bg-transparent disabled:dark:text-primary-200/40;
+  @apply disabled:dark:bg-transparent disabled:dark:text-primary-200/40; */
 }
 
 .btn-text-secondary {
@@ -20,9 +20,9 @@
   @apply disabled:bg-secondary-700/40 disabled:text-white/40;
 
   /* Dark Theme */
-  @apply dark:text-secondary-200;
+  /* @apply dark:text-secondary-200;
   @apply dark:hover:bg-white/10 dark:hover:text-secondary-400;
-  @apply disabled:dark:bg-transparent disabled:dark:text-secondary-200/40;
+  @apply disabled:dark:bg-transparent disabled:dark:text-secondary-200/40; */
 }
 
 .btn-text-error {
@@ -32,9 +32,9 @@
   @apply disabled:bg-error-700/40 disabled:text-white/40;
 
   /* Dark Theme */
-  @apply dark:text-error-200;
+  /* @apply dark:text-error-200;
   @apply dark:hover:bg-white/10 dark:hover:text-error-400;
-  @apply disabled:dark:bg-transparent disabled:dark:text-error-200/40;
+  @apply disabled:dark:bg-transparent disabled:dark:text-error-200/40; */
 }
 
 .btn-text-warning {
@@ -44,9 +44,9 @@
   @apply disabled:bg-warning-700/40 disabled:text-white/40;
 
   /* Dark Theme */
-  @apply dark:text-warning-200;
+  /* @apply dark:text-warning-200;
   @apply dark:hover:bg-white/10 dark:hover:text-warning-400;
-  @apply disabled:dark:bg-transparent disabled:dark:text-warning-200/40;
+  @apply disabled:dark:bg-transparent disabled:dark:text-warning-200/40; */
 }
 
 .btn-text-info {
@@ -56,9 +56,9 @@
   @apply disabled:bg-info-700/40 disabled:text-white/40;
 
   /* Dark Theme */
-  @apply dark:text-info-200;
+  /* @apply dark:text-info-200;
   @apply dark:hover:bg-white/10 dark:hover:text-info-400;
-  @apply disabled:dark:bg-transparent disabled:dark:text-info-200/40;
+  @apply disabled:dark:bg-transparent disabled:dark:text-info-200/40; */
 }
 
 .btn-text-success {
@@ -68,9 +68,9 @@
   @apply disabled:bg-success-700/40 disabled:text-white/40;
 
   /* Dark Theme */
-  @apply dark:text-success-200;
+  /* @apply dark:text-success-200;
   @apply dark:hover:bg-white/10 dark:hover:text-success-400;
-  @apply disabled:dark:bg-transparent disabled:dark:text-success-200/40;
+  @apply disabled:dark:bg-transparent disabled:dark:text-success-200/40; */
 }
 /* #endregion */
 
@@ -85,9 +85,9 @@
   /* @apply disabled:border-primary-700 disabled:bg-zinc-600/20 disabled:text-primary-700; */
 
   /* Dark Theme */
-  @apply dark:border-primary-200 dark:text-primary-200;
+  /* @apply dark:border-primary-200 dark:text-primary-200;
   @apply dark:hover:border-primary-400 dark:hover:bg-white/10 dark:hover:text-primary-400;
-  @apply disabled:dark:border-primary-200/40 disabled:dark:bg-transparent disabled:dark:text-primary-200/40;
+  @apply disabled:dark:border-primary-200/40 disabled:dark:bg-transparent disabled:dark:text-primary-200/40; */
 }
 
 .btn-outlined-secondary {
@@ -100,9 +100,9 @@
   /* @apply disabled:border-secondary-700 disabled:bg-zinc-600/20 disabled:text-secondary-700; */
 
   /* Dark Theme */
-  @apply dark:border-secondary-200 dark:text-secondary-200;
+  /* @apply dark:border-secondary-200 dark:text-secondary-200;
   @apply dark:hover:border-secondary-400 dark:hover:bg-white/10 dark:hover:text-secondary-400;
-  @apply disabled:dark:border-secondary-200/40 disabled:dark:bg-transparent disabled:dark:text-secondary-200/40;
+  @apply disabled:dark:border-secondary-200/40 disabled:dark:bg-transparent disabled:dark:text-secondary-200/40; */
 }
 
 .btn-outlined-error {
@@ -115,9 +115,9 @@
   /* @apply disabled:border-error-700 disabled:bg-zinc-600/20 disabled:text-error-700; */
 
   /* Dark Theme */
-  @apply dark:border-error-200 dark:text-error-200;
+  /* @apply dark:border-error-200 dark:text-error-200;
   @apply dark:hover:border-error-400 dark:hover:bg-white/10 dark:hover:text-error-400;
-  @apply disabled:dark:border-error-200/40 disabled:dark:bg-transparent disabled:dark:text-error-200/40;
+  @apply disabled:dark:border-error-200/40 disabled:dark:bg-transparent disabled:dark:text-error-200/40; */
 }
 
 .btn-outlined-warning {
@@ -130,9 +130,9 @@
   /* @apply disabled:border-warning-700 disabled:bg-zinc-600/20 disabled:text-warning-700; */
 
   /* Dark Theme */
-  @apply dark:border-warning-200 dark:text-warning-200;
+  /* @apply dark:border-warning-200 dark:text-warning-200;
   @apply dark:hover:border-warning-400 dark:hover:bg-white/10 dark:hover:text-warning-400;
-  @apply disabled:dark:border-warning-200/40 disabled:dark:bg-transparent disabled:dark:text-warning-200/40;
+  @apply disabled:dark:border-warning-200/40 disabled:dark:bg-transparent disabled:dark:text-warning-200/40; */
 }
 
 .btn-outlined-info {
@@ -145,9 +145,9 @@
   /* @apply disabled:border-info-700 disabled:bg-zinc-600/20 disabled:text-info-700; */
 
   /* Dark Theme */
-  @apply dark:border-info-200 dark:text-info-200;
+  /* @apply dark:border-info-200 dark:text-info-200;
   @apply dark:hover:border-info-400 dark:hover:bg-white/10 dark:hover:text-info-400;
-  @apply disabled:dark:border-info-200/40 disabled:dark:bg-transparent disabled:dark:text-info-200/40;
+  @apply disabled:dark:border-info-200/40 disabled:dark:bg-transparent disabled:dark:text-info-200/40; */
 }
 
 .btn-outlined-success {
@@ -160,9 +160,9 @@
   /* @apply disabled:border-success-700 disabled:bg-zinc-600/20 disabled:text-success-700; */
 
   /* Dark Theme */
-  @apply dark:border-success-200 dark:text-success-200;
+  /* @apply dark:border-success-200 dark:text-success-200;
   @apply dark:hover:border-success-400 dark:hover:bg-white/10 dark:hover:text-success-400;
-  @apply disabled:dark:border-success-200/40 disabled:dark:bg-transparent disabled:dark:text-success-200/40;
+  @apply disabled:dark:border-success-200/40 disabled:dark:bg-transparent disabled:dark:text-success-200/40; */
 }
 /* #endregion */
 
@@ -174,9 +174,9 @@
   @apply disabled:bg-primary-400/40 disabled:text-black/40;
 
   /* Dark Theme */
-  @apply dark:bg-primary-200 dark:text-black;
+  /* @apply dark:bg-primary-200 dark:text-black;
   @apply dark:hover:bg-primary-400 dark:focus:bg-primary-400;
-  @apply disabled:dark:bg-primary-100/40 disabled:dark:text-white/40;
+  @apply disabled:dark:bg-primary-100/40 disabled:dark:text-white/40; */
 }
 
 .btn-contained-secondary {
@@ -186,9 +186,9 @@
   @apply disabled:bg-secondary-400/40 disabled:text-black/40;
 
   /* Dark Theme */
-  @apply dark:bg-secondary-200 dark:text-black;
+  /* @apply dark:bg-secondary-200 dark:text-black;
   @apply dark:hover:bg-secondary-400 dark:focus:bg-secondary-400;
-  @apply disabled:dark:bg-secondary-100/40 disabled:dark:text-white/40;
+  @apply disabled:dark:bg-secondary-100/40 disabled:dark:text-white/40; */
 }
 
 .btn-contained-error {
@@ -198,9 +198,9 @@
   @apply disabled:bg-error-400/40 disabled:text-black/40;
 
   /* Dark Theme */
-  @apply dark:bg-error-200 dark:text-black;
+  /* @apply dark:bg-error-200 dark:text-black;
   @apply dark:hover:bg-error-400 dark:focus:bg-error-400;
-  @apply disabled:dark:bg-error-100/40 disabled:dark:text-white/40;
+  @apply disabled:dark:bg-error-100/40 disabled:dark:text-white/40; */
 }
 
 .btn-contained-warning {
@@ -210,9 +210,9 @@
   @apply disabled:bg-warning-400/40 disabled:text-black/40;
 
   /* Dark Theme */
-  @apply dark:bg-warning-200 dark:text-black;
+  /* @apply dark:bg-warning-200 dark:text-black;
   @apply dark:hover:bg-warning-400 dark:focus:bg-warning-400;
-  @apply disabled:dark:bg-warning-100/40 disabled:dark:text-white/40;
+  @apply disabled:dark:bg-warning-100/40 disabled:dark:text-white/40; */
 }
 
 .btn-contained-info {
@@ -222,9 +222,9 @@
   @apply disabled:bg-info-400/40 disabled:text-black/40;
 
   /* Dark Theme */
-  @apply dark:bg-info-200 dark:text-black;
+  /* @apply dark:bg-info-200 dark:text-black;
   @apply dark:hover:bg-info-400 dark:focus:bg-info-400;
-  @apply disabled:dark:bg-info-100/40 disabled:dark:text-white/40;
+  @apply disabled:dark:bg-info-100/40 disabled:dark:text-white/40; */
 }
 
 .btn-contained-success {
@@ -234,8 +234,8 @@
   @apply disabled:bg-success-400/40 disabled:text-black/40;
 
   /* Dark Theme */
-  @apply dark:bg-success-200 dark:text-black;
+  /* @apply dark:bg-success-200 dark:text-black;
   @apply dark:hover:bg-success-400 dark:focus:bg-success-400;
-  @apply disabled:dark:bg-success-100/40 disabled:dark:text-white/40;
+  @apply disabled:dark:bg-success-100/40 disabled:dark:text-white/40; */
 }
 /* #endregion */

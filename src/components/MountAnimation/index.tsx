@@ -1,15 +1,8 @@
-import { ReactNode, Ref, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
+import { TMountAnimationProps } from '~@types/components/MountAnimation';
 
 export const ANIMATION_TIMEOUT = 150;
-
-interface IMountAnimationProps {
-  children: ReactNode;
-  timeout?: number;
-  unmountOnExit?: boolean;
-  classNames?: string;
-  nodeRef: Ref<HTMLElement | undefined> | undefined;
-}
 
 export const MountAnimation = ({
   children,
@@ -18,7 +11,7 @@ export const MountAnimation = ({
   classNames = 'slide', // ADD YOUR DEFAULT ANIMATION
   nodeRef,
   ...restProps
-}: IMountAnimationProps) => {
+}: TMountAnimationProps) => {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -37,7 +30,7 @@ export const MountAnimation = ({
       nodeRef={nodeRef}
       {...restProps}
     >
-      <>{children}</>
+      {children}
     </CSSTransition>
   );
 };
