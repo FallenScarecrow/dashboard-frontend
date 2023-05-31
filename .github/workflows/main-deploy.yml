@@ -38,6 +38,10 @@ jobs:
 
       - name: Build
         run: pnpm build
+        env:
+          NEXT_PUBLIC_URL: ${{ secrets.NEXT_PUBLIC_URL }}
+          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
+          NEXT_PUBLIC_TMDB_URL: ${{ secrets.NEXT_PUBLIC_TMDB_URL }}
 
       - name: Setup AWS
         uses: aws-actions/configure-aws-credentials@v1
