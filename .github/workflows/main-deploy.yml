@@ -42,18 +42,18 @@ jobs:
           NEXT_PUBLIC_URL: ${{ secrets.NEXT_PUBLIC_URL }}
           NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
           NEXT_PUBLIC_TMDB_URL: ${{ secrets.NEXT_PUBLIC_TMDB_URL }}
-          TMDB_V3_KEY: ${{ secrets.TMDB_V3_KEY }}
-          TMDB_V4_KEY: ${{ secrets.TMDB_V4_KEY }}
-          COOKIE_DOMAIN: ${{ secrets.COOKIE_DOMAIN }}
-          SITE_GITHUB_ID: ${{ secrets.SITE_GITHUB_ID }}
-          SITE_GITHUB_SCOPE: ${{ secrets.SITE_GITHUB_SCOPE }}
+          TMDB_V3_KEY: ${{ env.TMDB_V3_KEY }}
+          TMDB_V4_KEY: ${{ env.TMDB_V4_KEY }}
+          COOKIE_DOMAIN: ${{ env.COOKIE_DOMAIN }}
+          SITE_GITHUB_ID: ${{ env.SITE_GITHUB_ID }}
+          SITE_GITHUB_SCOPE: ${{ env.SITE_GITHUB_SCOPE }}
 
       - name: Setup AWS
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v2
         with:
           aws-access-key-id: ${{ secrets.AWS_KEY }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET }}
           aws-region: us-east-1
 
       - name: Deploy on AWS S3
-        run: aws s3 sync ./out s3://www.menecucci.dev
+        run: aws s3 sync . s3://www.menecucci.dev
