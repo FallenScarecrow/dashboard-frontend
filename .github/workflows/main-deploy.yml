@@ -6,21 +6,30 @@ on:
     branches: [main]
     types:
       - completed
-  push:
-    branches: [main]
 
 jobs:
-  deploy:
+  build:
+    name: Build and Package
     runs-on: ubuntu-latest
     environment: Production
+    permissions:
+      id-token: write
+      contents: read
 
     strategy:
       matrix:
         node-version: [latest]
 
     steps:
-      - name: Checkout
+      - name: Checkout Repository
         uses: actions/checkout@v3.4.0
+
+      - name: Setup AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET }}
+          aws-region: ${{ env.AWS_REGION }}
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v2.2.4
@@ -39,21 +48,38 @@ jobs:
       - name: Build
         run: pnpm build
         env:
-          NEXT_PUBLIC_URL: ${{ secrets.NEXT_PUBLIC_URL }}
-          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
-          NEXT_PUBLIC_TMDB_URL: ${{ secrets.NEXT_PUBLIC_TMDB_URL }}
+          NEXT_PUBLIC_URL: ${{ env.NEXT_PUBLIC_URL }}
+          NEXT_PUBLIC_API_URL: ${{ env.NEXT_PUBLIC_API_URL }}
+          NEXT_PUBLIC_TMDB_URL: ${{ env.NEXT_PUBLIC_TMDB_URL }}
           TMDB_V3_KEY: ${{ env.TMDB_V3_KEY }}
           TMDB_V4_KEY: ${{ env.TMDB_V4_KEY }}
           COOKIE_DOMAIN: ${{ env.COOKIE_DOMAIN }}
           SITE_GITHUB_ID: ${{ env.SITE_GITHUB_ID }}
           SITE_GITHUB_SCOPE: ${{ env.SITE_GITHUB_SCOPE }}
 
-      - name: Setup AWS
-        uses: aws-actions/configure-aws-credentials@v2
-        with:
-          aws-access-key-id: ${{ secrets.AWS_KEY }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET }}
-          aws-region: us-east-1
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: Production
+    permissions:
+      id-token: write
+      contents: read
 
-      - name: Deploy on AWS S3
-        run: aws s3 sync . s3://www.menecucci.dev
+    steps:
+      - uses: actions/checkout@v3.4.0
+      - name: Deploy in EC2
+        env:
+          USER_NAME: ${{ env.AWS_USERNAME }}
+          HOSTNAME: ${{ env.AWS_HOSTNAME }}
+          PRIVATE_KEY: ${{ env.PRIVATE_KEY }}
+        run: |
+          echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
+          ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} '
+
+            #Now we have got the access of EC2 and we will start the deploy .
+            cd /home/$USER_NAME/dashboard-frontend &&
+            git checkout master &&
+            git fetch --all &&
+            git reset --hard origin/master &&
+            git pull origin master &&
+            pnpm build
