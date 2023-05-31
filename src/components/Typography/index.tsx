@@ -1,48 +1,26 @@
+/* eslint-disable tailwindcss/no-custom-classname */
 import clsx from 'clsx';
-import React, { ComponentType, forwardRef, ReactNode } from 'react';
+import { forwardRef } from 'react';
 
-import { ThemeColors } from '~@types/_app';
+import { TTypography } from '~@types/components/Typography';
 
-import styles from './styles.module.css';
+import {
+  typographyClasses,
+  typographyEmphasisClasses,
+  typographyEmphasisColorClasses,
+} from '~@data/typographyClasses';
 
-interface ITypographyProps extends React.HTMLAttributes<HTMLElement> {
-  children?: ReactNode;
-  component: ComponentType | 'span' | 'div' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'a';
-  variant: 'display' | 'title' | 'heading' | 'body' | 'label';
-  size: 'large' | 'medium' | 'small';
-  color?: ThemeColors;
-}
-
-const defaultClassesMapping: Record<string, Record<string, string>> = {
-  display: {
-    large: 'text-6xl font-normal tracking-[0] leading-[64px]',
-    medium: 'text-5xl font-normal tracking-[0] leading-[52px]',
-    small: 'text-4xl font-normal tracking-[0] leading-[44px]',
-  },
-  heading: {
-    large: 'text-3xl font-normal tracking-[0] leading-10',
-    medium: 'text-2xl font-normal tracking-[0] leading-9',
-    small: 'text-xl font-normal tracking-[0] leading-8',
-  },
-  title: {
-    large: 'text-lg font-normal tracking-[0] leading-7',
-    medium: 'text-base font-medium tracking-[.15] leading-6',
-    small: 'text-sm font-medium tracking-[.1] leading-5',
-  },
-  body: {
-    large: 'text-base font-normal tracking-[.5] leading-6',
-    medium: 'text-sm font-normal tracking-[.25] leading-5',
-    small: 'text-xs font-normal tracking-[.4] leading-4',
-  },
-  label: {
-    large: 'text-sm font-medium tracking-widest leading-5',
-    medium: 'text-xs font-medium tracking-[.5] leading-4',
-    small: 'text-[11px] font-medium tracking-[.5] leading-4',
-  },
-};
-
-const Typography = forwardRef((props: ITypographyProps, ref) => {
-  const { children, variant, component, size, color, className, ...rest } = props;
+const Typography = forwardRef<HTMLElement, TTypography>((props, ref) => {
+  const {
+    children,
+    variant,
+    component,
+    size,
+    className,
+    emphasis,
+    emphasisColor = 'primary',
+    ...rest
+  } = props;
 
   const Component = component as React.ElementType;
 
@@ -50,14 +28,17 @@ const Typography = forwardRef((props: ITypographyProps, ref) => {
     <Component
       ref={ref}
       className={clsx(
-        'block align-middle font-sans text-black antialiased dark:text-white',
-        defaultClassesMapping[variant][size],
-        color && styles[`heading-${color}`],
+        'block align-middle font-sans antialiased',
+        typographyClasses[variant][size],
+        // color && styles[`heading-${color}`],
+        emphasis && typographyEmphasisClasses[emphasis],
+        emphasis && typographyEmphasisColorClasses[emphasisColor],
+        !className?.includes('text-') && 'text-inherit',
         className,
       )}
       {...rest}
     >
-      {children}
+      {emphasis ? <div className="relative text-inherit">{children}</div> : children}
     </Component>
   );
 });

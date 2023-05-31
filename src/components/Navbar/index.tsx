@@ -1,9 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
+import { TNavbarProps } from '~@types/components/Navbar';
+
 const defineTranslate = (val: number) => 'translate3D(' + val + '%, 0, 0)';
 
-const Navbar = ({ isOpen = false, onCloseNav }: { isOpen?: boolean; onCloseNav?: () => void }) => {
+const Navbar = ({ isOpen = false, onCloseNav }: TNavbarProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const resizableRef = useRef<HTMLDivElement>(null);
   const [isResizing, setIsResizing] = useState(false);
@@ -16,8 +18,6 @@ const Navbar = ({ isOpen = false, onCloseNav }: { isOpen?: boolean; onCloseNav?:
   const stopResizing = useCallback(() => {
     setIsResizing(false);
     if (isOpen != true && containerRef.current && resizableRef.current) {
-      console.log(isOpen, containerRef.current, resizableRef.current);
-      console.count('stopResizing');
       // Catch percent from translate3D(/-100/%, 0, 0)
       const { x, width } = resizableRef.current.getBoundingClientRect();
       // let x = /-?\d*(?:\.\d*)?(?=%)/.exec(resizableRef.current.style.getPropertyValue('transform'));
@@ -35,7 +35,6 @@ const Navbar = ({ isOpen = false, onCloseNav }: { isOpen?: boolean; onCloseNav?:
 
   const closeSideBar = useCallback(() => {
     if (containerRef.current && resizableRef.current) {
-      console.count('closeSideBar');
       resizableRef.current.style.transform = defineTranslate(-100);
       setTimeout(() => containerRef.current?.removeAttribute('open'), 150);
     }
@@ -78,7 +77,6 @@ const Navbar = ({ isOpen = false, onCloseNav }: { isOpen?: boolean; onCloseNav?:
   return (
     <div
       ref={containerRef}
-      // eslint-disable-next-line tailwindcss/no-custom-classname
       className="group/side invisible absolute inset-0 z-50 bg-transparent open:visible"
     >
       <div
@@ -87,7 +85,7 @@ const Navbar = ({ isOpen = false, onCloseNav }: { isOpen?: boolean; onCloseNav?:
         onClick={closeSideBar}
       />
       <div
-        className="absolute inset-y-0 left-0 w-60 bg-white p-0 transition-transform ease-linear after:visible after:absolute after:inset-y-0 after:left-full after:w-5 group-open/side:translate-x-0"
+        className="absolute inset-y-0 left-0 w-60 bg-brutal-white p-0 transition-transform ease-linear after:visible after:absolute after:inset-y-0 after:left-full after:w-5 group-open/side:translate-x-0"
         onMouseDown={startResizing}
         style={{
           transform: isOpen ? defineTranslate(0) : defineTranslate(-100),
