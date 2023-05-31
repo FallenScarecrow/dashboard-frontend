@@ -42,6 +42,11 @@ jobs:
           NEXT_PUBLIC_URL: ${{ secrets.NEXT_PUBLIC_URL }}
           NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
           NEXT_PUBLIC_TMDB_URL: ${{ secrets.NEXT_PUBLIC_TMDB_URL }}
+          TMDB_V3_KEY: ${{ secrets.TMDB_V3_KEY }}
+          TMDB_V4_KEY: ${{ secrets.TMDB_V4_KEY }}
+          COOKIE_DOMAIN: ${{ secrets.COOKIE_DOMAIN }}
+          SITE_GITHUB_ID: ${{ secrets.SITE_GITHUB_ID }}
+          SITE_GITHUB_SCOPE: ${{ secrets.SITE_GITHUB_SCOPE }}
 
       - name: Setup AWS
         uses: aws-actions/configure-aws-credentials@v1
