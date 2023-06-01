@@ -67,20 +67,23 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3.4.0
-      - name: Deploy in EC2
+      
+      - name: Configure SSH
         env:
           USER_NAME: ${{ secrets.AWS_USERNAME }}
           HOSTNAME: ${{ secrets.AWS_HOSTNAME }}
           PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY }}
         run: |
-          echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
-          ls -lrt /home
-          ssh -o StrictHostKeyChecking=no -i private_key -A ${USER_NAME}@${HOSTNAME} 'bash -s'
-
-            #Now we have got the access of EC2 and we will start the deploy .
-            cd /home/ec2-user/dashboard-frontend &&
-            git checkout master &&
-            git fetch --all &&
-            git reset --hard origin/master &&
-            git pull origin master &&
-            pnpm build
+          mkdir -p ~/.ssh/
+          echo "$PRIVATE_KEY" > ~/.ssh/production.key
+          chmod 400 ~/.ssh/production.key
+          cat >>~/.ssh/config <<END
+          Host production
+            HostName $HOSTNAME
+            User $USER_NAME
+            IdentityFile ~/.ssh/production.key
+            StrictHostKeyChecking no
+          END
+      
+      - name: Check out the source
+        run: ssh production 'cd /home/$USERNAME/dashboard-frontend && git fetch && git reset --hard origin/master && pnpm build'
