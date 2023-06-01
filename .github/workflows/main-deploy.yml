@@ -6,8 +6,6 @@ on:
     branches: [main]
     types:
       - completed
-  push:
-    branches: [main]
 
 jobs:
   build:
@@ -50,14 +48,14 @@ jobs:
       - name: Build
         run: pnpm build
         env:
-          NEXT_PUBLIC_URL: ${{ env.NEXT_PUBLIC_URL }}
-          NEXT_PUBLIC_API_URL: ${{ env.NEXT_PUBLIC_API_URL }}
-          NEXT_PUBLIC_TMDB_URL: ${{ env.NEXT_PUBLIC_TMDB_URL }}
-          TMDB_V3_KEY: ${{ env.TMDB_V3_KEY }}
-          TMDB_V4_KEY: ${{ env.TMDB_V4_KEY }}
-          COOKIE_DOMAIN: ${{ env.COOKIE_DOMAIN }}
-          SITE_GITHUB_ID: ${{ env.SITE_GITHUB_ID }}
-          SITE_GITHUB_SCOPE: ${{ env.SITE_GITHUB_SCOPE }}
+          NEXT_PUBLIC_URL: ${{ secrets.NEXT_PUBLIC_URL }}
+          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
+          NEXT_PUBLIC_TMDB_URL: ${{ secrets.NEXT_PUBLIC_TMDB_URL }}
+          TMDB_V3_KEY: ${{ secrets.TMDB_V3_KEY }}
+          TMDB_V4_KEY: ${{ secrets.TMDB_V4_KEY }}
+          COOKIE_DOMAIN: ${{ secrets.COOKIE_DOMAIN }}
+          SITE_GITHUB_ID: ${{ secrets.SITE_GITHUB_ID }}
+          SITE_GITHUB_SCOPE: ${{ secrets.SITE_GITHUB_SCOPE }}
 
   deploy:
     needs: build
@@ -71,9 +69,9 @@ jobs:
       - uses: actions/checkout@v3.4.0
       - name: Deploy in EC2
         env:
-          USER_NAME: ${{ env.AWS_USERNAME }}
-          HOSTNAME: ${{ env.AWS_HOSTNAME }}
-          PRIVATE_KEY: ${{ env.PRIVATE_KEY }}
+          USER_NAME: ${{ secrets.AWS_USERNAME }}
+          HOSTNAME: ${{ secrets.AWS_HOSTNAME }}
+          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
         run: |
           echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
           ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} '
