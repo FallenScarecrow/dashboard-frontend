@@ -86,4 +86,6 @@ jobs:
           END
       
       - name: Check out the source
-        run: ssh production 'cd /home/$USERNAME/dashboard-frontend && git fetch && git reset --hard origin/master && pnpm build'
+        env:
+          USER_NAME: ${{ secrets.AWS_USERNAME }}
+        run: ssh production 'cd /home/$USER_NAME/dashboard-frontend && git fetch && git reset --hard origin/master && pnpm build'
