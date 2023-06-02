@@ -90,32 +90,6 @@ jobs:
           USER_NAME: ${{ secrets.AWS_USERNAME }}
         run: ssh production 'cd /home/ec2-user/dashboard-frontend && git fetch && git reset --hard origin/main'
       
-      - name: Configure .ENV
-        env:
-          NEXT_PUBLIC_URL: ${{ secrets.NEXT_PUBLIC_URL }}
-          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
-          NEXT_PUBLIC_TMDB_URL: ${{ secrets.NEXT_PUBLIC_TMDB_URL }}
-          TMDB_V3_KEY: ${{ secrets.TMDB_V3_KEY }}
-          TMDB_V4_KEY: ${{ secrets.TMDB_V4_KEY }}
-          COOKIE_DOMAIN: ${{ secrets.COOKIE_DOMAIN }}
-          SITE_GITHUB_ID: ${{ secrets.SITE_GITHUB_ID }}
-          SITE_GITHUB_SCOPE: ${{ secrets.SITE_GITHUB_SCOPE }}
-        run: |
-          mkdir -p ~/.env/
-          cat >>~/.env/.env <<END
-          NEXT_PUBLIC_URL=$NEXT_PUBLIC_URL
-          NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
-          NEXT_PUBLIC_TMDB_URL=$NEXT_PUBLIC_TMDB_URL
-          TMDB_V3_KEY=$TMDB_V3_KEY
-          TMDB_V4_KEY=$TMDB_V4_KEY
-          COOKIE_DOMAIN=$COOKIE_DOMAIN
-          SITE_GITHUB_ID=$SITE_GITHUB_ID
-          SITE_GITHUB_SCOPE=$SITE_GITHUB_SCOPE
-          END
-          chmod 400 ~/.env/.env
-          scp ~/.env/.env production:/home/ec2-user/dashboard-frontend
-      
-      
       - name: Start the server
         if: ${{ always() }}
         run: ssh production 'cd /home/ec2-user/dashboard-frontend && pnpm install && pnpm build && pnpm start'
