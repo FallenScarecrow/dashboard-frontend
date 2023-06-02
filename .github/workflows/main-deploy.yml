@@ -118,4 +118,4 @@ jobs:
       
       - name: Start the server
         if: ${{ always() }}
-        run: ssh production 'pnpm install && pnpm build && pnpm start'
+        run: ssh production 'cd /home/ec2-user/dashboard-frontend && pnpm install && pnpm build && pnpm start'
