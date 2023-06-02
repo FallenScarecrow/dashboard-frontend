@@ -113,7 +113,7 @@ jobs:
           SITE_GITHUB_SCOPE=$SITE_GITHUB_SCOPE
           END
           chmod 400 ~/.env/.env
-          ssh production:/home/ec2-user/dashboard-frontend/.env ~/.env/.env
+          scp production:/home/ec2-user/dashboard-frontend/.env ~/.env/.env
       
       
       - name: Start the server
