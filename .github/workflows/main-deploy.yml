@@ -90,7 +90,7 @@ jobs:
           USER_NAME: ${{ secrets.AWS_USERNAME }}
         run: ssh production 'cd /home/ec2-user/dashboard-frontend && git fetch && git reset --hard origin/main'
       
-      - name: Configure SSH
+      - name: Configure .ENV
         env:
           NEXT_PUBLIC_URL: ${{ secrets.NEXT_PUBLIC_URL }}
           NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
@@ -102,7 +102,6 @@ jobs:
           SITE_GITHUB_SCOPE: ${{ secrets.SITE_GITHUB_SCOPE }}
         run: |
           mkdir -p ~/.env/
-          chmod 400 ~/.env/.env
           cat >>~/.env/.env <<END
           NEXT_PUBLIC_URL=$NEXT_PUBLIC_URL
           NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
@@ -113,6 +112,7 @@ jobs:
           SITE_GITHUB_ID=$SITE_GITHUB_ID
           SITE_GITHUB_SCOPE=$SITE_GITHUB_SCOPE
           END
+          chmod 400 ~/.env/.env
           ssh production:/home/ec2-user/dashboard-frontend/.env ~/.env/.env
       
       
