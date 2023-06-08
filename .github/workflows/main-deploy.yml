@@ -43,7 +43,7 @@ jobs:
           cache: 'pnpm'
 
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
 
       - name: Build
         run: pnpm build
@@ -90,6 +90,14 @@ jobs:
           USER_NAME: ${{ secrets.AWS_USERNAME }}
         run: ssh production 'cd /home/ec2-user/dashboard-frontend && git fetch && git reset --hard origin/main'
       
+      - name: Install dependencies
+        if: ${{ always() }}
+        run: ssh production 'cd /home/ec2-user/dashboard-frontend && pnpm install --frozen-lockfile'
+      
+      - name: Build
+        if: ${{ always() }}
+        run: ssh production 'pnpm build'
+      
       - name: Start the server
         if: ${{ always() }}
-        run: ssh production 'cd /home/ec2-user/dashboard-frontend && pnpm install && pnpm build && pm2 restart 0'
+        run: ssh production 'pm2 restart 1'
