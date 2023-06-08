@@ -96,8 +96,8 @@ jobs:
       
       - name: Build
         if: ${{ always() }}
-        run: ssh production 'pnpm build'
+        run: ssh production 'cd /home/ec2-user/dashboard-frontend && pnpm build'
       
       - name: Start the server
         if: ${{ always() }}
-        run: ssh production 'pm2 restart 1'
+        run: ssh production 'cd /home/ec2-user/dashboard-frontend && pm2 restart 1'
