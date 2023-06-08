@@ -8,6 +8,7 @@ import { App } from '~@types/_app';
 import Typography from '~@components/Typography';
 
 import styles from './styles.module.css';
+import withTMDBImage from '~@lib/HoC/withTMDBImage';
 
 type THeroTileProps = {
   title: string;
@@ -24,6 +25,8 @@ const HeroTile = ({
   poster = '',
   backdrop = '',
 }: THeroTileProps) => {
+  const TMDBImage = withTMDBImage(Image);
+
   return (
     <div
       className={clsx(
@@ -31,24 +34,6 @@ const HeroTile = ({
         styles[`HeroTile-${color}`],
       )}
     >
-      {/* {color || poster || backdrop ? (
-        <div
-          className={clsx(
-            'absolute inset-0 bg-fixed bg-no-repeat',
-            'after:absolute after:inset-0',
-            // !poster && !backdrop ? `after:bg-brutal-${color}` : 'after:bg-brutal-black/75',
-            !backdrop && !poster ? `after:bg-brutal-${color}/25` : 'after:bg-brutal-black/75',
-          )}
-          style={{
-            backgroundSize: 'contain',
-            backgroundPosition: 'center',
-            backgroundImage:
-              backdrop || poster
-                ? 'url(https://image.tmdb.org/t/p/original/' + (backdrop ? backdrop : poster) + ')'
-                : '',
-          }}
-        />
-      ) : null} */}
       {(color || poster || backdrop) && (
         <div
           className={clsx(
@@ -58,20 +43,22 @@ const HeroTile = ({
           )}
         >
           {backdrop && (
-            <Image
-              src={`https://image.tmdb.org/t/p/original/${backdrop}`}
+            <TMDBImage
+              src={backdrop}
               alt={title}
               fill
+              loading="eager"
               className={clsx('object-cover xl:block', poster ? 'hidden' : 'block')}
               placeholder="blur"
               blurDataURL={`https://image.tmdb.org/t/p/w92/${backdrop}`}
             />
           )}
           {poster && (
-            <Image
-              src={`https://image.tmdb.org/t/p/original/${poster}`}
+            <TMDBImage
+              src={poster}
               alt={title}
               fill
+              loading="eager"
               className={clsx('block object-cover', backdrop && 'xl:hidden')}
               placeholder="blur"
               blurDataURL={`https://image.tmdb.org/t/p/w92/${poster}`}
@@ -83,10 +70,11 @@ const HeroTile = ({
         <div className="h-20"></div>
         {poster && (
           <div className={styles['HeroTile-poster']}>
-            <Image
-              src={`https://image.tmdb.org/t/p/original/${poster}`}
+            <TMDBImage
+              src={poster}
               alt={title}
               fill
+              loading="eager"
               className="block object-cover"
               placeholder="blur"
               blurDataURL={`https://image.tmdb.org/t/p/w92/${poster}`}

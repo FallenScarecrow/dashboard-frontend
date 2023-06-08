@@ -13,9 +13,12 @@ import { TMDbApi } from '~@lib/utils/api/tmdb';
 import Hero from '~@components/Hero';
 import HeroTile from '~@components/HeroTile';
 import Typography from '~@components/Typography';
+import withTMDBImage from '~@lib/HoC/withTMDBImage';
 
 const Dashboard: App.TNextPageWithLayout<IDashboardProps> = ({ movies }) => {
   const { nowPlaying } = movies;
+
+  const TMDBImage = withTMDBImage(Image);
 
   return (
     <>
@@ -117,8 +120,8 @@ const Dashboard: App.TNextPageWithLayout<IDashboardProps> = ({ movies }) => {
                       className="group/movie-card flex aspect-[20/7.55] h-full cursor-pointer border-4 border-brutal-black bg-brutal-surface text-brutal-on-surface transition-all hover:shadow-neubrutalism hover:shadow-brutal-black"
                     >
                       <div className="relative h-full w-2/3 border-r-4 border-brutal-black">
-                        <Image
-                          src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
+                        <TMDBImage
+                          src={movie.backdrop_path}
                           alt={movie.title}
                           layout="fill"
                           className="scale-100 transition-transform group-hover/movie-card:scale-150"

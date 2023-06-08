@@ -13,10 +13,6 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'picsum.photos',
-      },
-      {
-        protocol: 'https',
         hostname: 'external-preview.redd.it',
       },
       {
@@ -24,14 +20,8 @@ const nextConfig = {
         hostname: 'image.tmdb.org',
       },
       {
-        protocol: 'http',
-        hostname: 'localhost',
-        port: '3001',
-      },
-      {
-        protocol: 'http',
-        hostname: '192.168.1.66',
-        port: '3001',
+        protocol: 'https',
+        hostname: 'image.menecucci.dev',
       },
     ],
   },
