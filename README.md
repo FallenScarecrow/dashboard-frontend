@@ -44,11 +44,14 @@ Use these steps to clone from SourceTree, our client for using the repository co
 
 Now that you're more familiar with your Bitbucket repository, go ahead and add a new file locally. You can [push your change back to Bitbucket with SourceTree](https://confluence.atlassian.com/x/iqyBMg), or you can [add, commit,](https://confluence.atlassian.com/x/8QhODQ) and [push from the command line](https://confluence.atlassian.com/x/NQ0zDQ).
 
-- [ ] Auto redirect after register
-  - [ ] Verbose form errors
+- [ ] Register
+  - [ ] Validate emails comparison
+  - [ ] Verbose errors
   - [ ] Deny duplicates registration
-  - [ ] Asking for validate the email
-- [ ] Login routes
-- [ ] Adjust navigation
+- [ ] Login
+  - [ ] Login fetch
+  - [ ] Verbose errors
+- [ ] Images
+  - [ ] Image Optimization all at once
 
 Managing as much as needed css clases with useState and clsx, use some "group" and "peer"

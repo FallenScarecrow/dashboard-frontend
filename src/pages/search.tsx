@@ -12,9 +12,12 @@ import { ISearchProps } from '~@types/pages/search';
 import { TMDbApi } from '~@lib/utils/api/tmdb';
 
 import Typography from '~@components/Typography';
+import withTMDBImage from '~@lib/HoC/withTMDBImage';
 
 const Dashboard: App.TNextPageWithLayout<ISearchProps> = ({ movies }) => {
   const router = useRouter();
+
+  const TMDBImage = withTMDBImage(Image);
 
   return (
     <>
@@ -44,8 +47,8 @@ const Dashboard: App.TNextPageWithLayout<ISearchProps> = ({ movies }) => {
                 >
                   <div className="relative aspect-[3/4] w-full">
                     {movie.poster_path ? (
-                      <Image
-                        src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
+                      <TMDBImage
+                        src={movie.poster_path}
                         alt={movie.title}
                         layout="fill"
                         placeholder="blur"
