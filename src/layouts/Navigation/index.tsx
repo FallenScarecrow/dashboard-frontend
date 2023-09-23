@@ -85,9 +85,7 @@ function withLink(Component: React.FunctionComponent<NavItemProps>) {
       if (href !== '') {
         return (
           <Link href={{ pathname: href, query: '' }} passHref>
-            <a>
-              <Component {...rest} />
-            </a>
+            <Component {...rest} />
           </Link>
         );
       }
@@ -206,7 +204,7 @@ const NavComponent: React.FunctionComponent = () => {
           </nav>
         </div>
       </div>
-      <div className="fixed inset-x-0 bottom-0 z-50 border-t-4 border-brutal-black bg-brutal-surface pt-2 pb-4 lg:hidden">
+      <div className="fixed inset-x-0 bottom-0 z-50 border-t-4 border-brutal-black bg-brutal-surface pb-4 pt-2 lg:hidden">
         <nav className="flex w-full flex-col gap-6">
           <ul className="flex justify-around">
             {menuOptions.map(({ icon: Icon, title, href }) => (

@@ -163,17 +163,16 @@ const Register: App.TNextPageWithLayout<IRegisterProps> = ({ providers }) => {
             <Typography variant="body" size="small" component="div">
               Already have an account?
             </Typography>
-            <Link href="/login" passHref legacyBehavior>
               <Typography
+                component={Link}
+                href="/login"
                 variant="body"
                 size="small"
-                component="a"
                 className="my-4 underline"
                 emphasis="full"
               >
                 Sign-In
               </Typography>
-            </Link>
           </div>
         </div>
       </MountAnimation>

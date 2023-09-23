@@ -39,17 +39,16 @@ const SignIn: App.TNextPageWithLayout<ILoginProps> = ({ providers }) => {
             <Typography component="div" variant="body" size="small" className="my-4">
               New to Dashboard?
             </Typography>
-            <Link href="/register" passHref legacyBehavior>
               <Typography
+              component={Link}
+              href="/register"
                 variant="body"
                 size="small"
-                component="a"
                 className="my-4 underline"
                 emphasis="full"
               >
                 Sign Up
               </Typography>
-            </Link>
           </div>
 
           <Form
@@ -61,17 +60,16 @@ const SignIn: App.TNextPageWithLayout<ILoginProps> = ({ providers }) => {
             onSubmit={handleSubmit}
           />
 
-          <Link href="/register" passHref legacyBehavior>
             <Typography
+            component={Link}
+            href="/register"
               variant="body"
               size="small"
-              component="a"
               emphasis="full"
               className="z-10 my-4 w-max underline"
             >
               Forgot your password?
             </Typography>
-          </Link>
           <div className="relative my-4 flex justify-center overflow-hidden">
             <Typography
               component="span"

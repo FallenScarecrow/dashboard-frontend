@@ -1,8 +1,5 @@
 import React from 'react';
-import { ImageProps as FutureImageProps } from 'next/future/image';
-import { ImageLoader, ImageProps as LegacyImageProps } from 'next/image';
-
-type ImageProps = LegacyImageProps | FutureImageProps;
+import { ImageLoader, ImageProps } from 'next/image';
 
 function withTMDBImage<T extends ImageProps>(WrappedComponent: React.ComponentType<T>) {
   const imageLoader: ImageLoader = ({ src }) => {

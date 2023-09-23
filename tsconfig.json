@@ -3,7 +3,10 @@
     "target": "esnext",
     "module": "esnext",
     "jsx": "preserve",
-    "lib": ["dom", "es2017"],
+    "lib": [
+      "dom",
+      "es2017"
+    ],
     "moduleResolution": "node",
     "allowJs": true,
     "noEmit": true,
@@ -20,23 +23,58 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "incremental": true,
-
     "baseUrl": "./src",
     "paths": {
-      "~@data/*": ["data/*"],
-      "~@env/*": ["env/*"],
-      "~@pages/*": ["pages/*"],
-      "~@server/*": ["server/*"],
-      "~@styles/*": ["styles/*"],
-      "~@components/*": ["components/*"],
-      "~@containers/*": ["containers/*"],
-      "~@layouts/*": ["layouts/*"],
-      "~@layouts": ["layouts/index"],
-      "~@types/*": ["types/*"],
-      "~@lib/*": ["lib/*"],
-      "~@utils/*": ["utils/*"]
-    }
+      "~@data/*": [
+        "data/*"
+      ],
+      "~@env/*": [
+        "env/*"
+      ],
+      "~@pages/*": [
+        "pages/*"
+      ],
+      "~@server/*": [
+        "server/*"
+      ],
+      "~@styles/*": [
+        "styles/*"
+      ],
+      "~@components/*": [
+        "components/*"
+      ],
+      "~@containers/*": [
+        "containers/*"
+      ],
+      "~@layouts/*": [
+        "layouts/*"
+      ],
+      "~@layouts": [
+        "layouts/index"
+      ],
+      "~@types/*": [
+        "types/*"
+      ],
+      "~@lib/*": [
+        "lib/*"
+      ],
+      "~@utils/*": [
+        "utils/*"
+      ]
+    },
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
-  "exclude": ["node_modules"],
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
+  "exclude": [
+    "node_modules"
+  ],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts"
+  ]
 }

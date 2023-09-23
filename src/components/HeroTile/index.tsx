@@ -1,6 +1,6 @@
 /* eslint-disable tailwindcss/classnames-order */
 /* eslint-disable tailwindcss/no-custom-classname */
-import Image from 'next/future/image';
+import Image from 'next/image';
 import clsx from 'clsx';
 
 import { App } from '~@types/_app';

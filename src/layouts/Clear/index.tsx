@@ -56,7 +56,7 @@ const Default = ({ children }: TDefaultLayoutProps) => {
               </div>
             </>
           ) : (
-            <Link href={'/login'}>Login</Link>
+            <Link href='/login'>Login</Link>
           )}
         </div>
       </Row>
