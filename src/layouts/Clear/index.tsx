@@ -26,7 +26,7 @@ const Default = ({ children }: TDefaultLayoutProps) => {
                   component="span"
                   size="large"
                   variant="label"
-                  className="absolute top-0.5 right-0.5 flex items-center justify-center rounded-full bg-red-500 text-white"
+                  className="absolute right-0.5 top-0.5 flex items-center justify-center rounded-full bg-red-500 text-white"
                   style={{ minHeight: '1.25rem', minWidth: '1.25rem' }}
                 >
                   3
@@ -56,7 +56,7 @@ const Default = ({ children }: TDefaultLayoutProps) => {
               </div>
             </>
           ) : (
-            <Link href='/login'>Login</Link>
+            <Link href="/login">Login</Link>
           )}
         </div>
       </Row>
